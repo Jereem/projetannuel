@@ -1,7 +1,7 @@
 public class Competences {
 
 	private Note note;
-	private int nomCompetence;
+	private String nomCompetence;
 
 	public Note getNote() {
 		return this.note;
@@ -23,7 +23,7 @@ public class Competences {
 	 * 
 	 * @param nomCompetence
 	 */
-	public void setNomCompetence(int nomCompetence) {
+	public void setNomCompetence(String nomCompetence) {
 		this.nomCompetence = nomCompetence;
 	}
 

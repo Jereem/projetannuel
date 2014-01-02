@@ -2,6 +2,7 @@ public abstract class MetaData {
 
 	private int nomMetaData;
 	private int valeur;
+        // creer un type de valeur non définit
 
 	public MetaData() {
 		throw new UnsupportedOperationException();

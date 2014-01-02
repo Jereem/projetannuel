@@ -1,7 +1,10 @@
+
+import java.util.ArrayList;
+
 public class BureauProGphy extends Etudiant {
 
 	private Poste poste;
-	private int anneesMembre;
+	private ArrayList<Integer> anneesMembre;
 	private String identifiant;
 	private String mdp;
 	private boolean actif;
@@ -22,7 +25,7 @@ public class BureauProGphy extends Etudiant {
 		this.poste = poste;
 	}
 
-	public int getAnneesMembre() {
+	public ArrayList<Integer> getAnneesMembre() {
 		return this.anneesMembre;
 	}
 
@@ -30,7 +33,7 @@ public class BureauProGphy extends Etudiant {
 	 * 
 	 * @param anneesMembre
 	 */
-	public void setAnneesMembre(int anneesMembre) {
+	public void setAnneesMembre(ArrayList<Integer> anneesMembre) {
 		this.anneesMembre = anneesMembre;
 	}
 
@@ -38,7 +41,7 @@ public class BureauProGphy extends Etudiant {
 	 * 
 	 * @param annee
 	 */
-	public void addAnneeMembre(int annee) {
+	public void addAnneeMembre(Integer annee) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -46,7 +49,7 @@ public class BureauProGphy extends Etudiant {
 	 * 
 	 * @param annee
 	 */
-	public void delAnneeMembre(int annee) {
+	public void delAnneeMembre(Integer annee) {
 		throw new UnsupportedOperationException();
 	}
 

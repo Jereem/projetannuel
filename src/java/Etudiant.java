@@ -5,7 +5,7 @@ import java.util.Date;
 public class Etudiant extends Personne {
 
 	private int promotion;
-	private int anneesAdherant;
+	private ArrayList<Integer> anneesAdherant;
 	private int numeroSS;
 	private ArrayList<Competences> listeCompetences;
 	private Date dateNaissance;
@@ -27,7 +27,7 @@ public class Etudiant extends Personne {
 		throw new UnsupportedOperationException();
 	}
 
-	public int getAnneesAdherant() {
+	public ArrayList<Integer> getAnneesAdherant() {
 		return this.anneesAdherant;
 	}
 
@@ -35,7 +35,7 @@ public class Etudiant extends Personne {
 	 * 
 	 * @param anneesAdherant
 	 */
-	public void setAnneesAdherant(int anneesAdherant) {
+	public void setAnneesAdherant(ArrayList<Integer> anneesAdherant) {
 		this.anneesAdherant = anneesAdherant;
 	}
 
