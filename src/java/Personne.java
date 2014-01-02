@@ -1,9 +1,7 @@
-package ApliWebProGphy;
-
 public class Personne {
 
-	private string nom;
-	private string prenom;
+	private String nom;
+	private String prenom;
 	private Titres titre;
 	private Coordonnees coordonnees;
 
@@ -11,7 +9,7 @@ public class Personne {
 		throw new UnsupportedOperationException();
 	}
 
-	public string getNom() {
+	public String getNom() {
 		return this.nom;
 	}
 
@@ -23,7 +21,7 @@ public class Personne {
 		throw new UnsupportedOperationException();
 	}
 
-	public string getPrenom() {
+	public String getPrenom() {
 		return this.prenom;
 	}
 

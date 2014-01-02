@@ -1,5 +1,3 @@
-package ApliWebProGphy;
-
 public abstract class MetaData {
 
 	private int nomMetaData;

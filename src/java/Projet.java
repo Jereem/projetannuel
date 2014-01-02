@@ -1,10 +1,11 @@
-package ApliWebProGphy;
+
+import java.util.ArrayList;
 
 public class Projet {
 
 	private Client client;
 	private ArrayList<Etudiant> devellopeurs;
-	private string nomProjet;
+	private String nomProjet;
 	private ArrayList<Document> documents;
 	private ArrayList<BureauProGphy> membresDuBureau;
 
@@ -36,7 +37,7 @@ public class Projet {
 		this.devellopeurs = devellopeurs;
 	}
 
-	public string getNomProjet() {
+	public String getNomProjet() {
 		return this.nomProjet;
 	}
 
@@ -44,7 +45,7 @@ public class Projet {
 	 * 
 	 * @param nomProjet
 	 */
-	public void setNomProjet(string nomProjet) {
+	public void setNomProjet(String nomProjet) {
 		this.nomProjet = nomProjet;
 	}
 

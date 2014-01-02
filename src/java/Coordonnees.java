@@ -1,14 +1,12 @@
-package ApliWebProGphy;
-
 public class Coordonnees {
 
-	private string rue;
+	private String rue;
 	private Voies typeVoie;
 	private int cp;
-	private string ville;
-	private string pays;
+	private String ville;
+	private String pays;
 	private int numRue;
-	private string eMail;
+	private String eMail;
 	private int telPortable;
 	private int telFixe;
 
@@ -16,7 +14,7 @@ public class Coordonnees {
 		throw new UnsupportedOperationException();
 	}
 
-	public string getRue() {
+	public String getRue() {
 		return this.rue;
 	}
 
@@ -24,7 +22,7 @@ public class Coordonnees {
 	 * 
 	 * @param rue
 	 */
-	public void setRue(string rue) {
+	public void setRue(String rue) {
 		this.rue = rue;
 	}
 
@@ -52,7 +50,7 @@ public class Coordonnees {
 		throw new UnsupportedOperationException();
 	}
 
-	public string getVille() {
+	public String getVille() {
 		return this.ville;
 	}
 
@@ -60,11 +58,11 @@ public class Coordonnees {
 	 * 
 	 * @param ville
 	 */
-	public void setVille(string ville) {
+	public void setVille(String ville) {
 		this.ville = ville;
 	}
 
-	public string getPays() {
+	public String getPays() {
 		return this.pays;
 	}
 
@@ -72,7 +70,7 @@ public class Coordonnees {
 	 * 
 	 * @param pays
 	 */
-	public void setPays(string pays) {
+	public void setPays(String pays) {
 		this.pays = pays;
 	}
 
@@ -88,7 +86,7 @@ public class Coordonnees {
 		this.numRue = numRue;
 	}
 
-	public string getEMail() {
+	public String getEMail() {
 		return this.eMail;
 	}
 
@@ -96,7 +94,7 @@ public class Coordonnees {
 	 * 
 	 * @param eMail
 	 */
-	public void setEMail(string eMail) {
+	public void setEMail(String eMail) {
 		this.eMail = eMail;
 	}
 

@@ -1,16 +1,14 @@
-package ApliWebProGphy;
-
 public class Client extends Personne {
 
-	private string societe;
+	private String societe;
 	private int siren;
-	private string qualite;
+	private String qualite;
 
 	public Client() {
 		throw new UnsupportedOperationException();
 	}
 
-	public string getSociete() {
+	public String getSociete() {
 		return this.societe;
 	}
 
@@ -18,7 +16,7 @@ public class Client extends Personne {
 	 * 
 	 * @param societe
 	 */
-	public void setSociete(string societe) {
+	public void setSociete(String societe) {
 		this.societe = societe;
 	}
 
@@ -34,7 +32,7 @@ public class Client extends Personne {
 		this.siren = siren;
 	}
 
-	public string getPoste() {
+	public String getPoste() {
 		throw new UnsupportedOperationException();
 	}
 
@@ -42,7 +40,7 @@ public class Client extends Personne {
 	 * 
 	 * @param qualite
 	 */
-	public void setPoste(string qualite) {
+	public void setPoste(String qualite) {
 		throw new UnsupportedOperationException();
 	}
 

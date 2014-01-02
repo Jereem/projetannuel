@@ -1,5 +1,3 @@
-package ApliWebProGphy;
-
 public class Competences {
 
 	private Note note;

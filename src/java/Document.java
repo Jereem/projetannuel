@@ -1,11 +1,12 @@
-package ApliWebProGphy;
+
+import java.util.ArrayList;
 
 public class Document {
 
-	private string nomDoc;
-	private string typeDoc;
+	private String nomDoc;
+	private String typeDoc;
 	private ArrayList<MetaData> listMetaData;
-	private string emplacement;
+	private String emplacement;
 	private BureauProGphy auteur;
 	private int annee;
 
@@ -13,7 +14,7 @@ public class Document {
 		throw new UnsupportedOperationException();
 	}
 
-	public string getNomDoc() {
+	public String getNomDoc() {
 		return this.nomDoc;
 	}
 
@@ -21,11 +22,11 @@ public class Document {
 	 * 
 	 * @param nomDoc
 	 */
-	public void setNomDoc(string nomDoc) {
+	public void setNomDoc(String nomDoc) {
 		this.nomDoc = nomDoc;
 	}
 
-	public string getTypeDoc() {
+	public String getTypeDoc() {
 		return this.typeDoc;
 	}
 
@@ -33,7 +34,7 @@ public class Document {
 	 * 
 	 * @param typeDoc
 	 */
-	public void setTypeDoc(string typeDoc) {
+	public void setTypeDoc(String typeDoc) {
 		this.typeDoc = typeDoc;
 	}
 
@@ -65,7 +66,7 @@ public class Document {
 		throw new UnsupportedOperationException();
 	}
 
-	public string getEmplacement() {
+	public String getEmplacement() {
 		return this.emplacement;
 	}
 
@@ -73,7 +74,7 @@ public class Document {
 	 * 
 	 * @param emplacement
 	 */
-	public void setEmplacement(string emplacement) {
+	public void setEmplacement(String emplacement) {
 		this.emplacement = emplacement;
 	}
 

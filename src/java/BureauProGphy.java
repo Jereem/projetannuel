@@ -1,11 +1,9 @@
-package ApliWebProGphy;
-
 public class BureauProGphy extends Etudiant {
 
 	private Poste poste;
 	private int anneesMembre;
-	private string identifiant;
-	private string mdp;
+	private String identifiant;
+	private String mdp;
 	private boolean actif;
 
 	public BureauProGphy() {
@@ -52,7 +50,7 @@ public class BureauProGphy extends Etudiant {
 		throw new UnsupportedOperationException();
 	}
 
-	public string getIdentifiant() {
+	public String getIdentifiant() {
 		return this.identifiant;
 	}
 
@@ -60,11 +58,11 @@ public class BureauProGphy extends Etudiant {
 	 * 
 	 * @param identifiant
 	 */
-	public void setIdentifiant(string identifiant) {
+	public void setIdentifiant(String identifiant) {
 		this.identifiant = identifiant;
 	}
 
-	public string getMdp() {
+	public String getMdp() {
 		return this.mdp;
 	}
 
@@ -72,7 +70,7 @@ public class BureauProGphy extends Etudiant {
 	 * 
 	 * @param mdp
 	 */
-	public void setMdp(string mdp) {
+	public void setMdp(String mdp) {
 		this.mdp = mdp;
 	}
 
