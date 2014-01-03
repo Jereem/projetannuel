@@ -11,10 +11,6 @@ public class Etudiant extends Personne {
 	private Date dateNaissance;
 	private boolean AJourCotisation;
 
-	public Etudiant() {
-		throw new UnsupportedOperationException();
-	}
-
 	public int getAnneeEtude() {
 		throw new UnsupportedOperationException();
 	}

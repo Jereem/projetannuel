@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 
 public class BureauProGphy extends Etudiant {
@@ -9,9 +8,6 @@ public class BureauProGphy extends Etudiant {
 	private String mdp;
 	private boolean actif;
 
-	public BureauProGphy() {
-		throw new UnsupportedOperationException();
-	}
 
 	public Poste getPoste() {
 		return this.poste;

@@ -1,13 +1,17 @@
-public class Personne {
+
+import java.io.Serializable;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import java.io.Serializable;
+
+@ManagedBean
+@RequestScoped
+public class Personne implements Serializable{
 
 	private String nom;
 	private String prenom;
 	private Titres titre;
 	private Coordonnees coordonnees;
-
-	public Personne() {
-		throw new UnsupportedOperationException();
-	}
 
 	public String getNom() {
 		return this.nom;
