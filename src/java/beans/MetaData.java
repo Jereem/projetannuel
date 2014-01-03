@@ -1,3 +1,5 @@
+package beans;
+
 public abstract class MetaData {
 
 	private int nomMetaData;

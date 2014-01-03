@@ -1,3 +1,4 @@
+package beans;
 public class Client extends Personne {
 
 	private String societe;

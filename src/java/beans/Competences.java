@@ -1,3 +1,4 @@
+package beans;
 public class Competences {
 
 	private Note note;

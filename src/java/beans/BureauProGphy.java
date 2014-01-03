@@ -1,3 +1,5 @@
+package beans;
+
 import java.util.ArrayList;
 
 public class BureauProGphy extends Etudiant {
