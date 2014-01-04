@@ -1,0 +1,35 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+<p:layoutUnit position="west" size="210" collapsible="true" id="sidebar">
+                    <ul>
+                            <li>
+                                <img src="images/logo.jpg" alt="logo" width="180" />
+                            </li>
+                            <li id="search">
+                                <h2>Search</h2>
+                                <form method="get" action="">
+                                    <fieldset>
+                                        <input type="text" id="s" name="s" value="" />
+                                        <input type="submit" id="x" value="Search" />
+                                    </fieldset>
+                                </form>
+                            </li>
+                            <li>
+                                <h2>Lorem Ipsum</h2>
+                                <ul>
+                                    <li><a href="#">Fusce dui neque fringilla</a></li>
+                                    <li><a href="#">Eget tempor eget nonummy</a></li>
+                                    <li><a href="#">Magna lacus bibendum mauris</a></li>
+                                    <li><a href="#">Nec metus sed donec</a></li>
+                                    <li><a href="#">Magna lacus bibendum mauris</a></li>
+                                    <li><a href="#">Velit semper nisi molestie</a></li>
+                                    <li><a href="#">Eget tempor eget nonummy</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                </p:layoutUnit>
+
+</ui:composition>
