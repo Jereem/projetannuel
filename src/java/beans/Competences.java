@@ -1,5 +1,13 @@
 package beans;
-public class Competences {
+import java.io.Serializable;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
+
+@ManagedBean
+@RequestScoped
+
+public class Competences implements Serializable{
 
 	private Note note;
 	private String nomCompetence;

@@ -2,8 +2,15 @@ package beans;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.io.Serializable;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 
-public class Etudiant extends Personne {
+@ManagedBean
+@RequestScoped
+
+public class Etudiant extends Personne implements Serializable{
 
 	private int promotion;
 	private ArrayList<Integer> anneesAdherant;

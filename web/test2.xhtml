@@ -17,13 +17,11 @@
 
             <p:layout fullPage="true">
 
-                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
-                    Header
-                </p:layoutUnit>
+                <ui:include src="/WEB-INF/includeHeader.xhtml" />
+                <ui:include src="/WEB-INF/includeMenu.xhtml" />
+                <ui:include src="/WEB-INF/includeFooter.xhtml" />
 
-                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
-                    Footer
-                </p:layoutUnit>
+                
 
                 <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
                     <p:menu>
@@ -39,7 +37,8 @@
                 </p:layoutUnit>
 
                 <p:layoutUnit position="center">
-                    Bienvenue #{BureauProGphy.identifiant} !
+                    Bienvenue #{bureauProGphy.identifiant} !
+                    Votre mot de passe est : #{bureauProGphy.mdp}
                 </p:layoutUnit>
 
             </p:layout>
@@ -48,3 +47,4 @@
 
     </f:view>
 </html>
+

@@ -17,41 +17,37 @@
 
             <p:layout fullPage="true">
 
-                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
-                    Header
-                </p:layoutUnit>
+                <ui:include src="/WEB-INF/includeHeader.xhtml" />
+                <ui:include src="/WEB-INF/includeMenu.xhtml" />
+                <ui:include src="/WEB-INF/includeFooter.xhtml" />
 
-                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
-                    Footer
-                </p:layoutUnit>
-
-                <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
-                    <p:menu>
-                        <p:submenu label="Resources">
-                            <p:menuitem value="Demo" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
-                            <p:menuitem value="Documentation" url="http://www.primefaces.org/documentation.html" />
-                            <p:menuitem value="Forum" url="http://forum.primefaces.org/" />
-                            <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
-
-                        </p:submenu>
-
-                    </p:menu>
-                </p:layoutUnit>
+                
 
                 <p:layoutUnit position="center">
-                    <h:form>  
+                    <h:form id="form">  
 
-                        <h:panelGrid columns="4" cellpadding="5">  
-                            <h:outputLabel for="name" value="Name:" style="font-weight:bold"/>  
+                        <p:panel header="Entrez votre pseudo">  
+                            <h:panelGrid columns="2" >                     
+                                <h:outputLabel value="Pseudo : *" />  
+                                <p:inputText value="#{bureauProGphy.identifiant}" label="Pseudo" required="true"/>  
+                            </h:panelGrid>   
+                        </p:panel> 
+                        
+                        <p:panel header="Entrez votre mot de passe">  
+                            <p:messages id="messages" showDetail="true" autoUpdate="true"/>  
 
-                            <p:inputText id="name" value="#{BureauProGphy.identifiant}" />  
+                            <h:panelGrid columns="2" id="matchGrid">                     
+                                <h:outputLabel for="pwd1" value="Password : *" />  
+                                <p:password id="pwd1" value="#{bureauProGphy.mdp}" match="pwd2" label="Password 1" required="true" feedback="true"/>  
 
-                            <p:commandButton value="Submit" action="test2"/>  
+                                <h:outputLabel for="pwd2" value="Password : *" />  
+                                <p:password id="pwd2" value="#{bureauProGphy.mdp}" label="Password 2" required="true" feedback="true"/>  
+                            </h:panelGrid>  
 
-                              
-                        </h:panelGrid>  
+                            <p:commandButton id="saveButton" update="matchGrid" value="Save" action="test2"/>  
+                        </p:panel>  
 
-                    </h:form>
+                    </h:form> 
                 </p:layoutUnit>
 
             </p:layout>
@@ -60,3 +56,4 @@
 
     </f:view>
 </html>
+

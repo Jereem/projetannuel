@@ -1,8 +1,16 @@
 package beans;
 
 import java.util.ArrayList;
+import java.io.Serializable;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 
-public class BureauProGphy extends Etudiant {
+@ManagedBean
+@RequestScoped
+
+
+public class BureauProGphy extends Etudiant implements Serializable {
 
 	private Poste poste;
 	private ArrayList<Integer> anneesMembre;

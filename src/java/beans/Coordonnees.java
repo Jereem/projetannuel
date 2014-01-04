@@ -1,5 +1,13 @@
 package beans;
-public class Coordonnees {
+import java.io.Serializable;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
+
+@ManagedBean
+@RequestScoped
+
+public class Coordonnees implements Serializable{
 
 	private String rue;
 	private Voies typeVoie;

@@ -1,8 +1,15 @@
 package beans;
 
 import java.util.ArrayList;
+import java.io.Serializable;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 
-public class Projet {
+@ManagedBean
+@RequestScoped
+
+public class Projet implements Serializable{
 
 	private Client client;
 	private ArrayList<Etudiant> devellopeurs;

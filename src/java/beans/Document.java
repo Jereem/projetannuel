@@ -1,8 +1,15 @@
 package beans;
 
 import java.util.ArrayList;
+import java.io.Serializable;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 
-public class Document {
+@ManagedBean
+@RequestScoped
+
+public class Document implements Serializable{
 
 	private String nomDoc;
 	private String typeDoc;

@@ -1,6 +1,13 @@
 package beans;
+import java.io.Serializable;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 
-public abstract class MetaData {
+@ManagedBean
+@RequestScoped
+
+public abstract class MetaData implements Serializable{
 
 	private int nomMetaData;
 	private int valeur;
