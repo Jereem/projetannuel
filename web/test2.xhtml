@@ -19,28 +19,14 @@
 
                 <ui:include src="/WEB-INF/includeHeader.xhtml" />
                 <ui:include src="/WEB-INF/includeMenu.xhtml" />
-                <ui:include src="/WEB-INF/includeFooter.xhtml" />
-
-                
-
-                <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
-                    <p:menu>
-                        <p:submenu label="Resources">
-                            <p:menuitem value="Demo" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
-                            <p:menuitem value="Documentation" url="http://www.primefaces.org/documentation.html" />
-                            <p:menuitem value="Forum" url="http://forum.primefaces.org/" />
-                            <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
-
-                        </p:submenu>
-
-                    </p:menu>
-                </p:layoutUnit>
+                <ui:include src="/WEB-INF/includeFooter.xhtml" />      
 
                 <p:layoutUnit position="center">
                     Bienvenue #{bureauProGphy.identifiant} !
                     Votre mot de passe est : #{bureauProGphy.mdp}
                 </p:layoutUnit>
 
+            
             </p:layout>
 
         </h:body>
