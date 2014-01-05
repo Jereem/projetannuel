@@ -10,15 +10,15 @@
     <ui:composition template="newTemplate.xhtml"> 
         <!-- Defini la partie nommée contenu dans le template par le bloc qui suit -->
         <ui:define name="content"> 
-            <h2>Test</h2> 
+            <h2>Bureau</h2> 
             <p:accordionPanel>  
-                <p:tab title="Inscription">  
+                <p:tab title="Ajouter un membre du bureau">  
                     <h:panelGrid columns="2" cellpadding="10">  
                         <h:form id="form">  
 
 
 
-                            <p:panel header="Inscription">  
+                            <p:panel header="Nouvel adhérent">  
 
                                 <h:panelGrid columns="2" cellpadding="5"> 
 
@@ -37,7 +37,7 @@
                         </h:form>  
                     </h:panelGrid>  
                 </p:tab>  
-                <p:tab title="Calendar">  
+                <p:tab title="Supprimer un membre du bureau">  
                     <h:form>  
 
                         <h3>Inline</h3>  
@@ -47,13 +47,17 @@
 
                     </h:form>
                 </p:tab>  
-                <p:tab title="Godfather Part III">  
-                    <h:panelGrid columns="2" cellpadding="10">  
-                        <p:graphicImage value="images/logo.jpg" />  
-                        <h:outputText value="After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this third and final story of the fictional Corleone crime family.   
-                                      Two decades have passed, and crime kingpin Michael Corleone, now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate." />  
-                    </h:panelGrid>  
+                <p:tab title="Liste des membres">  
+                    <h:form>  
+
+                        <h3>Inline</h3>  
+                        <p:calendar value="#{etudiant.dateNaissance}" mode="inline" id="inlineCal"/>     
+
+                        <p:commandButton value="Submit" />  
+
+                    </h:form>
                 </p:tab>  
+                 
             </p:accordionPanel>
 
             <!-- Fin du bloc "contenu" -->
