@@ -1,0 +1,78 @@
+#top {
+	clear: both;
+	width: 860px;
+	height: 52px;
+	margin: 0 auto;
+	background: url(images/img02.jpg) no-repeat left top;
+}
+
+#logo {
+	width: 820px;
+	height: 60px;
+	margin: 0 auto;
+        background: #242424;
+}
+
+
+
+#logo h1, #logo h2 {
+	float: left;
+	margin: 0;
+	padding: 0 0 0 20px;
+	line-height: normal;
+}
+
+#logo h1 { 
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-size:36px;
+	font-style: italic;
+}
+
+#logo h1 a {
+	text-decoration: none;
+	color: #FFFFFF; 
+}
+
+#logo h1 a:hover { text-decoration: underline; }
+
+#logo h2 {
+	padding: 20px 0 0 5px;
+	font: italic 13px Georgia, "Times New Roman", Times, serif;
+	color: #48ACDE;
+}
+
+#logo p a {
+	text-decoration: none;
+	color: #B6ACA2;
+}
+
+#logo p a:hover { text-decoration: underline; }
+
+
+
+.center_content {
+    position: relative;
+    background-color: #dddddd;
+}
+
+.left_content {
+    background-color: #dddddd;
+}
+
+.right_content {
+    background-color: #dddddd;
+}
+
+#top a:link, #top a:visited {
+  color: white;
+  font-weight : bold;
+  text-decoration: none;
+}
+
+#top a:link:hover, #top a:visited:hover  {
+  color: black;
+  font-weight : bold;
+  text-decoration : underline;
+}
+
+

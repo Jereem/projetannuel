@@ -19,33 +19,19 @@ Description: A two-column, fixed-width and lightweight template ideal for 1024x7
     
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>Harvest by Free Css Templates</title>
+<title>ProGestion</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <link href="default.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 
-<div id="logo-wrap">
-<div id="logo">
-    
-	<h1><a href="#">ProGestion </a></h1>
-	<h2> Outil de gestion des adhérents et des projets de ProGphy</h2>
-</div>
-</div>
+<ui:include src="includeHeader.xhtml" />
 
 <!-- start header -->
-<div id="header">
-	<div id="menu">
-		<ul>
-			<li class="current_page_item"><a href="#">Accueil</a></li>
-			<li><a href="#">GED</a></li>
-			<li><a href="#">Adhérent</a></li>
-			<li><a href="#">Projet</a></li>
-		</ul>
-	</div>
-</div>
+<ui:include src="includeMenu.xhtml" />
 <!-- end header -->
+
 <!-- start page -->
 <div id="wrapper">
 <div id="wrapper-btm">
@@ -54,28 +40,7 @@ Description: A two-column, fixed-width and lightweight template ideal for 1024x7
 	<div id="content">
             
             <ui:insert name="contenu" > 
-		<div id="banner">&nbsp;</div>
-		<div class="post">
-			<h1 class="title">Welcome to our website </h1>
-			<div class="entry">
-				<p><img src="images/img06.jpg" alt="" width="140" height="125" class="left" />This is Harvest, is a free template from <a href="http://freecsstemplates.org/">Free CSS Templates</a> released under a <a href="http://creativecommons.org/licenses/by/2.5/">Creative Commons Attribution 2.5 License</a>. The flower photo is from <a href="http://www.pdphoto.org/">PDPhoto.org</a>. You're free to use this template for both commercial or personal use. I only ask that you link back to <a href="http://freecsstemplates.org/">my site</a> in some way. Enjoy :)</p>
-			</div>
-			<div class="meta">
-				<p class="byline">Posted on July 21, 2007 byFreeCssTemplates</p>
-				<p class="links"><a href="#" class="more">Read full article</a> <b>|</b> <a href="#" class="comments">Comments (32)</a></p>
-			</div>
-		</div>
-		<div class="post">
-			<h2 class="title">Lorem Ipsum Dolor Volutpat</h2>
-			<div class="entry">
-				<p>Curabitur tellus. Phasellus tellus turpis, iaculis in, faucibus lobortis, posuere in, lorem. Donec a ante. Donec neque purus, adipiscing id, eleifend a, cursus vel, odio. Vivamus varius justo sit amet leo. Morbi sed libero. Vestibulum blandit augue at mi. Praesent fermentum lectus eget diam. Nam cursus, orci sit amet porttitor iaculis, ipsum massa aliquet nulla, non elementum mi elit a mauris. In hac habitasse platea.</p>
-				<p>Vestibulum blandit augue at mi. Praesent fermentum lectus eget diam. Nam cursus, orci sit amet porttitor iaculis, ipsum massa aliquet nulla, non elementum mi elit a mauris. In hac habitasse platea.</p>
-			</div>
-			<div class="meta">
-				<p class="byline">Posted on July 18, 2007 byFreeCssTemplates</p>
-				<p class="links"><a href="#" class="more">Read full article</a> <b>|</b> <a href="#" class="comments">Comments (32)</a></p>
-			</div>
-		</div>
+		
                 </ui:insert>
 	</div>
 	<!-- end content -->
