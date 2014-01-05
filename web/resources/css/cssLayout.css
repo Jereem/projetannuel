@@ -30,7 +30,7 @@
 
 #logo h1 a {
 	text-decoration: none;
-	color: #FFFFFF; 
+	 color: grey;
 }
 
 #logo h1 a:hover { text-decoration: underline; }
@@ -48,7 +48,39 @@
 
 #logo p a:hover { text-decoration: underline; }
 
+/* Footer */
+#footer-wrap {
+	width: 860px;
+	height: 64px;
+	margin: 0 auto;
+}
 
+#footer {
+	margin: 0 auto;
+	height: 64px;
+	min-height: 64px;
+	padding: 0;
+	font-size: 10px;
+        color: #BBBBBB;
+}
+
+html>body #footer {
+	height: auto;
+}
+
+#footer p {
+}
+
+#legal {
+	clear: both;
+	padding-top: 10px;
+	padding-left: 30px;
+	text-align: center;
+	color: #999999;
+}
+
+#legal a {
+}
 
 .center_content {
     position: relative;
@@ -61,18 +93,6 @@
 
 .right_content {
     background-color: #dddddd;
-}
-
-#top a:link, #top a:visited {
-  color: white;
-  font-weight : bold;
-  text-decoration: none;
-}
-
-#top a:link:hover, #top a:visited:hover  {
-  color: black;
-  font-weight : bold;
-  text-decoration : underline;
 }
 
 

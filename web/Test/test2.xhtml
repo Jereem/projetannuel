@@ -6,15 +6,18 @@
       xmlns:p="http://primefaces.org/ui">
 
     <!-- appelle le template layout.xhtml -->
-    <ui:composition template="layoutbis.xhtml"> 
+    <ui:composition template="newTemplate.xhtml"> 
         <!-- Defini la partie nommée contenu dans le template par le bloc qui suit -->
-        <ui:define name="contenu"> 
+        
+        <ui:define name="content"> 
             <h2>Test</h2>
+            <p>
             <!-- affiche le pseudo dans l'attribut "identifiant" de l'objet "BureauProGphy" -->
             Bienvenue #{bureauProGphy.identifiant} !
             <!-- affiche le mdp dans l'attribut "mdp" de l'objet "BureauProGphy" -->
             Votre mot de passe est : #{bureauProGphy.mdp}
             <!-- Fin du bloc "contenu" -->
+            </p>
         </ui:define> 
         <!-- Fin du template "layout" -->
     </ui:composition> 

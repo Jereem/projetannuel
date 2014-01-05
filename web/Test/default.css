@@ -43,6 +43,7 @@ p, ul, ol {
 
 a:link {
 	color: #48ACDE;
+        text-decoration: none;
 }
 
 a:hover, a:active {
