@@ -16,6 +16,8 @@
             <title>JSP Page</title>
         </head>
         <body>
+            
+            
             <h1><h:outputText value="JavaServer Faces"/></h1>
         </body>
     </html>
