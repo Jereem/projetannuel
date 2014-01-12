@@ -1,8 +1,12 @@
-
+// une connexion à la BD
 import java.sql.Connection;
+// gestion des pilotes
 import java.sql.DriverManager;
+// une erreur
 import java.sql.SQLException;
+// une instruction
 import java.sql.Statement;
+// u nresultat (lignes/colonnes)
 import java.sql.ResultSet;
 
 
