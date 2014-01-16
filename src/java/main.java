@@ -1,14 +1,6 @@
-// une connexion à la BD
-import java.sql.Connection;
-// gestion des pilotes
-import java.sql.DriverManager;
-// une erreur
-import java.sql.SQLException;
-// une instruction
-import java.sql.Statement;
-// u nresultat (lignes/colonnes)
-import java.sql.ResultSet;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 
 
@@ -27,35 +19,38 @@ public class main {
     
     public static void main(String[] args){
         
-        Statement stmt = null;
-        ResultSet rs = null;
-        /* Chargement du driver JDBC pour MySQL */
-try {
-    Class.forName("com.mysql.jdbc.Driver");
-} 
-catch ( ClassNotFoundException e ) {
-            System.out.println("exception chargement driver jdbc");
-    /* Gérer les éventuelles erreurs ici. */
-}    
 
-//conexion à la base de donnees
-String url = "jdbc:mysql:/localhost/projetannuel-";
-Connection conn = null;
+ConnectBDD b= new ConnectBDD();
+
 
 try {
-conn = DriverManager.getConnection(url, "root","");
-stmt.executeUpdate("INSERT INTO PERSONNE VALUES ('1', 'M','MOI','JEAN' )");
-rs = stmt.executeQuery("SELECT * FROM PERSONNE");
-if (stmt.execute("SELECT * FROM PERSONNE")) {
-    rs = stmt.getResultSet();
+
+    b.getMyStatement().executeUpdate("INSERT INTO projetannuel.ANNEE VALUES ('4','2016' )");
+
+
+
+ /* Exécution d'une requête de lecture */
+ResultSet resultat = b.getMyStatement().executeQuery( "SELECT * FROM ANNEE;" );
+
+/* Récupération des données du résultat de la requête de lecture */
+while ( resultat.next() ) {
+    int id = resultat.getInt( "id_annee" );
+    int annee = resultat.getInt( "Annee" );
+   
+    //String nomUtilisateur = resultat.getString( "nom" );
+    System.out.println("id_annee: "+ id );
+    System.out.println("annee: "+ annee );
+   /* Traiter ici les valeurs récupérées. */
+}
+
+if (b.getMyStatement().execute("SELECT * FROM ANNEE")) {
+    ResultSet rs = b.getMyStatement().getResultSet();
     
     }
 
 }
 catch (SQLException ex) {
-    System.out.println("SQLException: " + ex.getMessage());
-    System.out.println("SQLState: " + ex.getSQLState());
-    System.out.println("VendorError: " + ex.getErrorCode());
+   
 }
 
 //System.out.println("resultat" + rs);
