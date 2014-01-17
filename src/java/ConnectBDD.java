@@ -26,10 +26,10 @@ public class ConnectBDD {
     private Statement myStatement;
     private final String MYURL = "jdbc:mysql://localhost/projetannuel";
     private final String MYUSER= "root";
-    private final String MYPASSWORD= "projetannuel2014";
+    private final String MYPASSWORD= "";
     
     
-    public void ConnectBDD(){
+    public ConnectBDD(){
         if (testDriver()) {
             try {
                 myConnexion = DriverManager.getConnection(MYURL, MYUSER, MYPASSWORD);
@@ -40,6 +40,10 @@ public class ConnectBDD {
                 System.out.println("SQLState: " + ex.getSQLState());
                 System.out.println("VendorError: " + ex.getErrorCode());
             }
+        }
+        else
+        {
+            System.out.println("testdriver false");
         }
 
     }
@@ -53,10 +57,7 @@ public class ConnectBDD {
             System.out.println("Le driver n'a pas été chargé");
             return false;
         }
-        
-        
-        
-        
+    
     }
     
 public Connection getMyConnexion() {
@@ -66,8 +67,5 @@ public Connection getMyConnexion() {
     public Statement getMyStatement() {
         return myStatement;
     }
-    
-    
-    
     
 }

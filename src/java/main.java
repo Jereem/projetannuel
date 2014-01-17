@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 
 
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -23,17 +24,21 @@ public class main {
 ConnectBDD b= new ConnectBDD();
 
 
+ 
 try {
+    
+   
 
-    b.getMyStatement().executeUpdate("INSERT INTO projetannuel.ANNEE VALUES ('4','2016' )");
-
+    
+     b.getMyStatement().executeUpdate("INSERT INTO projetannuel.ANNEE VALUES ('5','2017')");
+    
 
 
  /* Exécution d'une requête de lecture */
-ResultSet resultat = b.getMyStatement().executeQuery( "SELECT * FROM ANNEE;" );
+ResultSet resultat = b.getMyStatement().executeQuery("SELECT * FROM ANNEE;");
 
 /* Récupération des données du résultat de la requête de lecture */
-while ( resultat.next() ) {
+while (resultat.next()) {
     int id = resultat.getInt( "id_annee" );
     int annee = resultat.getInt( "Annee" );
    
@@ -43,14 +48,16 @@ while ( resultat.next() ) {
    /* Traiter ici les valeurs récupérées. */
 }
 
-if (b.getMyStatement().execute("SELECT * FROM ANNEE")) {
-    ResultSet rs = b.getMyStatement().getResultSet();
+//if (b.getMyStatement().execute("SELECT * FROM ANNEE")) {
+   // ResultSet rs = b.getMyStatement().getResultSet();
     
-    }
+   // }
 
 }
 catch (SQLException ex) {
-   
+    System.out.println("SQLException: " + ex.getMessage());
+                System.out.println("SQLState: " + ex.getSQLState());
+                System.out.println("VendorError: " + ex.getErrorCode());
 }
 
 //System.out.println("resultat" + rs);
