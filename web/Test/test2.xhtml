@@ -9,17 +9,49 @@
     <!-- appelle le template layout.xhtml -->
     <ui:composition template="newTemplate.xhtml"> 
         <!-- Defini la partie nommée contenu dans le template par le bloc qui suit -->
-        
+
         <ui:define name="content"> 
             <h2>Bureau</h2>
-            <p>
-            <!-- affiche le pseudo dans l'attribut "identifiant" de l'objet "BureauProGphy" -->
-            Bienvenue #{bureauProGphy.identifiant} !
-            
-            <!-- affiche le mdp dans l'attribut "mdp" de l'objet "BureauProGphy" -->
-            Votre mot de passe est : #{bureauProGphy.mdp}
-            <!-- Fin du bloc "contenu" -->
-            </p>
+
+            <p:accordionPanel>  
+                <p:tab title="Ajouter un membre du bureau">  
+                    <h:panelGrid columns="2" cellpadding="10">  
+                        <h:form>  
+
+                            <p>
+                                <!-- affiche le pseudo dans l'attribut "identifiant" de l'objet "BureauProGphy" -->
+                                Bienvenue #{bureauProGphy.identifiant} !
+
+                                <!-- affiche le mdp dans l'attribut "mdp" de l'objet "BureauProGphy" -->
+                                Votre mot de passe est : #{bureauProGphy.mdp}
+                                <!-- Fin du bloc "contenu" -->
+                            </p>  
+
+                        </h:form>  
+                    </h:panelGrid>  
+                </p:tab>  
+                <p:tab title="Supprimer un membre du bureau">  
+                    <h:form>  
+
+                        <h3>Inline</h3>  
+                        <p:calendar value="#{etudiant.dateNaissance}" mode="inline" id="inlineCal"/>     
+
+                        <p:commandButton value="Submit" />  
+
+                    </h:form>
+                </p:tab>  
+                <p:tab title="Liste des membres">  
+                    <h:form>  
+
+                        <h3>Inline</h3>  
+                        <p:calendar value="#{etudiant.dateNaissance}" mode="inline" id="inlineCal"/>     
+
+                        <p:commandButton value="Submit" />  
+
+                    </h:form>
+                </p:tab>  
+
+            </p:accordionPanel>
         </ui:define> 
         <!-- Fin du template "layout" -->
     </ui:composition> 

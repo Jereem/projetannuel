@@ -1,5 +1,6 @@
 package beans;
 
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.io.Serializable;
@@ -111,7 +112,7 @@ public class BureauProGphy extends Etudiant implements Serializable {
             String paramIdentifiant = this.getIdentifiant();
             String paramMotDePasse = this.getMdp();
             /* Exécution d'une requête de modification de la BD (INSERT, UPDATE, DELETE, CREATE, etc.). */
-            b.getMyStatement().executeUpdate("INSERT INTO projetannuel.membre_bureau(Identifiant, Mot-de-passe) VALUES (" + paramIdentifiant + "," + paramMotDePasse + ")");
+            b.getMyStatement().executeUpdate("INSERT INTO projetannuel.membre_bureau(Identifiant, Mot_de_passe) VALUES (" + paramIdentifiant + "," + paramMotDePasse + ")");
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
@@ -119,25 +120,26 @@ public class BureauProGphy extends Etudiant implements Serializable {
         }
     }
 
-//      public List<BureauProGphy> getBureauProGphy() throws SQLException {
-//        //get database connection
-//        ConnectBDD con = new ConnectBDD();
-//        if (con == null) {
-//            throw new SQLException("Can't get database connection");
-//        }
-//        PreparedStatement ps = con.prepareStatement("select customer_id, name, address, created_date from customer");
-//        //get customer data from database
-//        ResultSet result = ps.executeQuery();
-//        List<Customer> list = new ArrayList<Customer>();
-//        while (result.next()) {
-//            Customer cust = new Customer();
-//            cust.setCustomerID(result.getLong("customer_id"));
-//            cust.setName(result.getString("name"));
-//            cust.setAddress(result.getString("address"));
-//            cust.setCreated_date(result.getDate("created_date"));
-//            //store all data into a List
-//            list.add(cust);
-//        }
-//        return list;
-//    }
+      public List<BureauProGphy> getBureauProGphy() throws SQLException {
+        //get database connection
+        ConnectBDD b = new ConnectBDD();
+        Connection con = b.getMyConnexion();
+        if (con == null) {
+            throw new SQLException("Can't get database connection");
+        }
+        PreparedStatement ps = con.prepareStatement("select Identifiant, Mot_de_passe, Actif from membre_bureau");
+        //get customer data from database
+        ResultSet result = ps.executeQuery();
+        List<BureauProGphy> list = new ArrayList<BureauProGphy>();
+        while (result.next()) {
+            BureauProGphy membre = new BureauProGphy();
+            membre.setIdentifiant(result.getString("Identifiant"));
+            membre.setMdp(result.getString("Mot_de_passe"));
+            //membre.setPoste(result.getString("Poste"));
+            membre.setActif(result.getBoolean("Actif"));
+            //store all data into a List
+            list.add(membre);
+        }
+        return list;
+    }
 }

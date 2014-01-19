@@ -4,6 +4,7 @@ package tools;
 import java.sql.Connection;
 // gestion des pilotes
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 // erreurs
 import java.sql.SQLException;
 // une instruction
@@ -26,6 +27,7 @@ import java.util.logging.Logger;
 public class ConnectBDD {
     private Connection myConnexion;
     private Statement myStatement;
+    
     private final String MYURL = "jdbc:mysql://localhost/projetannuel";
     private final String MYUSER= "root";
     private final String MYPASSWORD= "projetannuel2014";
@@ -69,5 +71,5 @@ public Connection getMyConnexion() {
     public Statement getMyStatement() {
         return myStatement;
     }
-    
+   
 }
