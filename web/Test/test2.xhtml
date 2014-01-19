@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     #{bureauProGphy.saveBureauProGphy()};
     <!-- appelle le template layout.xhtml -->
@@ -40,16 +41,52 @@
 
                     </h:form>
                 </p:tab>  
-                <p:tab title="Liste des membres">  
+                <p:tab title="Liste des membres actifs">  
                     <h:form>  
 
-                        <h3>Inline</h3>  
-                        <p:calendar value="#{etudiant.dateNaissance}" mode="inline" id="inlineCal"/>     
+                        <p:dataTable id="dataTable" var="bureauProGphy" value="#{bureauProGphy.getBureauProGphy()}" sortMode="multiple" rows="5" paginator="true">  
+                            <f:facet name="header">  
+                                Membres  
+                            </f:facet>  
 
-                        <p:commandButton value="Submit" />  
+                            <p:column sortBy="pseudo" headerText="Pseudo">  
+                                <h:outputText value="#{bureauProGphy.identifiant}" />  
+                            </p:column>  
 
+                            <p:column sortBy="mdp" headerText="Mdp">  
+                                <h:outputText value="#{bureauProGphy.mdp}" />  
+                            </p:column>  
+
+                            <p:column sortBy="actif" headerText="Actif">  
+                                <h:outputText value="#{bureauProGphy.actif}" />  
+                            </p:column>  
+
+                        </p:dataTable>
                     </h:form>
                 </p:tab>  
+                <p:tab title="Liste des anciens membres">  
+                    <h:form>  
+
+                        <p:dataTable id="dataTable" var="bureauProGphy" value="#{bureauProGphy.getBureauProGphy()}" sortMode="multiple" rows="5" paginator="true">  
+                            <f:facet name="header">  
+                                Membres  
+                            </f:facet>  
+
+                            <p:column sortBy="pseudo" headerText="Pseudo">  
+                                <h:outputText value="#{bureauProGphy.identifiant}" />  
+                            </p:column>  
+
+                            <p:column sortBy="mdp" headerText="Mdp">  
+                                <h:outputText value="#{bureauProGphy.mdp}" />  
+                            </p:column>  
+
+                            <p:column sortBy="actif" headerText="Actif">  
+                                <h:outputText value="#{bureauProGphy.actif}" />  
+                            </p:column>  
+
+                        </p:dataTable>
+                    </h:form>
+                </p:tab> 
 
             </p:accordionPanel>
         </ui:define> 
