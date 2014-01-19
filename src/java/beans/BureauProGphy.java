@@ -14,112 +14,111 @@ import tools.ConnectBDD;
 @ManagedBean
 @RequestScoped
 
-
 public class BureauProGphy extends Etudiant implements Serializable {
 
     // Attributs
-	private Poste poste;
-	private ArrayList<Integer> anneesMembre;
-	private String identifiant;
-	private String mdp;
-	private boolean actif;
+    private Poste poste;
+    private ArrayList<Integer> anneesMembre;
+    private String identifiant;
+    private String mdp;
+    private boolean actif;
 
+    // Getter et Setter
+    public Poste getPoste() {
+        return this.poste;
+    }
 
-        // Getter et Setter
-	public Poste getPoste() {
-		return this.poste;
-	}
+    /**
+     *
+     * @param poste
+     */
+    public void setPoste(Poste poste) {
+        this.poste = poste;
+    }
 
-	/**
-	 * 
-	 * @param poste
-	 */
-	public void setPoste(Poste poste) {
-		this.poste = poste;
-	}
+    public ArrayList<Integer> getAnneesMembre() {
+        return this.anneesMembre;
+    }
 
-	public ArrayList<Integer> getAnneesMembre() {
-		return this.anneesMembre;
-	}
+    /**
+     *
+     * @param anneesMembre
+     */
+    public void setAnneesMembre(ArrayList<Integer> anneesMembre) {
+        this.anneesMembre = anneesMembre;
+    }
 
-	/**
-	 * 
-	 * @param anneesMembre
-	 */
-	public void setAnneesMembre(ArrayList<Integer> anneesMembre) {
-		this.anneesMembre = anneesMembre;
-	}
+    /**
+     *
+     * @param annee
+     */
+    public void addAnneeMembre(Integer annee) {
+        throw new UnsupportedOperationException();
+    }
 
-	/**
-	 * 
-	 * @param annee
-	 */
-	public void addAnneeMembre(Integer annee) {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     *
+     * @param annee
+     */
+    public void delAnneeMembre(Integer annee) {
+        throw new UnsupportedOperationException();
+    }
 
-	/**
-	 * 
-	 * @param annee
-	 */
-	public void delAnneeMembre(Integer annee) {
-		throw new UnsupportedOperationException();
-	}
+    public String getIdentifiant() {
+        return this.identifiant;
+    }
 
-	public String getIdentifiant() {
-		return this.identifiant;
-	}
+    /**
+     *
+     * @param identifiant
+     */
+    public void setIdentifiant(String identifiant) {
+        this.identifiant = identifiant;
+    }
 
-	/**
-	 * 
-	 * @param identifiant
-	 */
-	public void setIdentifiant(String identifiant) {
-		this.identifiant = identifiant;
-	}
+    public String getMdp() {
+        return this.mdp;
+    }
 
-	public String getMdp() {
-		return this.mdp;
-	}
+    /**
+     *
+     * @param mdp
+     */
+    public void setMdp(String mdp) {
+        this.mdp = mdp;
+    }
 
-	/**
-	 * 
-	 * @param mdp
-	 */
-	public void setMdp(String mdp) {
-		this.mdp = mdp;
-	}
+    public boolean getActif() {
+        return this.actif;
+    }
 
-	public boolean getActif() {
-		return this.actif;
-	}
-
-	/**
-	 * 
-	 * @param actif
-	 */
-	public void setActif(boolean actif) {
-		this.actif = actif;
-	}
+    /**
+     *
+     * @param actif
+     */
+    public void setActif(boolean actif) {
+        this.actif = actif;
+    }
 
         // Methodes pour la BDD
-        
-      public void saveBureauProGphy() throws SQLException {
+    public void saveBureauProGphy() throws SQLException {
         ConnectBDD b = new ConnectBDD();
         if (b == null) {
             throw new SQLException("Can't get database connection");
         }
         try {
-
+            /* Récupération des paramètres d'URL saisis par l'utilisateur */
+            String paramIdentifiant = this.getIdentifiant();
+            String paramMotDePasse = this.getMdp();
             /* Exécution d'une requête de modification de la BD (INSERT, UPDATE, DELETE, CREATE, etc.). */
-            b.getMyStatement().executeUpdate("INSERT INTO projetannuel.membre_bureau(Identifiant, Mot-de-passe, Poste, actif) VALUES (" + identifiant + "," + mdp + "," + poste + "," + actif + ")");
+            b.getMyStatement().executeUpdate("INSERT INTO projetannuel.membre_bureau(Identifiant, Mot-de-passe) VALUES (" + paramIdentifiant + "," + paramMotDePasse + ")");
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
         }
     }
-        
+
 //      public List<BureauProGphy> getBureauProGphy() throws SQLException {
 //        //get database connection
 //        ConnectBDD con = new ConnectBDD();
