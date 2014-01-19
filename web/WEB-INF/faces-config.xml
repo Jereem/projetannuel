@@ -4,4 +4,18 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
 
+    <navigation-rule>
+	<from-view-id>test.xhtml</from-view-id>
+	<navigation-case>
+		<from-action>#{bureauProGphy.saveBureauProGphy()}</from-action>
+		<from-outcome>success</from-outcome>
+		<to-view-id>test2.xhtml</to-view-id>
+	</navigation-case>
+	<navigation-case>
+		<from-action>#{bureauProGphy.saveBureauProGphy()}</from-action>
+		<from-outcome>failed</from-outcome>
+		<to-view-id>test.xhtml</to-view-id>
+	</navigation-case>
+    </navigation-rule>
+    
 </faces-config>

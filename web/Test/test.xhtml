@@ -48,31 +48,24 @@
                 <p:tab title="Liste des membres">  
                     <h:form>  
 
-                        <h:dataTable value="#{bureauProGphy.getBureauProGphy()}" var="c"
-                                     styleClass="order-table"
-                                     headerClass="order-table-header"
-                                     rowClasses="order-table-odd-row,order-table-even-row"
-                                     >
-                            <h:column>
-                                <f:facet name="header">
-                                    Pseudo
-                                </f:facet>
-                                #{c.identifiant}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    Mdp
-                                </f:facet>
-                                #{c.mdp}
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    Actif
-                                </f:facet>
-                                #{c.actif}
-                            </h:column>
-                        </h:dataTable> 
+                        <p:dataTable id="dataTable" var="bureauProGphy" value="#{bureauProGphy.getBureauProGphy()}" sortMode="multiple" rows="25" paginator="true">  
+                            <f:facet name="header">  
+                                Membres  
+                            </f:facet>  
 
+                            <p:column sortBy="pseudo" headerText="Pseudo">  
+                                <h:outputText value="#{bureauProGphy.identifiant}" />  
+                            </p:column>  
+
+                            <p:column sortBy="mdp" headerText="Mdp">  
+                                <h:outputText value="#{bureauProGphy.mdp}" />  
+                            </p:column>  
+
+                            <p:column sortBy="actif" headerText="Actif">  
+                                <h:outputText value="#{bureauProGphy.actif}" />  
+                            </p:column>  
+
+                        </p:dataTable>
                     </h:form>
                 </p:tab>  
 

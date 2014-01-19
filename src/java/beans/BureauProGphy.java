@@ -102,7 +102,7 @@ public class BureauProGphy extends Etudiant implements Serializable {
     }
 
         // Methodes pour la BDD
-    public void saveBureauProGphy() throws SQLException {
+    public String saveBureauProGphy() throws SQLException {
         ConnectBDD b = new ConnectBDD();
         if (b == null) {
             throw new SQLException("Can't get database connection");
@@ -113,11 +113,14 @@ public class BureauProGphy extends Etudiant implements Serializable {
             String paramMotDePasse = this.getMdp();
             /* Exécution d'une requête de modification de la BD (INSERT, UPDATE, DELETE, CREATE, etc.). */
             b.getMyStatement().executeUpdate("INSERT INTO projetannuel.membre_bureau(Identifiant, Mot_de_passe) VALUES (" + paramIdentifiant + "," + paramMotDePasse + ")");
+            
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
+            
         }
+        return "success";
     }
 
       public List<BureauProGphy> getBureauProGphy() throws SQLException {
