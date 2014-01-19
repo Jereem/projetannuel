@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <!-- appelle le template layoutbis.xhtml -->
+    <ui:composition template="newTemplate.xhtml"> 
+        <!-- Defini la partie nommée contenu dans le template par le bloc qui suit -->
+        <ui:define name="content"> 
+            <h2>Adhérents</h2> 
+            <p:accordionPanel>  
+                <p:tab title="Ajouter un nouvel adhérent">  
+                    <h:panelGrid columns="2" cellpadding="10">  
+                        <h:form>  
+
+                            <p:panel header="Nouvel adhérent">  
+
+                                <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5"> 
+
+                                    
+                                    <h:outputText value="Titre: *" />  
+                                    <p:selectOneMenu value="#{etudiant.titre}">  
+                                        <f:selectItems value="#{etudiant.titres}" var="titres" itemValue="#{titres.getNomTitre()}" /> 
+                                    </p:selectOneMenu>
+                                    
+                                    <h:outputText value="Nom : *" />  
+                                    <p:inputText value="#{etudiant.nom}" required="true"/> 
+
+                                    <h:outputText value="Prénom : *" />  
+                                    <p:inputText value="#{etudiant.prenom}" required="true"/>
+                                    
+                                    <h:outputText value="Coordonnées : *" />  
+                                    <p:inputText value="#{etudiant.coordonnees}" required="true"/>
+                                    
+                                    <h:outputText value="Promotion : *" />  
+                                    <p:inputText value="#{etudiant.promotion}" required="true"/>
+                                    
+                                    <h:outputText value="Numéro de sécurité sociale : *" />  
+                                    <p:inputText value="#{etudiant.numeroSS}" required="true"/>
+                                    
+                                    <h:outputText value="Date de naissance : *" />  
+                                    <p:inputText value="#{etudiant.dateNaissance}" required="true"/>
+                                    
+                                    
+                                    
+                                </h:panelGrid>  
+
+                            </p:panel>  
+
+                            <!-- Envoie le formulaire et passe a la page test2.xhtml -->
+                            <p:commandButton value="Save" action="#{bureauProGphy.saveBureauProGphy()}"/>  
+
+                        </h:form>  
+                    </h:panelGrid>  
+                </p:tab>  
+                <p:tab title="Supprimer un adhérent">  
+                    <h:form>  
+
+                        <h3>Inline</h3>  
+                        <p:calendar value="#{etudiant.dateNaissance}" mode="inline" id="inlineCal"/>     
+
+                        <p:commandButton value="Submit" />  
+
+                    </h:form>
+                </p:tab>  
+                <p:tab title="Liste des adhérents">  
+                    <h:form>  
+
+                        <p:dataTable id="dataTable" var="bureauProGphy" value="#{bureauProGphy.getBureauProGphy()}" sortMode="multiple" rows="5" paginator="true">  
+                            <f:facet name="header">  
+                                Membres  
+                            </f:facet>  
+
+                            <p:column sortBy="pseudo" headerText="Pseudo">  
+                                <h:outputText value="#{bureauProGphy.identifiant}" />  
+                            </p:column>  
+
+                            <p:column sortBy="mdp" headerText="Mdp">  
+                                <h:outputText value="#{bureauProGphy.mdp}" />  
+                            </p:column>  
+
+                            <p:column sortBy="actif" headerText="Actif">  
+                                <h:outputText value="#{bureauProGphy.actif}" />  
+                            </p:column>  
+
+                        </p:dataTable>
+                    </h:form>
+                </p:tab>  
+                <p:tab title="Liste des anciens adhérents">  
+                    <h:form>  
+
+                        <p:dataTable id="dataTable" var="bureauProGphy" value="#{bureauProGphy.getBureauProGphy()}" sortMode="multiple" rows="5" paginator="true">  
+                            <f:facet name="header">  
+                                Membres  
+                            </f:facet>  
+
+                            <p:column sortBy="pseudo" headerText="Pseudo">  
+                                <h:outputText value="#{bureauProGphy.identifiant}" />  
+                            </p:column>  
+
+                            <p:column sortBy="mdp" headerText="Mdp">  
+                                <h:outputText value="#{bureauProGphy.mdp}" />  
+                            </p:column>  
+
+                            <p:column sortBy="actif" headerText="Actif">  
+                                <h:outputText value="#{bureauProGphy.actif}" />  
+                            </p:column>  
+
+                        </p:dataTable>
+                    </h:form>
+                </p:tab>
+
+            </p:accordionPanel>
+
+            <!-- Fin du bloc "contenu" -->
+        </ui:define> 
+        <!-- Fin du template "layout" -->
+    </ui:composition> 
+</html>

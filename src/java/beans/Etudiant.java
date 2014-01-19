@@ -12,12 +12,13 @@ import javax.faces.bean.SessionScoped;
 
 public class Etudiant extends Personne implements Serializable{
 
-	private int promotion;
+	
 	private ArrayList<Integer> anneesAdherant;
 	private int numeroSS;
 	private ArrayList<Competences> listeCompetences;
 	private Date dateNaissance;
 	private boolean AJourCotisation;
+        private int promotion;
 
 	public int getAnneeEtude() {
 		throw new UnsupportedOperationException();

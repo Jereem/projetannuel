@@ -12,11 +12,22 @@ import java.sql.SQLException;
 @RequestScoped
 public class Personne implements Serializable {
 
-    private String nom;
-    private String prenom;
-    private Titres titre;
-    private Coordonnees coordonnees;
+    protected enum Titres {
 
+        MR, MME, MLLE, DR, PF, MAITRE;
+
+        public String getNomTitre() {
+            return toString();
+        }
+    }
+    protected final Titres[] titres = Titres.values();
+    protected String nom;
+    protected String prenom;
+    protected Titres titre;
+    protected Coordonnees coordonnees;
+
+    public Titres[] getTitres() { return titres; }
+    
     public String getNom() {
         return this.nom;
     }
