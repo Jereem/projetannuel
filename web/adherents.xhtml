@@ -18,6 +18,8 @@
 
                             <p:panel header="Nouvel adhérent">  
 
+                                
+                                
                                 <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5"> 
 
                                     
@@ -33,16 +35,15 @@
                                     <p:inputText value="#{etudiant.prenom}" required="true"/>
                                     
                                     <h:outputText value="Coordonnées : *" />  
-                                    <p:inputText value="#{etudiant.coordonnees}" required="true"/>
-                                    
-                                    <h:outputText value="Promotion : *" />  
-                                    <p:inputText value="#{etudiant.promotion}" required="true"/>
+                                    <p:inputText value="#{etudiant.coordonnees}" required="true"/>                                   
                                     
                                     <h:outputText value="Numéro de sécurité sociale : *" />  
                                     <p:inputText value="#{etudiant.numeroSS}" required="true"/>
                                     
-                                    <h:outputText value="Date de naissance : *" />  
-                                    <p:inputText value="#{etudiant.dateNaissance}" required="true"/>
+                                    <h:outputText value="Date de naissance : *" />
+                                    <p:calendar value="#{etudiant.dateNaissance}" id="popupButtonCal" showOn="button" />
+                                      
+                                    
                                     
                                     
                                     
@@ -51,7 +52,7 @@
                             </p:panel>  
 
                             <!-- Envoie le formulaire et passe a la page test2.xhtml -->
-                            <p:commandButton value="Save" action="#{bureauProGphy.saveBureauProGphy()}"/>  
+                            <p:commandButton value="Save" action="#{etudiant.saveEtudiant()}"/>  
 
                         </h:form>  
                     </h:panelGrid>  

@@ -16,6 +16,17 @@
 		<from-outcome>failed</from-outcome>
 		<to-view-id>test.xhtml</to-view-id>
 	</navigation-case>
+        <from-view-id>adherents.xhtml</from-view-id>
+        <navigation-case>
+		<from-action>#{etudiant.saveEtudiant()}</from-action>
+		<from-outcome>success</from-outcome>
+		<to-view-id>adherents.xhtml</to-view-id>
+	</navigation-case>
+	<navigation-case>
+		<from-action>#{etudiant.saveEtudiant()}</from-action>
+		<from-outcome>failed</from-outcome>
+		<to-view-id>adherents.xhtml</to-view-id>
+	</navigation-case>
     </navigation-rule>
     
 </faces-config>
