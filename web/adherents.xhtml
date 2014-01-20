@@ -17,39 +17,62 @@
                         <h:form>  
 
                             <p:panel header="Nouvel adhérent">  
-
-                                
-                                
                                 <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5"> 
 
-                                    
                                     <h:outputText value="Titre: *" />  
                                     <p:selectOneMenu value="#{etudiant.titre}">  
                                         <f:selectItems value="#{etudiant.titres}" var="titres" itemValue="#{titres.getNomTitre()}" /> 
                                     </p:selectOneMenu>
-                                    
+
                                     <h:outputText value="Nom : *" />  
                                     <p:inputText value="#{etudiant.nom}" required="true"/> 
 
                                     <h:outputText value="Prénom : *" />  
                                     <p:inputText value="#{etudiant.prenom}" required="true"/>
-                                    
-                                    <h:outputText value="Coordonnées : *" />  
-                                    <p:inputText value="#{etudiant.coordonnees}" required="true"/>                                   
-                                    
+
                                     <h:outputText value="Numéro de sécurité sociale : *" />  
                                     <p:inputText value="#{etudiant.numeroSS}" required="true"/>
-                                    
+
                                     <h:outputText value="Date de naissance : *" />
                                     <p:calendar value="#{etudiant.dateNaissance}" id="popupButtonCal" showOn="button" />
-                                      
-                                    
-                                    
-                                    
-                                    
-                                </h:panelGrid>  
 
+                                </h:panelGrid>  
                             </p:panel>  
+
+                           <p:panel header="Coordonnées">                           
+                                <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                                    <h:outputText value="Type de voie: *" />  
+                                    <p:selectOneMenu value="#{coordonnees.voies}">  
+                                        <f:selectItems value="#{coordonnees.voies}" var="voies" itemValue="#{voies.getNomVoie()}" /> 
+                                    </p:selectOneMenu>
+                                    <h:outputText value="Numéro : *" />  
+                                    <p:inputText value="#{coordonnees.numRue}" required="true"/>  
+                                    <h:outputText value="Rue : *" />  
+                                    <p:inputText value="#{coordonnees.rue}" required="true"/> 
+                                    <h:outputText value="Code postal : *" />  
+                                    <p:inputText value="#{coordonnees.codePostal}" required="true"/> 
+                                    <h:outputText value="Ville : *" />  
+                                    <p:inputText value="#{coordonnees.ville}" required="true"/> 
+                                    <h:outputText value="Pays : *" />  
+                                    <p:inputText value="#{coordonnees.pays}" required="true"/> 
+                                    <h:outputText value="Email : *" />  
+                                    <p:inputText value="#{coordonnees.EMail}" required="true"/> 
+                                    <h:outputText value="Telephone fixe : *" />  
+                                    <p:inputText value="#{coordonnees.telFixe}" required="true"/> 
+                                    <h:outputText value="Téléphone mobile : *" />  
+                                    <p:inputText value="#{coordonnees.telPortable}" required="true"/>
+
+                                </h:panelGrid>
+                            </p:panel> 
+
+                            <p:panel header="Scolarité">                           
+                                <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+
+                                    <h:outputText value="Coordonnées : *" />  
+                                    <p:inputText value="#{etudiant.coordonnees}" required="true"/>    
+
+                                </h:panelGrid>
+                            </p:panel> 
 
                             <!-- Envoie le formulaire et passe a la page test2.xhtml -->
                             <p:commandButton value="Save" action="#{etudiant.saveEtudiant()}"/>  
