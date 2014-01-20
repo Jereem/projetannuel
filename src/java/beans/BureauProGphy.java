@@ -101,9 +101,10 @@ public class BureauProGphy extends Etudiant implements Serializable {
         this.actif = actif;
     }
 
-        // Methodes pour la BDD
+    // Methodes pour la BDD
     public String saveBureauProGphy() throws SQLException {
-        ConnectBDD b = new ConnectBDD();
+        ConnectBDD con = new ConnectBDD();
+        Connection b = con.getMyConnexion();
         if (b == null) {
             throw new SQLException("Can't get database connection");
         }
@@ -111,19 +112,27 @@ public class BureauProGphy extends Etudiant implements Serializable {
             /* Récupération des paramètres d'URL saisis par l'utilisateur */
             String paramIdentifiant = this.getIdentifiant();
             String paramMotDePasse = this.getMdp();
-            /* Exécution d'une requête de modification de la BD (INSERT, UPDATE, DELETE, CREATE, etc.). */
-            b.getMyStatement().executeUpdate("INSERT INTO projetannuel.membre_bureau(Identifiant, Mot_de_passe) VALUES (" + paramIdentifiant + "," + paramMotDePasse + ")");
-            
+            /* Création de l'objet gérant les requêtes préparées */
+            PreparedStatement ps = b.prepareStatement("INSERT INTO projetannuel.membre_bureau(Identifiant, Mot_de_passe) VALUES (?,?)");
+            /*
+             * Remplissage des paramètres de la requête grâce aux méthodes
+             * setXXX() mises à disposition par l'objet PreparedStatement.
+             */
+            ps.setString(1, paramIdentifiant);
+            ps.setString(2, paramMotDePasse);
+            /* Exécution de la requête */
+            int statut = ps.executeUpdate();
+            return "success";
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
-            
+            return "failed";
         }
-        return "success";
+
     }
 
-      public List<BureauProGphy> getBureauProGphy() throws SQLException {
+    public List<BureauProGphy> getBureauProGphy() throws SQLException {
         //get database connection
         ConnectBDD b = new ConnectBDD();
         Connection con = b.getMyConnexion();
@@ -133,7 +142,7 @@ public class BureauProGphy extends Etudiant implements Serializable {
         PreparedStatement ps = con.prepareStatement("select Identifiant, Mot_de_passe, Actif from membre_bureau");
         //get customer data from database
         ResultSet result = ps.executeQuery();
-        List<BureauProGphy> list = new ArrayList<BureauProGphy>();
+        List<BureauProGphy> list = new ArrayList<>();
         while (result.next()) {
             BureauProGphy membre = new BureauProGphy();
             membre.setIdentifiant(result.getString("Identifiant"));
