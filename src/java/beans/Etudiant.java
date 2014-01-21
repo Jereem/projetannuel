@@ -11,110 +11,121 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
+import javax.validation.constraints.Pattern;
 import tools.ConnectBDD;
 
 @ManagedBean
-@RequestScoped
+@ViewScoped
 
-public class Etudiant extends Personne implements Serializable{
+public class Etudiant extends Personne implements Serializable {
 
-	
-	private ArrayList<Integer> anneesAdherant;
-	private int numeroSS;
-	private ArrayList<Competences> listeCompetences;
-	private Date dateNaissance;
-	private boolean AJourCotisation;
-        private int promotion;
+    private ArrayList<Integer> anneesAdherant;
+    @Pattern(regexp = "[0-9]{13}", message = "Numéro de sécurité sociale invalide.")
+    private int numeroSS;
+    private ArrayList<Competences> listeCompetences;
+    private Date dateNaissance;
+    private boolean AJourCotisation;
 
-	public int getAnneeEtude() {
-		throw new UnsupportedOperationException();
-	}
+    private int promotion;
 
-	/**
-	 * 
-	 * @param anneeEtude
-	 */
-	public void setAnneeEtude(int anneeEtude) {
-		throw new UnsupportedOperationException();
-	}
+    public void setPromotion(int promotion) {
+        this.promotion = promotion;
+    }
 
-	public ArrayList<Integer> getAnneesAdherant() {
-		return this.anneesAdherant;
-	}
+    public int getPromotion() {
+        return promotion;
+    }
 
-	/**
-	 * 
-	 * @param anneesAdherant
-	 */
-	public void setAnneesAdherant(ArrayList<Integer> anneesAdherant) {
-		this.anneesAdherant = anneesAdherant;
-	}
+    public int getAnneeEtude() {
+        throw new UnsupportedOperationException();
+    }
 
-	/**
-	 * 
-	 * @param annee
-	 */
-	public void addAnneeAdherent(int annee) {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     *
+     * @param anneeEtude
+     */
+    public void setAnneeEtude(int anneeEtude) {
+        throw new UnsupportedOperationException();
+    }
 
-	/**
-	 * 
-	 * @param annee
-	 */
-	public void delAnneeAdherent(int annee) {
-		throw new UnsupportedOperationException();
-	}
+    public ArrayList<Integer> getAnneesAdherant() {
+        return this.anneesAdherant;
+    }
 
-	public int getNumeroSS() {
-		return this.numeroSS;
-	}
+    /**
+     *
+     * @param anneesAdherant
+     */
+    public void setAnneesAdherant(ArrayList<Integer> anneesAdherant) {
+        this.anneesAdherant = anneesAdherant;
+    }
 
-	/**
-	 * 
-	 * @param NumeroSS
-	 */
-	public void setNumeroSS(int NumeroSS) {
-		this.numeroSS = NumeroSS;
-	}
+    /**
+     *
+     * @param annee
+     */
+    public void addAnneeAdherent(int annee) {
+        throw new UnsupportedOperationException();
+    }
 
-	public ArrayList<Competences> getListeCompetences() {
-		return this.listeCompetences;
-	}
+    /**
+     *
+     * @param annee
+     */
+    public void delAnneeAdherent(int annee) {
+        throw new UnsupportedOperationException();
+    }
 
-	/**
-	 * 
-	 * @param listeCompetences
-	 */
-	public void setListeCompetences(ArrayList<Competences> listeCompetences) {
-		this.listeCompetences = listeCompetences;
-	}
+    public int getNumeroSS() {
+        return this.numeroSS;
+    }
 
-	public Date getDateNaissance() {
-		return this.dateNaissance;
-	}
+    /**
+     *
+     * @param NumeroSS
+     */
+    public void setNumeroSS(int NumeroSS) {
+        this.numeroSS = NumeroSS;
+    }
 
-	/**
-	 * 
-	 * @param dateNaissance
-	 */
-	public void setDateNaissance(Date dateNaissance) {
-		this.dateNaissance = dateNaissance;
-	}
+    public ArrayList<Competences> getListeCompetences() {
+        return this.listeCompetences;
+    }
 
-	public boolean getAJourCotisation() {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     *
+     * @param listeCompetences
+     */
+    public void setListeCompetences(ArrayList<Competences> listeCompetences) {
+        this.listeCompetences = listeCompetences;
+    }
 
-	/**
-	 * 
-	 * @param AJourCotisation
-	 */
-	public void setAJourCotisation(boolean AJourCotisation) {
-		throw new UnsupportedOperationException();
-	}
-        
-            // Methodes pour la BDD
+    public Date getDateNaissance() {
+        return this.dateNaissance;
+    }
+
+    /**
+     *
+     * @param dateNaissance
+     */
+    public void setDateNaissance(Date dateNaissance) {
+        this.dateNaissance = dateNaissance;
+    }
+
+    public boolean getAJourCotisation() {
+        return (this.AJourCotisation);
+    }
+
+    /**
+     *
+     * @param AJourCotisation
+     */
+    public void setAJourCotisation(boolean AJourCotisation) {
+        this.AJourCotisation = AJourCotisation;
+    }
+
+    // Methodes pour la BDD
     public String saveEtudiant() throws SQLException {
         ConnectBDD b = new ConnectBDD();
         if (b == null) {
@@ -130,17 +141,17 @@ public class Etudiant extends Personne implements Serializable{
             //Date paramdateNaissance = this.getDateNaissance();
             /* Exécution d'une requête de modification de la BD (INSERT, UPDATE, DELETE, CREATE, etc.). */
             b.getMyStatement().executeUpdate("INSERT INTO projetannuel.personne(Titre, Nom_Personne, Prenom_Personne, Numero_SS) VALUES (" + paramTitre + "," + paramNom + "," + paramPrenom + "," + paramNumeroSS + ")");
-            
+
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
-            
+
         }
         return "success";
     }
 
-      public List<BureauProGphy> getBureauProGphy() throws SQLException {
+    public List<BureauProGphy> getBureauProGphy() throws SQLException {
         //get database connection
         ConnectBDD b = new ConnectBDD();
         Connection con = b.getMyConnexion();
@@ -150,7 +161,7 @@ public class Etudiant extends Personne implements Serializable{
         PreparedStatement ps = con.prepareStatement("select Identifiant, Mot_de_passe, Actif from membre_bureau");
         //get customer data from database
         ResultSet result = ps.executeQuery();
-        List<BureauProGphy> list = new ArrayList<BureauProGphy>();
+        List<BureauProGphy> list = new ArrayList<>();
         while (result.next()) {
             BureauProGphy membre = new BureauProGphy();
             membre.setIdentifiant(result.getString("Identifiant"));

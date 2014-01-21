@@ -17,37 +17,48 @@
                         <h:form>  
 
                             <p:panel header="Nouvel adhérent">  
-                                <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5"> 
+                                <h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5"> 
 
                                     <h:outputText value="Titre: *" />  
                                     <p:selectOneMenu value="#{etudiant.titre}">  
                                         <f:selectItems value="#{etudiant.titres}" var="titres" itemValue="#{titres.getNomTitre()}" /> 
                                     </p:selectOneMenu>
+                                    <p></p>
 
                                     <h:outputText value="Nom : *" />  
-                                    <p:inputText value="#{etudiant.nom}" required="true"/> 
+                                    <h:inputText id="nom" value="#{etudiant.nom}" required="true" >
+                                    <f:ajax event="blur" render="nomMessage" />
+                                    </h:inputText>
+                                    <h:message id="nomMessage" for="nom" errorClass="erreur" />
 
                                     <h:outputText value="Prénom : *" />  
-                                    <p:inputText value="#{etudiant.prenom}" required="true"/>
+                                    <h:inputText id="prenom" value="#{etudiant.prenom}" required="true" >
+                                    <f:ajax event="blur" render="prenomMessage" />
+                                    </h:inputText>
+                                    <h:message id="prenomMessage" for="prenom" errorClass="erreur" />
 
                                     <h:outputText value="Numéro de sécurité sociale : *" />  
-                                    <p:inputText value="#{etudiant.numeroSS}" required="true"/>
+                                    <h:inputText id="numSS" value="#{etudiant.numeroSS}" required="true" >
+                                    <f:ajax event="blur" render="numSSMessage" />
+                                    </h:inputText>
+                                    <h:message id="numSSMessage" for="numSS" errorClass="erreur" />
 
                                     <h:outputText value="Date de naissance : *" />
                                     <p:calendar value="#{etudiant.dateNaissance}" id="popupButtonCal" showOn="button" />
+                                    <p></p>
 
                                 </h:panelGrid>  
                             </p:panel>  
 
                            <p:panel header="Coordonnées">                           
                                 <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                                    <h:outputText value="Numéro : *" />  
+                                    <p:inputText value="#{coordonnees.numRue}" required="true"/>
                                     <h:outputText value="Type de voie: *" />  
                                     <p:selectOneMenu value="#{coordonnees.voies}">  
                                         <f:selectItems value="#{coordonnees.voies}" var="voies" itemValue="#{voies.getNomVoie()}" /> 
                                     </p:selectOneMenu>
-                                    <h:outputText value="Numéro : *" />  
-                                    <p:inputText value="#{coordonnees.numRue}" required="true"/>  
-                                    <h:outputText value="Rue : *" />  
+                                    <h:outputText value="Nom de la rue : *" />  
                                     <p:inputText value="#{coordonnees.rue}" required="true"/> 
                                     <h:outputText value="Code postal : *" />  
                                     <p:inputText value="#{coordonnees.codePostal}" required="true"/> 
@@ -68,8 +79,8 @@
                             <p:panel header="Scolarité">                           
                                 <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
 
-                                    <h:outputText value="Coordonnées : *" />  
-                                    <p:inputText value="#{etudiant.coordonnees}" required="true"/>    
+                                    <h:outputText value="Année de promotion : *" />  
+                                    <p:inputText value="#{etudiant.promotion}" required="true"/>    
 
                                 </h:panelGrid>
                             </p:panel> 

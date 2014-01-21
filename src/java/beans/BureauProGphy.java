@@ -10,17 +10,23 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import tools.ConnectBDD;
 
 @ManagedBean
-@RequestScoped
+@ViewScoped
 
 public class BureauProGphy extends Etudiant implements Serializable {
 
     // Attributs
     private Poste poste;
     private ArrayList<Integer> anneesMembre;
+    @NotNull
+    @Size( min = 1, max = 13, message = "L'identifiant doit contenir au moins 13 caractères" )
     private String identifiant;
+    @NotNull
     private String mdp;
     private boolean actif;
 

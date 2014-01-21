@@ -7,9 +7,14 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import java.io.Serializable;
 import java.sql.SQLException;
+import javax.faces.bean.ViewScoped;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @ManagedBean
-@RequestScoped
+@ViewScoped
+
 public class Personne implements Serializable {
 
     protected enum Titres {
@@ -21,8 +26,13 @@ public class Personne implements Serializable {
         }
     }
     protected final Titres[] titres = Titres.values();
+    //@NotNull ( message = "Vous devez indiquer une valeur." )
+    @Size( max = 30, message = "Le nom ne peut pas dépasser 30 caractères." )
     protected String nom;
+    //@NotNull ( message = "Vous devez indiquer une valeur." )
+    @Size( max = 30, message = "Le prénom ne peut pas dépasser 30 caractères." )
     protected String prenom;
+    @NotNull
     protected Titres titre;
     protected Coordonnees coordonnees;
 

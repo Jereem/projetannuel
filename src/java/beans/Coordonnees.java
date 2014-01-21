@@ -4,9 +4,12 @@ import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @ManagedBean
-@RequestScoped
+@ViewScoped
 
 public class Coordonnees implements Serializable {
 
@@ -23,9 +26,11 @@ public class Coordonnees implements Serializable {
 
     private String rue;
     private Voies typeVoie;
+    @Size( min = 5, max = 5, message = "Le code postal doit contenir 3 caractères" )
     private int codePostal;
     private String ville;
     private String pays;
+    @Pattern(regexp = "[0-9]+", message = "Veuillez saisir un chiffre")
     private int numRue;
     private String eMail;
     private int telPortable;

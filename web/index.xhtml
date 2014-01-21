@@ -18,10 +18,14 @@
 
                             <p:panel header="Nouvel adhérent">  
 
-                                <h:panelGrid columns="2" cellpadding="5"> 
+                                <h:panelGrid columns="3" cellpadding="5"> 
 
                                     <h:outputText value="Pseudo : *" />  
-                                    <p:inputText value="#{bureauProGphy.identifiant}" required="true"/> 
+                                    
+                                    <h:inputText id="pseudo" value="#{bureauProGphy.identifiant}" required="true" >
+                                    <f:ajax event="blur" render="message" />
+                                    </h:inputText>
+                                    <h:message id="message" for="pseudo" errorClass="erreur" />
 
                                     <h:outputText value="Password: *" />  
                                     <p:password id="feedback" value="#{bureauProGphy.mdp}" feedback="true"/>  
