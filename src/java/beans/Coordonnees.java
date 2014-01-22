@@ -2,11 +2,8 @@ package beans;
 
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 @ManagedBean
 @ViewScoped
@@ -36,118 +33,81 @@ public class Coordonnees implements Serializable {
     private int telPortable;
     private int telFixe;
 
-    public Voies[] getVoies() {
-        return voies;
-    }
-
+    //Getter and Setter
+    public Voies[] getVoies() { return voies; }
     
-
     public String getRue() {
-        return this.rue;
+        return rue;
     }
 
-    /**
-     *
-     * @param rue
-     */
     public void setRue(String rue) {
         this.rue = rue;
     }
 
     public Voies getTypeVoie() {
-        return this.typeVoie;
+        return typeVoie;
     }
 
-    /**
-     *
-     * @param typeVoie
-     */
     public void setTypeVoie(Voies typeVoie) {
         this.typeVoie = typeVoie;
     }
 
     public int getCodePostal() {
-        return this.codePostal;
+        return codePostal;
     }
 
-    /**
-     *
-     * @param cp
-     */
-    public void setCodePostal(int cp) {
-        this.codePostal = cp;
+    public void setCodePostal(int codePostal) {
+        this.codePostal = codePostal;
     }
 
     public String getVille() {
-        return this.ville;
+        return ville;
     }
 
-    /**
-     *
-     * @param ville
-     */
     public void setVille(String ville) {
         this.ville = ville;
     }
 
     public String getPays() {
-        return this.pays;
+        return pays;
     }
 
-    /**
-     *
-     * @param pays
-     */
     public void setPays(String pays) {
         this.pays = pays;
     }
 
     public int getNumRue() {
-        return this.numRue;
+        return numRue;
     }
 
-    /**
-     *
-     * @param numRue
-     */
     public void setNumRue(int numRue) {
         this.numRue = numRue;
     }
 
-    public String getEMail() {
-        return this.eMail;
+    public String geteMail() {
+        return eMail;
     }
 
-    /**
-     *
-     * @param eMail
-     */
-    public void setEMail(String eMail) {
+    public void seteMail(String eMail) {
         this.eMail = eMail;
     }
 
     public int getTelPortable() {
-        return this.telPortable;
+        return telPortable;
     }
 
-    /**
-     *
-     * @param telPortable
-     */
     public void setTelPortable(int telPortable) {
         this.telPortable = telPortable;
     }
 
     public int getTelFixe() {
-        return this.telFixe;
+        return telFixe;
     }
 
-    /**
-     *
-     * @param telFixe
-     */
     public void setTelFixe(int telFixe) {
         this.telFixe = telFixe;
     }
+
+    
 
 }

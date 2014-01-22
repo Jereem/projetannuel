@@ -9,10 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.*;
 import tools.ConnectBDD;
 
 @ManagedBean
@@ -21,46 +19,67 @@ import tools.ConnectBDD;
 public class Etudiant extends Personne implements Serializable {
 
     private ArrayList<Integer> anneesAdherant;
-    @Pattern(regexp = "[0-9]{13}", message = "Numéro de sécurité sociale invalide.")
-    private int numeroSS;
+    @NotNull ( message = "Veuillez saisir un numéro à 13 chiffres" )
+    @Digits (integer = 13, fraction = 1, message = "Veuillez saisir un numéro à 13 chiffres")
+    private long numeroSS;
     private ArrayList<Competences> listeCompetences;
     private Date dateNaissance;
     private boolean AJourCotisation;
 
     private int promotion;
 
-    public void setPromotion(int promotion) {
-        this.promotion = promotion;
+    //Getter and Setter
+    public ArrayList<Integer> getAnneesAdherant() {
+        return anneesAdherant;
+    }
+
+    public void setAnneesAdherant(ArrayList<Integer> anneesAdherant) {
+        this.anneesAdherant = anneesAdherant;
+    }
+
+    public long getNumeroSS() {
+        return numeroSS;
+    }
+
+    public void setNumeroSS(long numeroSS) {
+        this.numeroSS = numeroSS;
+    }
+
+
+    public ArrayList<Competences> getListeCompetences() {
+        return listeCompetences;
+    }
+
+    public void setListeCompetences(ArrayList<Competences> listeCompetences) {
+        this.listeCompetences = listeCompetences;
+    }
+
+    public Date getDateNaissance() {
+        return dateNaissance;
+    }
+
+    public void setDateNaissance(Date dateNaissance) {
+        this.dateNaissance = dateNaissance;
+    }
+
+    public boolean isAJourCotisation() {
+        return AJourCotisation;
+    }
+
+    public void setAJourCotisation(boolean AJourCotisation) {
+        this.AJourCotisation = AJourCotisation;
     }
 
     public int getPromotion() {
         return promotion;
     }
 
-    public int getAnneeEtude() {
-        throw new UnsupportedOperationException();
+    public void setPromotion(int promotion) {
+        this.promotion = promotion;
     }
-
-    /**
-     *
-     * @param anneeEtude
-     */
-    public void setAnneeEtude(int anneeEtude) {
-        throw new UnsupportedOperationException();
-    }
-
-    public ArrayList<Integer> getAnneesAdherant() {
-        return this.anneesAdherant;
-    }
-
-    /**
-     *
-     * @param anneesAdherant
-     */
-    public void setAnneesAdherant(ArrayList<Integer> anneesAdherant) {
-        this.anneesAdherant = anneesAdherant;
-    }
-
+    
+    // Methodes
+    
     /**
      *
      * @param annee
@@ -77,54 +96,6 @@ public class Etudiant extends Personne implements Serializable {
         throw new UnsupportedOperationException();
     }
 
-    public int getNumeroSS() {
-        return this.numeroSS;
-    }
-
-    /**
-     *
-     * @param NumeroSS
-     */
-    public void setNumeroSS(int NumeroSS) {
-        this.numeroSS = NumeroSS;
-    }
-
-    public ArrayList<Competences> getListeCompetences() {
-        return this.listeCompetences;
-    }
-
-    /**
-     *
-     * @param listeCompetences
-     */
-    public void setListeCompetences(ArrayList<Competences> listeCompetences) {
-        this.listeCompetences = listeCompetences;
-    }
-
-    public Date getDateNaissance() {
-        return this.dateNaissance;
-    }
-
-    /**
-     *
-     * @param dateNaissance
-     */
-    public void setDateNaissance(Date dateNaissance) {
-        this.dateNaissance = dateNaissance;
-    }
-
-    public boolean getAJourCotisation() {
-        return (this.AJourCotisation);
-    }
-
-    /**
-     *
-     * @param AJourCotisation
-     */
-    public void setAJourCotisation(boolean AJourCotisation) {
-        this.AJourCotisation = AJourCotisation;
-    }
-
     // Methodes pour la BDD
     public String saveEtudiant() throws SQLException {
         ConnectBDD b = new ConnectBDD();
@@ -137,7 +108,7 @@ public class Etudiant extends Personne implements Serializable {
             String paramNom = this.getNom();
             String paramPrenom = this.getPrenom();
             //String paramCoordonnees = this.getCoordonnees().toString();
-            int paramNumeroSS = this.getNumeroSS();
+            long paramNumeroSS = this.getNumeroSS();
             //Date paramdateNaissance = this.getDateNaissance();
             /* Exécution d'une requête de modification de la BD (INSERT, UPDATE, DELETE, CREATE, etc.). */
             b.getMyStatement().executeUpdate("INSERT INTO projetannuel.personne(Titre, Nom_Personne, Prenom_Personne, Numero_SS) VALUES (" + paramTitre + "," + paramNom + "," + paramPrenom + "," + paramNumeroSS + ")");

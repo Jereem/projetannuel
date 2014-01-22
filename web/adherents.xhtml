@@ -26,19 +26,19 @@
                                     <p></p>
 
                                     <h:outputText value="Nom : *" />  
-                                    <h:inputText id="nom" value="#{etudiant.nom}" required="true" >
+                                    <h:inputText id="nom" value="#{etudiant.nom}" >
                                     <f:ajax event="blur" render="nomMessage" />
                                     </h:inputText>
                                     <h:message id="nomMessage" for="nom" errorClass="erreur" />
 
                                     <h:outputText value="Prénom : *" />  
-                                    <h:inputText id="prenom" value="#{etudiant.prenom}" required="true" >
+                                    <h:inputText id="prenom" value="#{etudiant.prenom}" >
                                     <f:ajax event="blur" render="prenomMessage" />
                                     </h:inputText>
                                     <h:message id="prenomMessage" for="prenom" errorClass="erreur" />
 
                                     <h:outputText value="Numéro de sécurité sociale : *" />  
-                                    <h:inputText id="numSS" value="#{etudiant.numeroSS}" required="true" >
+                                    <h:inputText id="numSS" value="#{etudiant.numeroSS}" >
                                     <f:ajax event="blur" render="numSSMessage" />
                                     </h:inputText>
                                     <h:message id="numSSMessage" for="numSS" errorClass="erreur" />
@@ -53,25 +53,25 @@
                            <p:panel header="Coordonnées">                           
                                 <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
                                     <h:outputText value="Numéro : *" />  
-                                    <p:inputText value="#{coordonnees.numRue}" required="true"/>
+                                    <p:inputText value="#{coordonnees.numRue}" />
                                     <h:outputText value="Type de voie: *" />  
                                     <p:selectOneMenu value="#{coordonnees.voies}">  
                                         <f:selectItems value="#{coordonnees.voies}" var="voies" itemValue="#{voies.getNomVoie()}" /> 
                                     </p:selectOneMenu>
                                     <h:outputText value="Nom de la rue : *" />  
-                                    <p:inputText value="#{coordonnees.rue}" required="true"/> 
+                                    <p:inputText value="#{coordonnees.rue}" /> 
                                     <h:outputText value="Code postal : *" />  
-                                    <p:inputText value="#{coordonnees.codePostal}" required="true"/> 
+                                    <p:inputText value="#{coordonnees.codePostal}" /> 
                                     <h:outputText value="Ville : *" />  
-                                    <p:inputText value="#{coordonnees.ville}" required="true"/> 
+                                    <p:inputText value="#{coordonnees.ville}" /> 
                                     <h:outputText value="Pays : *" />  
-                                    <p:inputText value="#{coordonnees.pays}" required="true"/> 
+                                    <p:inputText value="#{coordonnees.pays}" /> 
                                     <h:outputText value="Email : *" />  
-                                    <p:inputText value="#{coordonnees.EMail}" required="true"/> 
+                                    <p:inputText value="#{coordonnees.eMail}" /> 
                                     <h:outputText value="Telephone fixe : *" />  
-                                    <p:inputText value="#{coordonnees.telFixe}" required="true"/> 
+                                    <p:inputText value="#{coordonnees.telFixe}" /> 
                                     <h:outputText value="Téléphone mobile : *" />  
-                                    <p:inputText value="#{coordonnees.telPortable}" required="true"/>
+                                    <p:inputText value="#{coordonnees.telPortable}" />
 
                                 </h:panelGrid>
                             </p:panel> 
@@ -80,7 +80,7 @@
                                 <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
 
                                     <h:outputText value="Année de promotion : *" />  
-                                    <p:inputText value="#{etudiant.promotion}" required="true"/>    
+                                    <p:inputText value="#{etudiant.promotion}" />    
 
                                 </h:panelGrid>
                             </p:panel> 

@@ -2,15 +2,11 @@ package beans;
 
 import tools.ConnectBDD;
 
-import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import java.io.Serializable;
 import java.sql.SQLException;
 import javax.faces.bean.ViewScoped;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 @ManagedBean
 @ViewScoped
@@ -26,66 +22,51 @@ public class Personne implements Serializable {
         }
     }
     protected final Titres[] titres = Titres.values();
-    //@NotNull ( message = "Vous devez indiquer une valeur." )
+    @NotNull ( message = "Veuillez saisir un nom" )
     @Size( max = 30, message = "Le nom ne peut pas dépasser 30 caractères." )
     protected String nom;
-    //@NotNull ( message = "Vous devez indiquer une valeur." )
+    @NotNull ( message = "Veuillez saisir un prénom" )
     @Size( max = 30, message = "Le prénom ne peut pas dépasser 30 caractères." )
     protected String prenom;
-    @NotNull
+    @NotNull (message = "Veuillez séléctionner un titre")
     protected Titres titre;
     protected Coordonnees coordonnees;
 
     public Titres[] getTitres() { return titres; }
-    
+
     public String getNom() {
-        return this.nom;
+        return nom;
     }
 
-    /**
-     *
-     * @param Nom
-     */
-    public void setNom(int Nom) {
-        throw new UnsupportedOperationException();
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
     public String getPrenom() {
-        return this.prenom;
+        return prenom;
     }
 
-    /**
-     *
-     * @param prenom
-     */
-    public void setPrenom(int prenom) {
-        throw new UnsupportedOperationException();
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
     }
 
     public Titres getTitre() {
-        return this.titre;
+        return titre;
     }
 
-    /**
-     *
-     * @param Titre
-     */
-    public void setTitre(Titres Titre) {
-        this.titre = Titre;
+    public void setTitre(Titres titre) {
+        this.titre = titre;
     }
 
     public Coordonnees getCoordonnees() {
-        return this.coordonnees;
+        return coordonnees;
     }
 
-    /**
-     *
-     * @param coordonnees
-     */
     public void setCoordonnees(Coordonnees coordonnees) {
         this.coordonnees = coordonnees;
     }
-
+    
+    
     public void savePersonne() {
         String nom = getNom();
         String prenom = getPrenom();
