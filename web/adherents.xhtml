@@ -42,8 +42,8 @@
                                     <f:ajax event="blur" render="numSSMessage" />
                                     </h:inputText>
                                     <h:message id="numSSMessage" for="numSS" errorClass="erreur" />
-
-                                    <h:outputText value="Date de naissance : *" />
+                                    
+                                    <h:outputText value="Date de naissance (jj/mm/aa): *" />
                                     <p:calendar value="#{etudiant.dateNaissance}" id="popupButtonCal" showOn="button" />
                                     <p></p>
 
@@ -51,36 +51,74 @@
                             </p:panel>  
 
                            <p:panel header="Coordonnées">                           
-                                <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                                <h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
+                                    
                                     <h:outputText value="Numéro : *" />  
-                                    <p:inputText value="#{coordonnees.numRue}" />
+                                    <h:inputText id="numRue" value="#{coordonnees.numRue}" >
+                                    <f:ajax event="blur" render="numRueMessage" />
+                                    </h:inputText>
+                                    <h:message id="numRueMessage" for="numRue" errorClass="erreur" />
+                                    
                                     <h:outputText value="Type de voie: *" />  
                                     <p:selectOneMenu value="#{coordonnees.voies}">  
                                         <f:selectItems value="#{coordonnees.voies}" var="voies" itemValue="#{voies.getNomVoie()}" /> 
                                     </p:selectOneMenu>
+                                    <p></p>
+                                    
                                     <h:outputText value="Nom de la rue : *" />  
-                                    <p:inputText value="#{coordonnees.rue}" /> 
+                                    <h:inputText id="rue" value="#{coordonnees.rue}" >
+                                    <f:ajax event="blur" render="rueMessage" />
+                                    </h:inputText>
+                                    <h:message id="rueMessage" for="rue" errorClass="erreur" />
+                                    
+                                    
                                     <h:outputText value="Code postal : *" />  
-                                    <p:inputText value="#{coordonnees.codePostal}" /> 
+                                    <h:inputText id="CP" value="#{coordonnees.codePostal}" >
+                                    <f:ajax event="blur" render="CPMessage" />
+                                    </h:inputText>
+                                    <h:message id="CPMessage" for="CP" errorClass="erreur" />
+                                    
                                     <h:outputText value="Ville : *" />  
-                                    <p:inputText value="#{coordonnees.ville}" /> 
+                                    <h:inputText id="ville" value="#{coordonnees.ville}" >
+                                    <f:ajax event="blur" render="villeMessage" />
+                                    </h:inputText>
+                                    <h:message id="villeMessage" for="ville" errorClass="erreur" />
+                                   
                                     <h:outputText value="Pays : *" />  
-                                    <p:inputText value="#{coordonnees.pays}" /> 
+                                    <h:inputText id="pays" value="#{coordonnees.pays}" >
+                                    <f:ajax event="blur" render="paysMessage" />
+                                    </h:inputText>
+                                    <h:message id="paysMessage" for="pays" errorClass="erreur" />
+                                    
                                     <h:outputText value="Email : *" />  
-                                    <p:inputText value="#{coordonnees.eMail}" /> 
+                                    <h:inputText id="eMail" value="#{coordonnees.eMail}" >
+                                    <f:ajax event="blur" render="eMailMessage" />
+                                    </h:inputText>
+                                    <h:message id="eMailMessage" for="eMail" errorClass="erreur" />
+                                    
                                     <h:outputText value="Telephone fixe : *" />  
-                                    <p:inputText value="#{coordonnees.telFixe}" /> 
+                                    <h:inputText id="telFixe" value="#{coordonnees.telFixe}" >
+                                    <f:ajax event="blur" render="telFixeMessage" />
+                                    </h:inputText>
+                                    <h:message id="telFixeMessage" for="telFixe" errorClass="erreur" />
+                                    
                                     <h:outputText value="Téléphone mobile : *" />  
-                                    <p:inputText value="#{coordonnees.telPortable}" />
-
+                                    <h:inputText id="telPortable" value="#{coordonnees.telPortable}" >
+                                    <f:ajax event="blur" render="telPortableMessage" />
+                                    </h:inputText>
+                                    <h:message id="telPortableMessage" for="telPortable" errorClass="erreur" />
+                                    
                                 </h:panelGrid>
                             </p:panel> 
 
                             <p:panel header="Scolarité">                           
-                                <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                                <h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
 
                                     <h:outputText value="Année de promotion : *" />  
-                                    <p:inputText value="#{etudiant.promotion}" />    
+                                    <h:inputText id="promotion" value="#{etudiant.promotion}" >
+                                    <f:ajax event="blur" render="promotionMessage" />
+                                    </h:inputText>
+                                    <h:message id="promotionMessage" for="promotion" errorClass="erreur" />
 
                                 </h:panelGrid>
                             </p:panel> 

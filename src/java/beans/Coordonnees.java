@@ -21,16 +21,24 @@ public class Coordonnees implements Serializable {
 
     protected final Voies[] voies = Voies.values();
 
+    @NotNull ( message = "Veuillez saisir un nom de rue" )
     private String rue;
     private Voies typeVoie;
-    @Size( min = 5, max = 5, message = "Le code postal doit contenir 3 caractères" )
-    private int codePostal;
+    @NotNull ( message = "Veuillez saisir un numéro de code postal" )
+    @Pattern( regexp = "[0-9]{5}", message = "Veuillez saisir un numéro de code postal valide" )
+    private String codePostal;
+    @NotNull ( message = "Veuillez saisir le nom d'une ville" )
     private String ville;
+    @NotNull ( message = "Veuillez saisir un numéro le nom d'un pays" )
     private String pays;
-    @Pattern(regexp = "[0-9]+", message = "Veuillez saisir un chiffre")
+    @NotNull ( message = "Veuillez saisir un chiffre" )
     private int numRue;
+    @NotNull(message = "Veuillez saisir une adresse email")
+    @Pattern(regexp = "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)", message = "Merci de saisir une adresse mail valide")
     private String eMail;
+    @NotNull ( message = "Veuillez saisir un numéro de telephone portable" )
     private int telPortable;
+    @NotNull ( message = "Veuillez saisir un numéro de telephone fixe" )
     private int telFixe;
 
     //Getter and Setter
@@ -52,11 +60,11 @@ public class Coordonnees implements Serializable {
         this.typeVoie = typeVoie;
     }
 
-    public int getCodePostal() {
+    public String getCodePostal() {
         return codePostal;
     }
 
-    public void setCodePostal(int codePostal) {
+    public void setCodePostal(String codePostal) {
         this.codePostal = codePostal;
     }
 
@@ -91,6 +99,7 @@ public class Coordonnees implements Serializable {
     public void seteMail(String eMail) {
         this.eMail = eMail;
     }
+
 
     public int getTelPortable() {
         return telPortable;

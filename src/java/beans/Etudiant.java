@@ -23,9 +23,13 @@ public class Etudiant extends Personne implements Serializable {
     @Digits (integer = 13, fraction = 1, message = "Veuillez saisir un numéro à 13 chiffres")
     private long numeroSS;
     private ArrayList<Competences> listeCompetences;
+    @NotNull ( message = "Veuillez saisir une date de naissance" )
+    @Pattern(regexp = "^(\\d\\d)\\/(\\d\\d)\\/(\\d\\d)$", message = "Merci de saisir une date valide (jj/mm/aa)")
     private Date dateNaissance;
     private boolean AJourCotisation;
-
+    @NotNull ( message = "Veuillez saisir une année de promotion" )
+    @Min(2013)
+    @Max(2099)
     private int promotion;
 
     //Getter and Setter
