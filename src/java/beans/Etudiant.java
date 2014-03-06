@@ -18,19 +18,19 @@ import tools.ConnectBDD;
 
 public class Etudiant extends Personne implements Serializable {
 
-    private ArrayList<Integer> anneesAdherant;
+    private static ArrayList<Integer> anneesAdherant;
     @NotNull ( message = "Veuillez saisir un numéro à 13 chiffres" )
     @Digits (integer = 13, fraction = 1, message = "Veuillez saisir un numéro à 13 chiffres")
-    private long numeroSS;
-    private ArrayList<Competences> listeCompetences;
+    private static long numeroSS;
+    private static ArrayList<Competences> listeCompetences;
     @NotNull ( message = "Veuillez saisir une date de naissance" )
     @Pattern(regexp = "^(\\d\\d)\\/(\\d\\d)\\/(\\d\\d)$", message = "Merci de saisir une date valide (jj/mm/aa)")
-    private Date dateNaissance;
-    private boolean AJourCotisation;
+    private static Date dateNaissance;
+    private static boolean AJourCotisation;
     @NotNull ( message = "Veuillez saisir une année de promotion" )
     @Min(2013)
     @Max(2099)
-    private int promotion;
+    private static int promotion;
 
     //Getter and Setter
     public ArrayList<Integer> getAnneesAdherant() {
@@ -41,7 +41,7 @@ public class Etudiant extends Personne implements Serializable {
         this.anneesAdherant = anneesAdherant;
     }
 
-    public long getNumeroSS() {
+    public static long getNumeroSS() {
         return numeroSS;
     }
 
@@ -58,7 +58,7 @@ public class Etudiant extends Personne implements Serializable {
         this.listeCompetences = listeCompetences;
     }
 
-    public Date getDateNaissance() {
+    public static Date getDateNaissance() {
         return dateNaissance;
     }
 
@@ -74,7 +74,7 @@ public class Etudiant extends Personne implements Serializable {
         this.AJourCotisation = AJourCotisation;
     }
 
-    public int getPromotion() {
+    public static int getPromotion() {
         return promotion;
     }
 
@@ -100,19 +100,19 @@ public class Etudiant extends Personne implements Serializable {
         throw new UnsupportedOperationException();
     }
 
-    // Methodes pour la BDD
-    public String saveEtudiant() throws SQLException {
+    // Methodes pour sauvegarder dans la BDD
+    public String saveNewAdherent() throws SQLException {
         ConnectBDD b = new ConnectBDD();
         if (b == null) {
             throw new SQLException("Can't get database connection");
         }
         try {
             /* Récupération des paramètres d'URL saisis par l'utilisateur */
-            String paramTitre = this.getTitre().toString();
-            String paramNom = this.getNom();
-            String paramPrenom = this.getPrenom();
+            String paramTitre = Etudiant.getTitre().toString();
+            String paramNom = Etudiant.getNom();
+            String paramPrenom = Etudiant.getPrenom();
             //String paramCoordonnees = this.getCoordonnees().toString();
-            long paramNumeroSS = this.getNumeroSS();
+            long paramNumeroSS = Etudiant.getNumeroSS();
             //Date paramdateNaissance = this.getDateNaissance();
             /* Exécution d'une requête de modification de la BD (INSERT, UPDATE, DELETE, CREATE, etc.). */
             b.getMyStatement().executeUpdate("INSERT INTO projetannuel.personne(Titre, Nom_Personne, Prenom_Personne, Numero_SS) VALUES (" + paramTitre + "," + paramNom + "," + paramPrenom + "," + paramNumeroSS + ")");
@@ -126,6 +126,7 @@ public class Etudiant extends Personne implements Serializable {
         return "success";
     }
 
+    
     public List<BureauProGphy> getBureauProGphy() throws SQLException {
         //get database connection
         ConnectBDD b = new ConnectBDD();

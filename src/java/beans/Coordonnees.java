@@ -19,30 +19,32 @@ public class Coordonnees implements Serializable {
         }
     }
 
-    protected final Voies[] voies = Voies.values();
+    protected static final Voies[] voies = Voies.values();
 
     @NotNull ( message = "Veuillez saisir un nom de rue" )
-    private String rue;
-    private Voies typeVoie;
+    private static String rue;
+    private static Voies typeVoie;
     @NotNull ( message = "Veuillez saisir un numéro de code postal" )
     @Pattern( regexp = "[0-9]{5}", message = "Veuillez saisir un numéro de code postal valide" )
-    private String codePostal;
+    private static String codePostal;
     @NotNull ( message = "Veuillez saisir le nom d'une ville" )
-    private String ville;
+    private static String ville;
     @NotNull ( message = "Veuillez saisir un numéro le nom d'un pays" )
-    private String pays;
+    private static String pays;
     @NotNull ( message = "Veuillez saisir un chiffre" )
-    private int numRue;
+    private static int numRue;
     @NotNull(message = "Veuillez saisir une adresse email")
     @Pattern(regexp = "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)", message = "Merci de saisir une adresse mail valide")
-    private String eMail;
+    private static String eMail;
     @NotNull ( message = "Veuillez saisir un numéro de telephone portable" )
-    private int telPortable;
+    private static int telPortable;
     @NotNull ( message = "Veuillez saisir un numéro de telephone fixe" )
-    private int telFixe;
+    private static int telFixe;
 
     //Getter and Setter
     public Voies[] getVoies() { return voies; }
+    
+    public static String getVoiesString() { return voies.toString(); }
     
     public String getRue() {
         return rue;

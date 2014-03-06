@@ -21,20 +21,22 @@ public class Personne implements Serializable {
             return toString();
         }
     }
-    protected final Titres[] titres = Titres.values();
+    protected static final Titres[] titres = Titres.values();
     @NotNull ( message = "Veuillez saisir un nom" )
     @Size( max = 30, message = "Le nom ne peut pas dépasser 30 caractères." )
-    protected String nom;
+    protected static String nom;
     @NotNull ( message = "Veuillez saisir un prénom" )
     @Size( max = 30, message = "Le prénom ne peut pas dépasser 30 caractères." )
-    protected String prenom;
+    protected static String prenom;
     @NotNull (message = "Veuillez séléctionner un titre")
-    protected Titres titre;
-    protected Coordonnees coordonnees;
+    protected static Titres titre;
+    protected static Coordonnees coordonnees;
 
     public Titres[] getTitres() { return titres; }
+    
+    public static String getTitresString() { return titres.toString(); }
 
-    public String getNom() {
+    public static String getNom() {
         return nom;
     }
 
@@ -42,7 +44,7 @@ public class Personne implements Serializable {
         this.nom = nom;
     }
 
-    public String getPrenom() {
+    public static String getPrenom() {
         return prenom;
     }
 
@@ -50,7 +52,7 @@ public class Personne implements Serializable {
         this.prenom = prenom;
     }
 
-    public Titres getTitre() {
+    public static Titres getTitre() {
         return titre;
     }
 
@@ -58,7 +60,7 @@ public class Personne implements Serializable {
         this.titre = titre;
     }
 
-    public Coordonnees getCoordonnees() {
+    public static Coordonnees getCoordonnees() {
         return coordonnees;
     }
 
