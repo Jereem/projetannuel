@@ -11,7 +11,7 @@ import javax.validation.constraints.*;
 public class Coordonnees implements Serializable {
 
     protected enum Voies implements Serializable {
-
+        
         Rue, Boulevard, LieuDit, Avenue, Allee, Impasse, Quai;
 
         public String getNomVoie() {

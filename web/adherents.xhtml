@@ -123,8 +123,8 @@
                                 </h:panelGrid>
                             </p:panel> 
 
-                            <!-- Envoie le formulaire et passe a la page test2.xhtml -->
-                            <p:commandButton value="Save" action="#{tools.saveNewAdherent()}"/>  
+                            <!-- Envoie le formulaire -->
+                            <p:commandButton value="Enregistrer" action="#{tools.saveNewAdherent}"/>  
 
                         </h:form>  
                     </h:panelGrid>  
@@ -142,7 +142,7 @@
                 <p:tab title="Liste des adhérents">  
                     <h:form>  
 
-                        <p:dataTable id="dataTable" var="etudiant" value="#{tools.Tools.getNewAdherent()}" sortMode="multiple" rows="5" paginator="true">  
+                        <p:dataTable id="liteAdherent" var="etudiant" value="#{tools.Tools.getNewAdherent()}" sortMode="multiple" rows="5" paginator="true">  
                             <f:facet name="header">  
                                 Adhérents  
                             </f:facet>  

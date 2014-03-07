@@ -15,7 +15,7 @@ public class Personne implements Serializable {
 
     protected static enum Titres {
 
-        MR, MME, MLLE, DR, PF, MAITRE;
+        M, Mme, Mlle, Dr, Me, Pr;
 
         public String getNomTitre() {
             return toString();
@@ -38,23 +38,23 @@ public class Personne implements Serializable {
 
     public void setTitres(String pTitres) {
         switch (pTitres) {
-            case "MR":
-                this.titre = Titres.MR;
+            case "M":
+                this.titre = Titres.M;
                 break;
-            case "MME":
-                this.titre = Titres.MME;
+            case "Mme":
+                this.titre = Titres.Mme;
                 break;
-            case "MLLE":
-                this.titre = Titres.MLLE;
+            case "Mlle":
+                this.titre = Titres.Mlle;
                 break;
-            case "DR":
-                this.titre = Titres.DR;
+            case "Dr":
+                this.titre = Titres.Dr;
                 break;
-            case "PF":
-                this.titre = Titres.PF;
+            case "Me":
+                this.titre = Titres.Me;
                 break;
-            case "MAITRE":
-                this.titre = Titres.MAITRE;
+            case "Pr":
+                this.titre = Titres.Pr;
                 break;
         }
     }

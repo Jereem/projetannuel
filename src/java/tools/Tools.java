@@ -43,14 +43,14 @@ public class Tools {
 		 
             /* Exécution d'une requête de modification de la BD (INSERT, UPDATE, DELETE, CREATE, etc.). */
             b.getMyStatement().executeUpdate("INSERT INTO projetannuel.ADHERENT natural join projetannuel.PERSONNE natural join projetannuel.COORDONNEES  (Titre, Nom_Personne, Prenom_Personne, Numero_SS, Date_Naissance, Promotion, Email, Rue ,Numero_De_Rue, Type_Voie, Ville, Code_Postal, Pays, Telephone_1, Telephone_2) VALUES (" + paramTitre + "," + paramNom + "," + paramPrenom + "," + paramNumeroSS + "," + paramdateNaissance + "," + paramPromo + "," + paramEmail + "," + paramNomRue + "," + paramNumRue + "," + paramTypeVoie +"," + paramVille +"," + paramCP +"," + paramPays +"," + paramTelFixe +"," + paramTelMobile +")");
-
+            return "success";
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
-
+            return "failed";
         }
-        return "success";
+        
     }
 
     
@@ -61,7 +61,7 @@ public class Tools {
         if (con == null) {
             throw new SQLException("Can't get database connection");
         }
-        PreparedStatement ps = con.prepareStatement("select Titre, Nom_Personne, Prenom_Personne, Numero_SS, Date_Naissance, Promotion, Email, Rue ,Numero_De_Rue, Type_Voie, Ville, Code_Postal, Pays, Telephone_1, Telephone_2 from projetannuel.ADHERENT natural join projetannuel.PERSONNE natural join projetannuel.COORDONNEES");
+        PreparedStatement ps = con.prepareStatement("select * from projetannuel.ADHERENT natural join projetannuel.PERSONNE natural join projetannuel.COORDONNEES");
         //get customer data from database
         ResultSet result = ps.executeQuery();
         List<Etudiant> list = new ArrayList<>();

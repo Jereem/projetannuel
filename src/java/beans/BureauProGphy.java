@@ -119,7 +119,7 @@ public class BureauProGphy extends Etudiant implements Serializable {
             String paramIdentifiant = this.getIdentifiant();
             String paramMotDePasse = this.getMdp();
             /* Création de l'objet gérant les requêtes préparées */
-            PreparedStatement ps = b.prepareStatement("INSERT INTO projetannuel.membre_bureau(Identifiant, Mot_de_passe) VALUES (?,?)");
+            PreparedStatement ps = b.prepareStatement("INSERT INTO projetannuel.MEMBRE_BUREAU(Identifiant, Mot_de_passe) VALUES (?,?)");
             /*
              * Remplissage des paramètres de la requête grâce aux méthodes
              * setXXX() mises à disposition par l'objet PreparedStatement.
@@ -138,6 +138,7 @@ public class BureauProGphy extends Etudiant implements Serializable {
 
     }
 
+    @Override
     public List<BureauProGphy> getBureauProGphy() throws SQLException {
         //get database connection
         ConnectBDD b = new ConnectBDD();
@@ -145,7 +146,7 @@ public class BureauProGphy extends Etudiant implements Serializable {
         if (con == null) {
             throw new SQLException("Can't get database connection");
         }
-        PreparedStatement ps = con.prepareStatement("select Identifiant, Mot_de_passe, Actif from membre_bureau");
+        PreparedStatement ps = con.prepareStatement("select Identifiant, Mot_de_passe, Actif from MEMBRE_BUREAU");
         //get customer data from database
         ResultSet result = ps.executeQuery();
         List<BureauProGphy> list = new ArrayList<>();

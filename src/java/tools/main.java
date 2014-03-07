@@ -26,8 +26,6 @@ public class main {
 
         try {
 
-            /* Exécution d'une requête de modification de la BD (INSERT, UPDATE, DELETE, CREATE, etc.). */
-            b.getMyStatement().executeUpdate("INSERT INTO projetannuel.ANNEE(Annee) VALUES ('2018')");
 
             /* Exécution d'une requête de lecture */
             ResultSet resultat = b.getMyStatement().executeQuery("SELECT * FROM ANNEE;");
