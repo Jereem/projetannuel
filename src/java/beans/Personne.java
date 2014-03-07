@@ -13,7 +13,7 @@ import javax.validation.constraints.*;
 
 public class Personne implements Serializable {
 
-    protected enum Titres {
+    protected static enum Titres {
 
         MR, MME, MLLE, DR, PF, MAITRE;
 
@@ -21,22 +21,45 @@ public class Personne implements Serializable {
             return toString();
         }
     }
-    protected static final Titres[] titres = Titres.values();
+    protected Titres[] titres = Titres.values();
     @NotNull ( message = "Veuillez saisir un nom" )
     @Size( max = 30, message = "Le nom ne peut pas dépasser 30 caractères." )
-    protected static String nom;
+    protected String nom;
     @NotNull ( message = "Veuillez saisir un prénom" )
     @Size( max = 30, message = "Le prénom ne peut pas dépasser 30 caractères." )
-    protected static String prenom;
+    protected String prenom;
     @NotNull (message = "Veuillez séléctionner un titre")
-    protected static Titres titre;
-    protected static Coordonnees coordonnees;
+    protected Titres titre;
+    protected Coordonnees coordonnees;
 
     public Titres[] getTitres() { return titres; }
     
-    public static String getTitresString() { return titres.toString(); }
+    public String getTitresString() { return titres.toString(); }
 
-    public static String getNom() {
+    public void setTitres(String pTitres) {
+        switch (pTitres) {
+            case "MR":
+                this.titre = Titres.MR;
+                break;
+            case "MME":
+                this.titre = Titres.MME;
+                break;
+            case "MLLE":
+                this.titre = Titres.MLLE;
+                break;
+            case "DR":
+                this.titre = Titres.DR;
+                break;
+            case "PF":
+                this.titre = Titres.PF;
+                break;
+            case "MAITRE":
+                this.titre = Titres.MAITRE;
+                break;
+        }
+    }
+
+    public String getNom() {
         return nom;
     }
 
@@ -44,7 +67,7 @@ public class Personne implements Serializable {
         this.nom = nom;
     }
 
-    public static String getPrenom() {
+    public String getPrenom() {
         return prenom;
     }
 
@@ -52,7 +75,7 @@ public class Personne implements Serializable {
         this.prenom = prenom;
     }
 
-    public static Titres getTitre() {
+    public Titres getTitre() {
         return titre;
     }
 
@@ -60,7 +83,7 @@ public class Personne implements Serializable {
         this.titre = titre;
     }
 
-    public static Coordonnees getCoordonnees() {
+    public Coordonnees getCoordonnees() {
         return coordonnees;
     }
 

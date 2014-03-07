@@ -5,12 +5,19 @@
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
 
     <navigation-rule>
-	<from-view-id>/index.xhtml</from-view-id>
-	<navigation-case>
-		<from-action>#{bureauProGphy.saveBureauProGphy}</from-action>
-		<from-outcome>success</from-outcome>
-		<to-view-id>/test2.xhtml</to-view-id>
-	</navigation-case>	
+        <from-view-id>/index.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{beans.bureauProGphy.saveBureauProGphy}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/test2.xhtml</to-view-id>
+        </navigation-case>
+        <from-view-id>/adherents.xhtml</from-view-id>
+        <navigation-case>
+            <from-action>#{tools.Tools.saveNewAdherent}</from-action>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/adherents.xhtml</to-view-id>
+        </navigation-case>	
     </navigation-rule>
     
 </faces-config>
+saveNewAdherent

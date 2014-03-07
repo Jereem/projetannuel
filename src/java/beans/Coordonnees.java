@@ -19,33 +19,58 @@ public class Coordonnees implements Serializable {
         }
     }
 
-    protected static final Voies[] voies = Voies.values();
+    protected  final Voies[] voies = Voies.values();
 
     @NotNull ( message = "Veuillez saisir un nom de rue" )
-    private static String rue;
-    private static Voies typeVoie;
+    private String rue;
+    private Voies typeVoie;
     @NotNull ( message = "Veuillez saisir un numéro de code postal" )
     @Pattern( regexp = "[0-9]{5}", message = "Veuillez saisir un numéro de code postal valide" )
-    private static String codePostal;
+    private String codePostal;
     @NotNull ( message = "Veuillez saisir le nom d'une ville" )
-    private static String ville;
+    private String ville;
     @NotNull ( message = "Veuillez saisir un numéro le nom d'un pays" )
-    private static String pays;
+    private String pays;
     @NotNull ( message = "Veuillez saisir un chiffre" )
-    private static int numRue;
+    private int numRue;
     @NotNull(message = "Veuillez saisir une adresse email")
     @Pattern(regexp = "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)", message = "Merci de saisir une adresse mail valide")
-    private static String eMail;
+    private String eMail;
     @NotNull ( message = "Veuillez saisir un numéro de telephone portable" )
-    private static int telPortable;
+    private int telPortable;
     @NotNull ( message = "Veuillez saisir un numéro de telephone fixe" )
-    private static int telFixe;
+    private int telFixe;
 
     //Getter and Setter
     public Voies[] getVoies() { return voies; }
     
-    public static String getVoiesString() { return voies.toString(); }
+    public String getVoiesString() { return voies.toString(); }
     
+    public void setVoies(String pVoies) {
+        switch (pVoies) {
+            case "Rue":
+                this.typeVoie = Voies.Rue;
+                break;
+            case "Boulevard":
+                this.typeVoie = Voies.Boulevard;
+                break;
+            case "LieuDit":
+                this.typeVoie = Voies.LieuDit;
+                break;
+            case "Avenue":
+                this.typeVoie = Voies.Avenue;
+                break;
+            case "Allee":
+                this.typeVoie = Voies.Allee;
+                break;
+            case "Impasse":
+                this.typeVoie = Voies.Impasse;
+                break;
+            case "Quai":
+                this.typeVoie = Voies.Quai;
+                break;
+        }
+    }
     public String getRue() {
         return rue;
     }

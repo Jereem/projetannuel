@@ -18,31 +18,31 @@ import java.util.List;
  */
 public class Tools {
     // Methodes pour sauvegarder dans la BDD
-    public String saveNewAdherent() throws SQLException {
+    public String saveNewAdherent(beans.Etudiant adherent) throws SQLException {
         ConnectBDD b = new ConnectBDD();
         if (b == null) {
             throw new SQLException("Can't get database connection");
         }
         try {
             /* Récupération des paramètres d'URL saisis par l'utilisateur */
-            String paramTitre = Etudiant.getTitresString().toString();
-            String paramNom = Etudiant.getNom();
-            String paramPrenom = Etudiant.getPrenom();
-            long paramNumeroSS = Etudiant.getNumeroSS();
-            Date paramdateNaissance = Etudiant.getDateNaissance();
-            int paramNumRue = Etudiant.getCoordonnees().getNumRue();
-            String paramTypeVoie = Etudiant.getCoordonnees().getVoiesString();
-            String paramNomRue = Etudiant.getCoordonnees().getRue();
-            String paramCP = Etudiant.getCoordonnees().getCodePostal();
-            String paramVille = Etudiant.getCoordonnees().getVille();
-            String paramPays = Etudiant.getCoordonnees().getPays();
-            String paramEmail = Etudiant.getCoordonnees().geteMail();
-            int paramTelFixe = Etudiant.getCoordonnees().getTelFixe();
-            int paramTelMobile = Etudiant.getCoordonnees().getTelPortable();
-            int paramPromo = Etudiant.getPromotion();
+            String paramTitre = adherent.getTitresString().toString();
+            String paramNom = adherent.getNom();
+            String paramPrenom = adherent.getPrenom();
+            long paramNumeroSS = adherent.getNumeroSS();
+            Date paramdateNaissance = adherent.getDateNaissance();
+            int paramNumRue = adherent.getCoordonnees().getNumRue();
+            String paramTypeVoie = adherent.getCoordonnees().getVoiesString();
+            String paramNomRue = adherent.getCoordonnees().getRue();
+            String paramCP = adherent.getCoordonnees().getCodePostal();
+            String paramVille = adherent.getCoordonnees().getVille();
+            String paramPays = adherent.getCoordonnees().getPays();
+            String paramEmail = adherent.getCoordonnees().geteMail();
+            int paramTelFixe = adherent.getCoordonnees().getTelFixe();
+            int paramTelMobile = adherent.getCoordonnees().getTelPortable();
+            int paramPromo = adherent.getPromotion();
 		 
             /* Exécution d'une requête de modification de la BD (INSERT, UPDATE, DELETE, CREATE, etc.). */
-            b.getMyStatement().executeUpdate("INSERT INTO projetannuel.personne(Titre, Nom_Personne, Prenom_Personne, Numero_SS) VALUES (" + paramTitre + "," + paramNom + "," + paramPrenom + "," + paramNumeroSS + ")");
+            b.getMyStatement().executeUpdate("INSERT INTO projetannuel.ADHERENT natural join projetannuel.PERSONNE natural join projetannuel.COORDONNEES  (Titre, Nom_Personne, Prenom_Personne, Numero_SS, Date_Naissance, Promotion, Email, Rue ,Numero_De_Rue, Type_Voie, Ville, Code_Postal, Pays, Telephone_1, Telephone_2) VALUES (" + paramTitre + "," + paramNom + "," + paramPrenom + "," + paramNumeroSS + "," + paramdateNaissance + "," + paramPromo + "," + paramEmail + "," + paramNomRue + "," + paramNumRue + "," + paramTypeVoie +"," + paramVille +"," + paramCP +"," + paramPays +"," + paramTelFixe +"," + paramTelMobile +")");
 
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());
@@ -54,25 +54,39 @@ public class Tools {
     }
 
     
-    public List<BureauProGphy> getBureauProGphy() throws SQLException {
+    public List<Etudiant> getNewAdherent() throws SQLException {
         //get database connection
         ConnectBDD b = new ConnectBDD();
         Connection con = b.getMyConnexion();
         if (con == null) {
             throw new SQLException("Can't get database connection");
         }
-        PreparedStatement ps = con.prepareStatement("select Identifiant, Mot_de_passe, Actif from membre_bureau");
+        PreparedStatement ps = con.prepareStatement("select Titre, Nom_Personne, Prenom_Personne, Numero_SS, Date_Naissance, Promotion, Email, Rue ,Numero_De_Rue, Type_Voie, Ville, Code_Postal, Pays, Telephone_1, Telephone_2 from projetannuel.ADHERENT natural join projetannuel.PERSONNE natural join projetannuel.COORDONNEES");
         //get customer data from database
         ResultSet result = ps.executeQuery();
-        List<BureauProGphy> list = new ArrayList<>();
+        List<Etudiant> list = new ArrayList<>();
         while (result.next()) {
-            BureauProGphy membre = new BureauProGphy();
-            membre.setIdentifiant(result.getString("Identifiant"));
-            membre.setMdp(result.getString("Mot_de_passe"));
-            //membre.setPoste(result.getString("Poste"));
-            membre.setActif(result.getBoolean("Actif"));
+            Etudiant adherent = new Etudiant();
+            adherent.setTitres(result.getString("Titre"));
+            adherent.setNom(result.getString("Nom_Personne"));
+            adherent.setPrenom(result.getString("Prenom_Personne"));
+            adherent.setNumeroSS(result.getInt("Numero_SS"));
+            adherent.setDateNaissance(result.getDate("Date_Naissance"));
+            Coordonnees coordonnes = new Coordonnees();
+            coordonnes.setNumRue(result.getInt("Numero_De_Rue"));
+            coordonnes.setVoies(result.getString("Type_Voie"));
+            coordonnes.setRue(result.getString("Rue"));
+            coordonnes.setCodePostal(result.getString("Code_Postal"));
+            coordonnes.setVille(result.getString("Ville"));
+            coordonnes.setPays(result.getString("Pays"));
+            coordonnes.seteMail(result.getString("Email"));
+            coordonnes.setTelFixe(result.getInt("Telephone_1"));
+            coordonnes.setTelPortable(result.getInt("Telephone_2"));
+            adherent.setCoordonnees(coordonnes);
+            adherent.setPromotion(result.getInt("Promotion"));
+            
             //store all data into a List
-            list.add(membre);
+            list.add(adherent);
         }
         return list;
     }

@@ -20,7 +20,7 @@
                                 <h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5"> 
 
                                     <h:outputText value="Titre: *" />  
-                                    <p:selectOneMenu value="#{etudiant.titre}">  
+                                    <p:selectOneMenu value="#{beans.Etudiant.titres}">  
                                         <f:selectItems value="#{etudiant.titres}" var="titres" itemValue="#{titres.getNomTitre()}" /> 
                                     </p:selectOneMenu>
                                     <p></p>
@@ -124,7 +124,7 @@
                             </p:panel> 
 
                             <!-- Envoie le formulaire et passe a la page test2.xhtml -->
-                            <p:commandButton value="Save" action="#{etudiant.saveEtudiant()}"/>  
+                            <p:commandButton value="Save" action="#{tools.saveNewAdherent()}"/>  
 
                         </h:form>  
                     </h:panelGrid>  
@@ -142,21 +142,21 @@
                 <p:tab title="Liste des adhérents">  
                     <h:form>  
 
-                        <p:dataTable id="dataTable" var="bureauProGphy" value="#{bureauProGphy.getBureauProGphy()}" sortMode="multiple" rows="5" paginator="true">  
+                        <p:dataTable id="dataTable" var="etudiant" value="#{tools.Tools.getNewAdherent()}" sortMode="multiple" rows="5" paginator="true">  
                             <f:facet name="header">  
-                                Membres  
+                                Adhérents  
                             </f:facet>  
 
-                            <p:column sortBy="pseudo" headerText="Pseudo">  
-                                <h:outputText value="#{bureauProGphy.identifiant}" />  
+                            <p:column sortBy="nom" headerText="Nom">  
+                                <h:outputText value="#{etudiant.nom}" />  
                             </p:column>  
 
-                            <p:column sortBy="mdp" headerText="Mdp">  
-                                <h:outputText value="#{bureauProGphy.mdp}" />  
+                            <p:column sortBy="prenom" headerText="Prenom">  
+                                <h:outputText value="#{etudiant.prenom}" />  
                             </p:column>  
 
-                            <p:column sortBy="actif" headerText="Actif">  
-                                <h:outputText value="#{bureauProGphy.actif}" />  
+                            <p:column sortBy="promo" headerText="Promo">  
+                                <h:outputText value="#{etudiant.promotion}" />  
                             </p:column>  
 
                         </p:dataTable>

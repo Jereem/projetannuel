@@ -18,19 +18,19 @@ import tools.ConnectBDD;
 
 public class Etudiant extends Personne implements Serializable {
 
-    private static ArrayList<Integer> anneesAdherant;
+    private ArrayList<Integer> anneesAdherant;
     @NotNull ( message = "Veuillez saisir un numéro à 13 chiffres" )
     @Digits (integer = 13, fraction = 1, message = "Veuillez saisir un numéro à 13 chiffres")
-    private static long numeroSS;
-    private static ArrayList<Competences> listeCompetences;
+    private long numeroSS;
+    private ArrayList<Competences> listeCompetences;
     @NotNull ( message = "Veuillez saisir une date de naissance" )
     @Pattern(regexp = "^(\\d\\d)\\/(\\d\\d)\\/(\\d\\d)$", message = "Merci de saisir une date valide (jj/mm/aa)")
-    private static Date dateNaissance;
-    private static boolean AJourCotisation;
+    private Date dateNaissance;
+    private boolean AJourCotisation;
     @NotNull ( message = "Veuillez saisir une année de promotion" )
     @Min(2013)
     @Max(2099)
-    private static int promotion;
+    private int promotion;
 
     //Getter and Setter
     public ArrayList<Integer> getAnneesAdherant() {
@@ -41,7 +41,7 @@ public class Etudiant extends Personne implements Serializable {
         this.anneesAdherant = anneesAdherant;
     }
 
-    public static long getNumeroSS() {
+    public long getNumeroSS() {
         return numeroSS;
     }
 
@@ -58,7 +58,7 @@ public class Etudiant extends Personne implements Serializable {
         this.listeCompetences = listeCompetences;
     }
 
-    public static Date getDateNaissance() {
+    public Date getDateNaissance() {
         return dateNaissance;
     }
 
@@ -74,7 +74,7 @@ public class Etudiant extends Personne implements Serializable {
         this.AJourCotisation = AJourCotisation;
     }
 
-    public static int getPromotion() {
+    public int getPromotion() {
         return promotion;
     }
 
@@ -108,11 +108,11 @@ public class Etudiant extends Personne implements Serializable {
         }
         try {
             /* Récupération des paramètres d'URL saisis par l'utilisateur */
-            String paramTitre = Etudiant.getTitre().toString();
-            String paramNom = Etudiant.getNom();
-            String paramPrenom = Etudiant.getPrenom();
+            String paramTitre = this.getTitre().toString();
+            String paramNom = this.getNom();
+            String paramPrenom = this.getPrenom();
             //String paramCoordonnees = this.getCoordonnees().toString();
-            long paramNumeroSS = Etudiant.getNumeroSS();
+            long paramNumeroSS = this.getNumeroSS();
             //Date paramdateNaissance = this.getDateNaissance();
             /* Exécution d'une requête de modification de la BD (INSERT, UPDATE, DELETE, CREATE, etc.). */
             b.getMyStatement().executeUpdate("INSERT INTO projetannuel.personne(Titre, Nom_Personne, Prenom_Personne, Numero_SS) VALUES (" + paramTitre + "," + paramNom + "," + paramPrenom + "," + paramNumeroSS + ")");
