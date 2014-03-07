@@ -10,13 +10,12 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import tools.ConnectBDD;
 
 @ManagedBean
-@ViewScoped
+@RequestScoped
 
 public class BureauProGphy extends Etudiant implements Serializable {
 
@@ -138,7 +137,6 @@ public class BureauProGphy extends Etudiant implements Serializable {
 
     }
 
-    @Override
     public List<BureauProGphy> getBureauProGphy() throws SQLException {
         //get database connection
         ConnectBDD b = new ConnectBDD();

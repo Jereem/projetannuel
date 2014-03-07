@@ -70,7 +70,7 @@ public class Tools {
             adherent.setTitres(result.getString("Titre"));
             adherent.setNom(result.getString("Nom_Personne"));
             adherent.setPrenom(result.getString("Prenom_Personne"));
-            adherent.setNumeroSS(result.getInt("Numero_SS"));
+            adherent.setNumeroSS(result.getLong("Numero_SS"));
             adherent.setDateNaissance(result.getDate("Date_Naissance"));
             Coordonnees coordonnes = new Coordonnees();
             coordonnes.setNumRue(result.getInt("Numero_De_Rue"));
@@ -84,10 +84,12 @@ public class Tools {
             coordonnes.setTelPortable(result.getInt("Telephone_2"));
             adherent.setCoordonnees(coordonnes);
             adherent.setPromotion(result.getInt("Promotion"));
-            
+            System.out.println(adherent.getNom());
+            System.out.println("test");
             //store all data into a List
             list.add(adherent);
         }
+        System.out.println(list);
         return list;
     }
 }
