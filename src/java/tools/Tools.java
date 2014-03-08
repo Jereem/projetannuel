@@ -54,14 +54,14 @@ public class Tools {
     }
 
     
-    public List<Etudiant> getNewAdherent() throws SQLException {
+    public List<Etudiant> getAdherent() throws SQLException {
         //get database connection
         ConnectBDD b = new ConnectBDD();
         Connection con = b.getMyConnexion();
         if (con == null) {
             throw new SQLException("Can't get database connection");
         }
-        PreparedStatement ps = con.prepareStatement("select * from projetannuel.ADHERENT natural join projetannuel.PERSONNE natural join projetannuel.COORDONNEES");
+        PreparedStatement ps = con.prepareStatement("select * from projetannuel.ADHERENT natural join projetannuel.PERSONNE natural join projetannuel.COORDONNEES where A_Jour_Cotisation = 1");
         //get customer data from database
         ResultSet result = ps.executeQuery();
         List<Etudiant> list = new ArrayList<>();
@@ -84,12 +84,51 @@ public class Tools {
             coordonnes.setTelPortable(result.getInt("Telephone_2"));
             adherent.setCoordonnees(coordonnes);
             adherent.setPromotion(result.getInt("Promotion"));
-            System.out.println(adherent.getNom());
-            System.out.println("test");
+//            System.out.println(adherent.getNom());
+//            System.out.println("test");
             //store all data into a List
             list.add(adherent);
         }
-        System.out.println(list);
+//        System.out.println(list);
+        return list;
+    }
+    
+    public List<Etudiant> getOldAdherent() throws SQLException {
+        //get database connection
+        ConnectBDD b = new ConnectBDD();
+        Connection con = b.getMyConnexion();
+        if (con == null) {
+            throw new SQLException("Can't get database connection");
+        }
+        PreparedStatement ps = con.prepareStatement("select * from projetannuel.ADHERENT natural join projetannuel.PERSONNE natural join projetannuel.COORDONNEES where A_Jour_Cotisation = 0");
+        //get customer data from database
+        ResultSet result = ps.executeQuery();
+        List<Etudiant> list = new ArrayList<>();
+        while (result.next()) {
+            Etudiant adherent = new Etudiant();
+            adherent.setTitres(result.getString("Titre"));
+            adherent.setNom(result.getString("Nom_Personne"));
+            adherent.setPrenom(result.getString("Prenom_Personne"));
+            adherent.setNumeroSS(result.getLong("Numero_SS"));
+            adherent.setDateNaissance(result.getDate("Date_Naissance"));
+            Coordonnees coordonnes = new Coordonnees();
+            coordonnes.setNumRue(result.getInt("Numero_De_Rue"));
+            coordonnes.setVoies(result.getString("Type_Voie"));
+            coordonnes.setRue(result.getString("Rue"));
+            coordonnes.setCodePostal(result.getString("Code_Postal"));
+            coordonnes.setVille(result.getString("Ville"));
+            coordonnes.setPays(result.getString("Pays"));
+            coordonnes.seteMail(result.getString("Email"));
+            coordonnes.setTelFixe(result.getInt("Telephone_1"));
+            coordonnes.setTelPortable(result.getInt("Telephone_2"));
+            adherent.setCoordonnees(coordonnes);
+            adherent.setPromotion(result.getInt("Promotion"));
+//            System.out.println(adherent.getNom());
+//            System.out.println("test");
+            //store all data into a List
+            list.add(adherent);
+        }
+//        System.out.println(list);
         return list;
     }
 }

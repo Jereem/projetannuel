@@ -1,26 +1,32 @@
 package beans;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.io.Serializable;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.io.Serializable;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
-import javax.validation.constraints.*;
+import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import tools.ConnectBDD;
 
 @ManagedBean
-@ViewScoped
+@RequestScoped
 
 public class Etudiant extends Personne implements Serializable {
 
     private ArrayList<Integer> anneesAdherant;
     @NotNull ( message = "Veuillez saisir un numéro à 13 chiffres" )
-    @Digits (integer = 13, fraction = 1, message = "Veuillez saisir un numéro à 13 chiffres")
+    @Digits (integer = 15, fraction = 1, message = "Veuillez saisir un numéro à 15 chiffres")
     private long numeroSS;
     private ArrayList<Competences> listeCompetences;
     @NotNull ( message = "Veuillez saisir une date de naissance" )
@@ -108,45 +114,108 @@ public class Etudiant extends Personne implements Serializable {
         }
         try {
             /* Récupération des paramètres d'URL saisis par l'utilisateur */
-            String paramTitre = this.getTitre().toString();
+            String paramTitre = this.getTitresString().toString();
             String paramNom = this.getNom();
             String paramPrenom = this.getPrenom();
-            //String paramCoordonnees = this.getCoordonnees().toString();
             long paramNumeroSS = this.getNumeroSS();
-            //Date paramdateNaissance = this.getDateNaissance();
+            Date paramdateNaissance = this.getDateNaissance();
+            int paramNumRue = this.getCoordonnees().getNumRue();
+            String paramTypeVoie = this.getCoordonnees().getVoiesString();
+            String paramNomRue = this.getCoordonnees().getRue();
+            String paramCP = this.getCoordonnees().getCodePostal();
+            String paramVille = this.getCoordonnees().getVille();
+            String paramPays = this.getCoordonnees().getPays();
+            String paramEmail = this.getCoordonnees().geteMail();
+            int paramTelFixe = this.getCoordonnees().getTelFixe();
+            int paramTelMobile = this.getCoordonnees().getTelPortable();
+            int paramPromo = this.getPromotion();
+		 
             /* Exécution d'une requête de modification de la BD (INSERT, UPDATE, DELETE, CREATE, etc.). */
-            b.getMyStatement().executeUpdate("INSERT INTO projetannuel.personne(Titre, Nom_Personne, Prenom_Personne, Numero_SS) VALUES (" + paramTitre + "," + paramNom + "," + paramPrenom + "," + paramNumeroSS + ")");
-
+            b.getMyStatement().executeUpdate("INSERT INTO PERSONNE(Titre, Nom_Personne, Prenom_Personne) VALUES (" + paramTitre + "," + paramNom + "," + paramPrenom + "); SELECT @last:=LAST_INSERT_ID(); INSERT INTO ADHERENT (Id_Personne, Numero_SS, Date_Naissance, Promotion) VALUES (@last, " + paramNumeroSS + "," + paramdateNaissance + "," + paramPromo + "); INSERT INTO coordonnees (Id_Personne, Email, Rue ,Numero_De_Rue, Type_Voie, Ville, Code_Postal, Pays, Telephone_1, Telephone_2) VALUES (@last," + paramEmail + "," + paramNomRue + "," + paramNumRue + "," + paramTypeVoie +"," + paramVille +"," + paramCP +"," + paramPays +"," + paramTelFixe +"," + paramTelMobile +")");
+            return "success";
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
-
+            return "failed";
         }
-        return "success";
     }
-
     
-    public List<BureauProGphy> getBureauProGphy() throws SQLException {
+    public List<Etudiant> getAdherent() throws SQLException {
         //get database connection
         ConnectBDD b = new ConnectBDD();
         Connection con = b.getMyConnexion();
         if (con == null) {
             throw new SQLException("Can't get database connection");
         }
-        PreparedStatement ps = con.prepareStatement("select Identifiant, Mot_de_passe, Actif from membre_bureau");
+        PreparedStatement ps = con.prepareStatement("select * from projetannuel.ADHERENT natural join projetannuel.PERSONNE natural join projetannuel.COORDONNEES where A_Jour_Cotisation = 1");
         //get customer data from database
         ResultSet result = ps.executeQuery();
-        List<BureauProGphy> list = new ArrayList<>();
+        List<Etudiant> list = new ArrayList<>();
         while (result.next()) {
-            BureauProGphy membre = new BureauProGphy();
-            membre.setIdentifiant(result.getString("Identifiant"));
-            membre.setMdp(result.getString("Mot_de_passe"));
-            //membre.setPoste(result.getString("Poste"));
-            membre.setActif(result.getBoolean("Actif"));
+            Etudiant adherent = new Etudiant();
+            adherent.setTitres(result.getString("Titre"));
+            adherent.setNom(result.getString("Nom_Personne"));
+            adherent.setPrenom(result.getString("Prenom_Personne"));
+            adherent.setNumeroSS(result.getLong("Numero_SS"));
+            adherent.setDateNaissance(result.getDate("Date_Naissance"));
+            Coordonnees coordonnes = new Coordonnees();
+            coordonnes.setNumRue(result.getInt("Numero_De_Rue"));
+            coordonnes.setVoies(result.getString("Type_Voie"));
+            coordonnes.setRue(result.getString("Rue"));
+            coordonnes.setCodePostal(result.getString("Code_Postal"));
+            coordonnes.setVille(result.getString("Ville"));
+            coordonnes.setPays(result.getString("Pays"));
+            coordonnes.seteMail(result.getString("Email"));
+            coordonnes.setTelFixe(result.getInt("Telephone_1"));
+            coordonnes.setTelPortable(result.getInt("Telephone_2"));
+            adherent.setCoordonnees(coordonnes);
+            adherent.setPromotion(result.getInt("Promotion"));
+//            System.out.println(adherent.getNom());
+//            System.out.println("test");
             //store all data into a List
-            list.add(membre);
+            list.add(adherent);
         }
+//        System.out.println(list);
+        return list;
+    }
+    
+    public List<Etudiant> getOldAdherent() throws SQLException {
+        //get database connection
+        ConnectBDD b = new ConnectBDD();
+        Connection con = b.getMyConnexion();
+        if (con == null) {
+            throw new SQLException("Can't get database connection");
+        }
+        PreparedStatement ps = con.prepareStatement("select * from projetannuel.ADHERENT natural join projetannuel.PERSONNE natural join projetannuel.COORDONNEES where A_Jour_Cotisation = 0");
+        //get customer data from database
+        ResultSet result = ps.executeQuery();
+        List<Etudiant> list = new ArrayList<>();
+        while (result.next()) {
+            Etudiant adherent = new Etudiant();
+            adherent.setTitres(result.getString("Titre"));
+            adherent.setNom(result.getString("Nom_Personne"));
+            adherent.setPrenom(result.getString("Prenom_Personne"));
+            adherent.setNumeroSS(result.getLong("Numero_SS"));
+            adherent.setDateNaissance(result.getDate("Date_Naissance"));
+            Coordonnees coordonnes = new Coordonnees();
+            coordonnes.setNumRue(result.getInt("Numero_De_Rue"));
+            coordonnes.setVoies(result.getString("Type_Voie"));
+            coordonnes.setRue(result.getString("Rue"));
+            coordonnes.setCodePostal(result.getString("Code_Postal"));
+            coordonnes.setVille(result.getString("Ville"));
+            coordonnes.setPays(result.getString("Pays"));
+            coordonnes.seteMail(result.getString("Email"));
+            coordonnes.setTelFixe(result.getInt("Telephone_1"));
+            coordonnes.setTelPortable(result.getInt("Telephone_2"));
+            adherent.setCoordonnees(coordonnes);
+            adherent.setPromotion(result.getInt("Promotion"));
+//            System.out.println(adherent.getNom());
+//            System.out.println("test");
+            //store all data into a List
+            list.add(adherent);
+        }
+//        System.out.println(list);
         return list;
     }
 

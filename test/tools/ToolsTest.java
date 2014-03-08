@@ -63,7 +63,7 @@ public class ToolsTest {
         System.out.println("getNewAdherent");
         Tools instance = new Tools();
         List<Etudiant> expResult = null;
-        List<Etudiant> result = instance.getNewAdherent();
+        List<Etudiant> result = instance.getAdherent();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");

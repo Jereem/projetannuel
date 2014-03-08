@@ -124,7 +124,7 @@
                             </p:panel> 
 
                             <!-- Envoie le formulaire -->
-                            <p:commandButton value="Enregistrer" action="#{tools.saveNewAdherent}"/>  
+                            <p:commandButton value="Enregistrer" action="#{etudiant.saveNewAdherent}"/>  
 
                         </h:form>  
                     </h:panelGrid>  
@@ -142,7 +142,7 @@
                 <p:tab title="Liste des adhérents">  
                     <h:form>  
 
-                        <p:dataTable id="liteAdherent" var="etudiant" value="#{tools.Tools.getNewAdherent()}" sortMode="multiple" rows="5" paginator="true">  
+                        <p:dataTable id="tableAdherent" var="etudiant" value="#{etudiant.getAdherent()}" sortMode="multiple" rows="5" paginator="true">  
                             <f:facet name="header">  
                                 Adhérents  
                             </f:facet>  
@@ -165,21 +165,21 @@
                 <p:tab title="Liste des anciens adhérents">  
                     <h:form>  
 
-                        <p:dataTable id="dataTable" var="bureauProGphy" value="#{bureauProGphy.getBureauProGphy()}" sortMode="multiple" rows="5" paginator="true">  
+                        <p:dataTable id="tableOldAdherent" var="etudiant" value="#{etudiant.getOldAdherent()}" sortMode="multiple" rows="5" paginator="true">  
                             <f:facet name="header">  
-                                Membres  
+                                Adhérents  
                             </f:facet>  
 
-                            <p:column sortBy="pseudo" headerText="Pseudo">  
-                                <h:outputText value="#{bureauProGphy.identifiant}" />  
+                            <p:column sortBy="nom" headerText="Nom">  
+                                <h:outputText value="#{etudiant.nom}" />  
                             </p:column>  
 
-                            <p:column sortBy="mdp" headerText="Mdp">  
-                                <h:outputText value="#{bureauProGphy.mdp}" />  
+                            <p:column sortBy="prenom" headerText="Prenom">  
+                                <h:outputText value="#{etudiant.prenom}" />  
                             </p:column>  
 
-                            <p:column sortBy="actif" headerText="Actif">  
-                                <h:outputText value="#{bureauProGphy.actif}" />  
+                            <p:column sortBy="promo" headerText="Promo">  
+                                <h:outputText value="#{etudiant.promotion}" />  
                             </p:column>  
 
                         </p:dataTable>
