@@ -97,7 +97,7 @@ public class BureauProGphy extends Etudiant implements Serializable {
     public boolean getActif() {
         return this.actif;
     }
-
+       
     /**
      *
      * @param actif
@@ -105,6 +105,26 @@ public class BureauProGphy extends Etudiant implements Serializable {
     public void setActif(boolean actif) {
         this.actif = actif;
     }
+    
+       /**
+ *
+ * @author Jeremy Gillet
+     * @return String
+ */
+    public String bool2String() {
+        
+        Boolean x=this.getActif();
+        
+        if (x == true) {
+            return "Oui";
+        } else if (x == false) {
+            return "Non";
+        } else {
+            return null;
+        }
+
+    }
+    
 
     // Methodes pour la BDD
     public String saveBureauProGphy() throws SQLException {
@@ -159,4 +179,40 @@ public class BureauProGphy extends Etudiant implements Serializable {
         }
         return list;
     }
+        //methode surchargée qui prend en paramètre un boolean actif
+      public List<BureauProGphy> getBureauProGphy(Boolean actif) throws SQLException {
+        //get database connection
+        ConnectBDD b = new ConnectBDD();
+        Connection con = b.getMyConnexion();
+        if (con == null) {
+            throw new SQLException("Can't get database connection");
+        }
+        PreparedStatement ps;
+        if (actif==true)
+        {
+         ps= con.prepareStatement("select Identifiant, Mot_de_passe, Actif from MEMBRE_BUREAU WHERE Actif=1");
+        }
+        else
+        {
+         ps = con.prepareStatement("select Identifiant, Mot_de_passe, Actif from MEMBRE_BUREAU WHERE Actif=0");
+        }
+        /*actif=false*/    
+        //get customer data from database
+        ResultSet result = ps.executeQuery();
+        List<BureauProGphy> list = new ArrayList<>();
+        while (result.next()) {
+            BureauProGphy membre = new BureauProGphy();
+            membre.setIdentifiant(result.getString("Identifiant"));
+            membre.setMdp(result.getString("Mot_de_passe"));
+            //membre.setPoste(result.getString("Poste"));
+            membre.setActif(result.getBoolean("Actif"));
+            //store all data into a List
+            list.add(membre);
+        }
+        return list;
+    }
+    
+    
+
+    
 }

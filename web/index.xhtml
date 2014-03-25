@@ -52,7 +52,7 @@
                 <p:tab title="Liste des membres actifs">  
                     <h:form>  
 
-                        <p:dataTable id="dataTable" var="bureauProGphy" value="#{bureauProGphy.getBureauProGphy()}" sortMode="multiple" rows="5" paginator="true">  
+                        <p:dataTable id="dataTable" var="bureauProGphy" value="#{bureauProGphy.getBureauProGphy(true)}" sortMode="multiple" rows="5" paginator="true">  
                             <f:facet name="header">  
                                 Membres  
                             </f:facet>  
@@ -66,7 +66,7 @@
                             </p:column>  
 
                             <p:column sortBy="actif" headerText="Actif">  
-                                <h:outputText value="#{bureauProGphy.actif}" />  
+                                <h:outputText value="#{bureauProGphy.bool2String()}" />  
                             </p:column>  
 
                         </p:dataTable>
@@ -75,7 +75,7 @@
                 <p:tab title="Liste des anciens membres">  
                     <h:form>  
 
-                        <p:dataTable id="dataTable" var="bureauProGphy" value="#{bureauProGphy.getBureauProGphy()}" sortMode="multiple" rows="5" paginator="true">  
+                        <p:dataTable id="dataTable" var="bureauProGphy" value="#{bureauProGphy.getBureauProGphy(false)}" sortMode="multiple" rows="5" paginator="true">  
                             <f:facet name="header">  
                                 Membres
                             </f:facet>  
@@ -89,7 +89,7 @@
                             </p:column>  
 
                             <p:column sortBy="actif" headerText="Actif">  
-                                <h:outputText value="#{bureauProGphy.actif}" />  
+                                <h:outputText value="#{bureauProGphy.bool2String()}" />  
                             </p:column>  
 
                         </p:dataTable>
