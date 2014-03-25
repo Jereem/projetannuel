@@ -11,6 +11,8 @@
         <!-- Defini la partie nommée contenu dans le template par le bloc qui suit -->
         <ui:define name="content"> 
             <h2>Bureau</h2> 
+//----------------------------------------------------------------------------------------------------------------           
+            
             <p:accordionPanel>  
                 <p:tab title="Ajouter un membre du bureau">  
                     <h:panelGrid columns="2" cellpadding="10">  
@@ -38,7 +40,8 @@
 
                         </h:form>  
                     </h:panelGrid>  
-                </p:tab>  
+                </p:tab> 
+//----------------------------------------------------------------------------------------------------------------                 
                 <p:tab title="Supprimer un membre du bureau">  
                     <h:form>  
 
@@ -48,7 +51,8 @@
                         <p:commandButton value="Submit" />  
 
                     </h:form>
-                </p:tab>  
+                </p:tab>
+//----------------------------------------------------------------------------------------------------------------                 
                 <p:tab title="Liste des membres actifs">  
                     <h:form>  
 
@@ -71,7 +75,8 @@
 
                         </p:dataTable>
                     </h:form>
-                </p:tab>  
+                </p:tab> 
+//----------------------------------------------------------------------------------------------------------------                 
                 <p:tab title="Liste des anciens membres">  
                     <h:form>  
 
@@ -97,7 +102,7 @@
                 </p:tab>
 
             </p:accordionPanel>
-
+//---------------------------------------------------------------------------------------------------------------- 
             <!-- Fin du bloc "contenu" -->
         </ui:define> 
         <!-- Fin du template "layout" -->
