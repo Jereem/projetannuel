@@ -30,7 +30,7 @@ public class ConnectBDD {
     
     private final String MYURL = "jdbc:mysql://localhost/projetannuel";
     private final String MYUSER= "root";
-    private final String MYPASSWORD= "";
+    private final String MYPASSWORD= "projetannuel2014";
     
     
     public ConnectBDD(){
