@@ -15,22 +15,28 @@
             
             <p:accordionPanel>  
                 <p:tab title="Administration">  
-                        <h:form>  
+                    <h:form>
 
-                             
+                        <p:fileUpload fileUploadListener="#{Upload.handleFileUpload}" mode="advanced"
+                                      update="messages" auto="true" sizeLimit="10000000" allowTypes="/(\.|\/)(gif|jpe?g|png|pdf)$/"/>
 
-                            
-                              
+                        <p:growl id="messages" showDetail="true"/>
 
-                        </h:form>  
-                      
+                    </h:form>
                 </p:tab> 
 
-                
-                
                 <p:tab title="Projet">  
-                   
                         <h3>Inline</h3>    
+
+                        <h:form>
+
+                            <p:fileUpload fileUploadListener="#{Upload.handleFileUpload}" mode="advanced" dragDropSupport="true"
+                                          update="messages" sizeLimit="1000000" allowTypes="/(\.|\/)(gif|jpe?g|png|pdf)$/" />
+
+                            <p:growl id="messages" showDetail="true"/>
+
+                        </h:form>
+                    
                 </p:tab>
             </p:accordionPanel>
 //---------------------------------------------------------------------------------------------------------------- 
