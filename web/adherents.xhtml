@@ -13,7 +13,7 @@
             <h2>Adhérents</h2> 
             <p:tabView id="tabView">  
   
-    <p:tab id="tab1" title="Ajouter un nouvel adhérent">  
+    <p:tab id="tab1" title="Ajout d'un nouvel adhérent">  
         <h:panelGrid columns="2" cellpadding="10">  
 		
             <h:form>  
@@ -28,9 +28,9 @@
 
                             <h:messages errorClass="error"/>  
 
-                            <h:panelGrid columns="2" columnClasses="label, value" styleClass="grid">  
+                            <h:panelGrid columns="3" columnClasses="label, value" styleClass="grid">  
 
-                                <h:outputText value="Titre: *" />  
+                                <h:outputText value="Titre : *" />  
                                 <p:selectOneMenu value="#{beans.Etudiant.titres}">  
                                     <f:selectItems value="#{etudiant.titres}" var="titres" itemValue="#{titres.getNomTitre()}" /> 
                                 </p:selectOneMenu>
@@ -54,7 +54,7 @@
                                 </h:inputText>
                                 <h:message id="numSSMessage" for="numSS" errorClass="erreur" />  
 
-                                <h:outputText value="Date de naissance (jj/mm/aa): *" />
+                                <h:outputText value="Date de naissance (jj/mm/aa) : *" />
                                 <p:calendar value="#{etudiant.dateNaissance}" id="popupButtonCal" showOn="button" />
                                 <p></p>
 
@@ -67,17 +67,17 @@
 
                             <h:messages errorClass="error"/>  
 
-                            <h:panelGrid columns="2" columnClasses="label, value">  
+                            <h:panelGrid columns="3" columnClasses="label, value">  
 
-                                                    <h:outputText value="Numéro : *" />  
-                                                    <h:inputText id="numRue" value="#{coordonnees.numRue}" >
-                                                    <f:ajax event="blur" render="numRueMessage" />
-                                                    </h:inputText>
-                                                    <h:message id="numRueMessage" for="numRue" errorClass="erreur" /> 
+                                <h:outputText value="Numéro : *" />  
+                                <h:inputText id="numRue" value="#{coordonnees.numRue}" >
+                                <f:ajax event="blur" render="numRueMessage" />
+                                </h:inputText>
+                                <h:message id="numRueMessage" for="numRue" errorClass="erreur" /> 
 
-                                <h:outputText value="Type de voie: *" />  
+                                <h:outputText value="Type de voie : *" />  
                                 <p:selectOneMenu value="#{coordonnees.voies}">  
-                                                            <f:selectItems value="#{coordonnees.voies}" var="voies" itemValue="#{voies.getNomVoie()}" /> 
+                                    <f:selectItems value="#{coordonnees.voies}" var="voies" itemValue="#{voies.getNomVoie()}" /> 
                                 </p:selectOneMenu>
                                 <p></p>
 
@@ -114,7 +114,7 @@
 
                             <h:messages errorClass="error"/>  
 
-                            <h:panelGrid columns="2" columnClasses="label, value">  
+                            <h:panelGrid columns="3" columnClasses="label, value">  
 
                             <h:outputText value="Email : *" />  
                             <h:inputText id="eMail" value="#{coordonnees.eMail}" >
@@ -122,7 +122,7 @@
                             </h:inputText>
                             <h:message id="eMailMessage" for="eMail" errorClass="erreur" />
 
-                                            <h:outputText value="Telephone fixe : *" />  
+                            <h:outputText value="Telephone fixe : *" />  
                             <h:inputText id="telFixe" value="#{coordonnees.telFixe}" >
                             <f:ajax event="blur" render="telFixeMessage" />
                             </h:inputText>
@@ -143,7 +143,7 @@
 
                             <h:messages errorClass="error"/>  
 
-                            <h:panelGrid columns="2" columnClasses="label, value"> 
+                            <h:panelGrid columns="3" columnClasses="label, value"> 
 
                             <h:outputText value="Année de promotion : *" />  
                             <h:inputText id="promotion" value="#{etudiant.promotion}" >
@@ -164,8 +164,10 @@
 						
         </h:panelGrid>  
     </p:tab>  
-  
-    <p:tab id="tab2" title="Supprimer un adhérent">  
+
+//-------------------------------------------------------------------------------------------------
+
+    <p:tab id="tab2" title="Suppression d'un adhérent">  
         <h:panelGrid columns="2" cellpadding="10">  
 		
                     <h:form>  
@@ -176,8 +178,18 @@
 					
         </h:panelGrid>  
     </p:tab>  
-  
-    <p:tab id="tab3" title="Liste des adhérents">  
+
+//-------------------------------------------------------------------------------------------------
+
+    <p:tab id="tab3" title="Modification">  
+        <h:panelGrid columns="2" cellpadding="10">  
+ 
+        </h:panelGrid>  
+    </p:tab>  
+
+//-------------------------------------------------------------------------------------------------
+
+    <p:tab id="tab4" title="Liste des adhérents">  
         <h:panelGrid columns="2" cellpadding="10">  
                     
                     <h:form>  
@@ -203,7 +215,7 @@
         </h:panelGrid>  
     </p:tab>  
   
-	<p:tab id="tab4" title="Liste des anciens adhérents">  
+	<p:tab id="tab5" title="Liste des anciens adhérents">  
         <h:panelGrid columns="2" cellpadding="10">  
                     
 					<h:form>  

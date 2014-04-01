@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <!-- appelle le template layoutbis.xhtml -->
+    <ui:composition template="newTemplate.xhtml"> 
+        <!-- Defini la partie nommée contenu dans le template par le bloc qui suit -->
+        <ui:define name="content"> 
+            <h2>Projets</h2>           
+            
+<p:tabView id="tabView">  
+  
+    <p:tab id="tab1" title="Ajout d'un projet">  
+        <h:panelGrid columns="2" cellpadding="10">
+
+        </h:panelGrid>  
+    </p:tab>  
+
+//-------------------------------------------------------------------------------------------------
+	
+    <p:tab id="tab2" title="Modification d'un projet">  
+        <h:panelGrid columns="2" cellpadding="10">  
+					
+        </h:panelGrid>  
+    </p:tab>  
+ 
+//-------------------------------------------------------------------------------------------------
+ 
+    <p:tab id="tab3" title="Clôture d'un projet">  
+        <h:panelGrid columns="2" cellpadding="10">  
+			
+        </h:panelGrid>  
+    </p:tab>  
+   
+</p:tabView>  
+
+//---------------------------------------------------------------------------------------------------------------- 
+            <!-- Fin du bloc "contenu" -->
+        </ui:define> 
+        <!-- Fin du template "layout" -->
+    </ui:composition> 
+</html>
