@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <!-- appelle le template layoutbis.xhtml -->
+    <ui:composition template="newTemplate.xhtml"> 
+        <!-- Defini la partie nommée contenu dans le template par le bloc qui suit -->
+        <ui:define name="content"> 
+            <h2>Bureau</h2> 
+
+            
+            <p:accordionPanel>  
+                <p:tab title="Administration">  
+                    <h:form>
+
+                        <p:fileUpload fileUploadListener="#{Upload.handleFileUpload}" mode="advanced"
+                                      update="messages" auto="true" sizeLimit="10000000" allowTypes="/(\.|\/)(gif|jpe?g|png|pdf)$/"/>
+
+                        <p:growl id="messages" showDetail="true"/>
+
+                    </h:form>
+                </p:tab> 
+
+                <p:tab title="Projet">  
+                        <h3>Inline</h3>    
+
+                        <h:form>
+
+                            <p:fileUpload fileUploadListener="#{Upload.handleFileUpload}" mode="advanced" dragDropSupport="true"
+                                          update="messages" sizeLimit="1000000" allowTypes="/(\.|\/)(gif|jpe?g|png|pdf)$/" />
+
+                            <p:growl id="messages" showDetail="true"/>
+
+                        </h:form>
+                    
+                </p:tab>
+            </p:accordionPanel>
+//---------------------------------------------------------------------------------------------------------------- 
+            <!-- Fin du bloc "contenu" -->
+        </ui:define> 
+        <!-- Fin du template "layout" -->
+    </ui:composition> 
+</html>
