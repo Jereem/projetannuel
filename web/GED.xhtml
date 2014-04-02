@@ -15,17 +15,74 @@
             
             <p:accordionPanel>  
                 <p:tab title="Administration">  
-                    <h:form>
+                        <h:form>  
 
-                        <p:fileUpload fileUploadListener="#{Upload.handleFileUpload}" mode="advanced"
-                                      update="messages" auto="true" sizeLimit="10000000" allowTypes="/(\.|\/)(gif|jpe?g|png|pdf)$/"/>
+                             
 
-                        <p:growl id="messages" showDetail="true"/>
+                            
+                              
 
                     </h:form>
+                    
+                    <h:form id="form2">
+                
+    <p:contextMenu for="docs">
+        <p:menuitem value="View" update="documentPanel" icon="ui-icon-search" oncomplete="PF('documentDialog').show()"/>
+        <p:menuitem value="Delete" actionListener="#{documentsController.deleteNode}" update="docs" icon="ui-icon-close"/>
+    </p:contextMenu>
+
+    <p:treeTable value="#{documentsController.root}" var="document" id="docs" 
+                 selectionMode="single" selection="#{documentsController.selectedNode}">
+
+        <f:facet name="header">
+            Right-Click to See Options
+        </f:facet>
+
+        <p:column style="width:150px">
+            <f:facet name="header">
+                Name
+            </f:facet>
+            <h:outputText value="#{document.name}" />
+        </p:column>
+
+        <p:column style="width:100px">
+            <f:facet name="header">
+                Size
+            </f:facet>
+            <h:outputText value="#{document.size}" />
+        </p:column>
+
+        <p:column style="width:100px">
+            <f:facet name="header">
+                Type
+            </f:facet>
+            <h:outputText value="#{document.type}" />
+        </p:column>
+    </p:treeTable>
+
+    <p:dialog header="Document Detail" showEffect="fade" widgetVar="documentDialog" modal="true">
+        <p:outputPanel id="documentPanel">
+            <h:panelGrid  columns="2" cellpadding="5" rendered="#{not empty documentsController.selectedNode}">
+                <h:outputLabel for="name" value="Name: " />
+                <h:outputText id="name" value="#{documentsController.selectedNode.data.name}" style="font-weight:bold" />
+
+                <h:outputLabel for="size" value="Size: " />
+                <h:outputText id="size" value="#{documentsController.selectedNode.data.size}" style="font-weight:bold" />
+
+                <h:outputLabel for="type" value="Type " />
+                <h:outputText id="type" value="#{documentsController.selectedNode.data.type}" style="font-weight:bold" />
+            </h:panelGrid>
+        </p:outputPanel>
+    </p:dialog>
+
+</h:form>
+					
                 </p:tab> 
 
+                
+                
                 <p:tab title="Projet">  
+                   
                         <h3>Inline</h3>    
 
                         <h:form>
@@ -37,9 +94,36 @@
 
                         </h:form>
                     
+                        
+                        
+                        
+                        <p:dialog modal="true" widgetVar="statusDialog" header="Status" draggable="false" closable="false" resizable="false">
+    <p:graphicImage value="/design/ajaxloadingbar.gif" />
+</p:dialog>
+
+<h:form id="form">
+
+<p:commandButton id="downloadLink" value="Download" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop)" 
+        icon="ui-icon-arrowthichk-s">
+    <p:fileDownload value="#{fileDownloadController.file}" />
+</p:commandButton>
+
+</h:form>
+
+        <script type="text/javascript">
+function start() {
+    PF('statusDialog').show();
+}
+
+function stop() {
+    PF('statusDialog').hide();
+}
+        </script>
                 </p:tab>
+                
+                
             </p:accordionPanel>
-//---------------------------------------------------------------------------------------------------------------- 
+ 
             <!-- Fin du bloc "contenu" -->
         </ui:define> 
         <!-- Fin du template "layout" -->
