@@ -9,7 +9,7 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean
 @RequestScoped
 
-public class Document implements Serializable{
+public class Documents implements Serializable{
 
 	private String nomDoc;
 	private String typeDoc;
@@ -18,7 +18,7 @@ public class Document implements Serializable{
 	private BureauProGphy auteur;
 	private int annee;
 
-	public Document() {
+	public Documents() {
 		throw new UnsupportedOperationException();
 	}
 

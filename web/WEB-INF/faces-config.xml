@@ -15,5 +15,4 @@
             <to-view-id>/test2.xhtml</to-view-id>
         </navigation-case>	
     </navigation-rule>
-    
 </faces-config>

@@ -14,7 +14,7 @@ public class Projet implements Serializable{
 	private Client client;
 	private ArrayList<Etudiant> devellopeurs;
 	private String nomProjet;
-	private ArrayList<Document> documents;
+	private ArrayList<Documents> documents;
 	private ArrayList<BureauProGphy> membresDuBureau;
 
 	public Projet() {
@@ -73,7 +73,7 @@ public class Projet implements Serializable{
 		throw new UnsupportedOperationException();
 	}
 
-	public ArrayList<Document> getDocuments() {
+	public ArrayList<Documents> getDocuments() {
 		return this.documents;
 	}
 
@@ -81,7 +81,7 @@ public class Projet implements Serializable{
 	 * 
 	 * @param documents
 	 */
-	public void setDocuments(ArrayList<Document> documents) {
+	public void setDocuments(ArrayList<Documents> documents) {
 		this.documents = documents;
 	}
 
@@ -89,7 +89,7 @@ public class Projet implements Serializable{
 	 * 
 	 * @param document
 	 */
-	public void addDocument(Document document) {
+	public void addDocument(Documents document) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -97,7 +97,7 @@ public class Projet implements Serializable{
 	 * 
 	 * @param document
 	 */
-	public void delDocument(Document document) {
+	public void delDocument(Documents document) {
 		throw new UnsupportedOperationException();
 	}
 

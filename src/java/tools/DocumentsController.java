@@ -6,12 +6,13 @@
 
 package tools;
 
+
 import java.io.Serializable;
+
 
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 
-import org.primefaces.examples.domain.Document;
 
 /**
  *
@@ -26,13 +27,14 @@ public class DocumentsController implements Serializable {
 	public DocumentsController() {
 		root = new DefaultTreeNode("root", null);
 		
-		TreeNode documents = new DefaultTreeNode(new Document("Documents", "-", "Folder"), root);
-		TreeNode pictures = new DefaultTreeNode(new Document("Pictures", "-", "Folder"), root);
-		TreeNode music = new DefaultTreeNode(new Document("Music", "-", "Folder"), root);
+		TreeNode documents = new DefaultTreeNode("Documents", "Folder", root);
+		TreeNode pictures = new DefaultTreeNode("Pictures" ,"Folder", root);
+		TreeNode music = new DefaultTreeNode("Music", "Folder", root);
 		
-		TreeNode work = new DefaultTreeNode(new Document("Work", "-", "Folder"), documents);
-		TreeNode primefaces = new DefaultTreeNode(new Document("PrimeFaces", "-", "Folder"), documents);
+		TreeNode work = new DefaultTreeNode("Work", "Folder", documents);
+		TreeNode primefaces = new DefaultTreeNode("PrimeFaces", "Folder", documents);
 		
+                /*
 		//Documents
 		TreeNode expenses = new DefaultTreeNode("document", new Document("Expenses.doc", "30 KB", "Word Document"), work);
 		TreeNode resume = new DefaultTreeNode("document", new Document("Resume.doc", "10 KB", "Word Document"), work);
@@ -58,7 +60,8 @@ public class DocumentsController implements Serializable {
 		
 		TreeNode toprakana = new DefaultTreeNode("mp3", new Document("Toprak Ana", "1536 KB", "Audio File"), mogollar);
 		TreeNode bisiyapmali = new DefaultTreeNode("mp3", new Document("Bisi Yapmali", "2730 KB", "Audio File"), mogollar);
-	}
+                        */
+                        }
 	
 	public TreeNode getRoot() {
 		return root;
