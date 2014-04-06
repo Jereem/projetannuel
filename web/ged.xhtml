@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <!-- appelle le template layoutbis.xhtml -->
+    <ui:composition template="newTemplate.xhtml"> 
+        <!-- Defini la partie nommée contenu dans le template par le bloc qui suit -->
+        <ui:define name="content"> 
+            <h2>Bureau</h2> 
+
+            
+<p:tabView id="tabView">  
+  
+    <p:tab id="tab1" title="Espace Administration">  
+        <h:panelGrid columns="2" cellpadding="10">
+
+            <h:form>  
+
+            </h:form>
+                    
+            <h:form id="form2">
+                
+		<p:contextMenu for="docs">
+                    <p:menuitem value="View" update="documentPanel" icon="ui-icon-search" oncomplete="PF('documentDialog').show()"/>
+                    <p:menuitem value="Delete" actionListener="#{documentsController.deleteNode}" update="docs" icon="ui-icon-close"/>
+		</p:contextMenu>
+
+		<p:treeTable value="#{documentsController.root}" var="document" id="docs" selectionMode="single" selection="#{documentsController.selectedNode}">
+                    <f:facet name="header">
+			Right-Click to See Options
+                    </f:facet>
+
+                    <p:column style="width:150px">
+			<f:facet name="header">
+                            Name
+			</f:facet>
+			<h:outputText value="#{document.name}" />
+                    </p:column>
+
+                    <p:column style="width:100px">
+			<f:facet name="header">
+                            Size
+			</f:facet>
+			<h:outputText value="#{document.size}" />
+                    </p:column>
+
+                    <p:column style="width:100px">
+			<f:facet name="header">
+                            Type
+			</f:facet>
+			<h:outputText value="#{document.type}" />
+                    </p:column>
+					
+                </p:treeTable>
+
+		<p:dialog header="Document Detail" showEffect="fade" widgetVar="documentDialog" modal="true">
+					
+                    <p:outputPanel id="documentPanel">
+			<h:panelGrid  columns="2" cellpadding="5" rendered="#{not empty documentsController.selectedNode}">
+                            <h:outputLabel for="name" value="Name: " />
+                            <h:outputText id="name" value="#{documentsController.selectedNode.data.name}" style="font-weight:bold" />
+
+                            <h:outputLabel for="size" value="Size: " />
+                            <h:outputText id="size" value="#{documentsController.selectedNode.data.size}" style="font-weight:bold" />
+
+                            <h:outputLabel for="type" value="Type " />
+                            <h:outputText id="type" value="#{documentsController.selectedNode.data.type}" style="font-weight:bold" />
+			</h:panelGrid>
+                    </p:outputPanel>
+    
+		</p:dialog>
+
+            </h:form>
+							
+        </h:panelGrid>  
+		
+    </p:tab>  
+
+//-------------------------------------------------------------------------------------------------
+	
+    <p:tab id="tab2" title="Espace Projet">  
+        <h:panelGrid columns="2" cellpadding="10">  
+
+            <h3>Inline</h3>    
+
+            <h:form>
+                <p:fileUpload fileUploadListener="#{Upload.handleFileUpload}" mode="advanced" dragDropSupport="true" update="messages" sizeLimit="1000000" allowTypes="/(\.|\/)(gif|jpe?g|png|pdf)$/" />
+                <p:growl id="messages" showDetail="true"/>
+            </h:form>
+                                
+            <p:dialog modal="true" widgetVar="statusDialog" header="Status" draggable="false" closable="false" resizable="false">
+		<p:graphicImage value="/design/ajaxloadingbar.gif" />
+            </p:dialog>
+
+            <h:form id="form">
+		<p:commandButton id="downloadLink" value="Download" ajax="false" onclick="PrimeFaces.monitorDownload(start, stop)" icon="ui-icon-arrowthichk-s">
+                    <p:fileDownload value="#{fileDownloadController.file}" />
+		</p:commandButton>
+            </h:form>
+
+            <script type="text/javascript">
+		function start() {
+                    PF('statusDialog').show();
+		}
+
+		function stop() {
+                    PF('statusDialog').hide();
+		}
+            </script>
+		
+	</h:panelGrid>  
+		
+    </p:tab>  
+  
+</p:tabView>  
+            
+<!-- Fin du bloc "contenu" -->
+    </ui:define> 
+<!-- Fin du template "layout" -->
+    </ui:composition> 
+</html>
