@@ -16,54 +16,155 @@
   
     <p:tab id="tab1" title="Ajout d'un nouveau membre">  
         <h:panelGrid columns="2" cellpadding="10">  
- 
-            <h:form>  
-
-                <p:panel header="Nouveau membre du bureau">  
-
-                    <h:panelGrid columns="3" cellpadding="5">  
-                        <h:outputText value="Pseudo : *" />  
-                                    
-                        <h:inputText id="pseudo" value="#{bureauProGphy.identifiant}" >
-                        <f:ajax event="blur" render="pseudoMessage" />
-                        </h:inputText>
-                        <h:message id="pseudoMessage" for="pseudo" errorClass="erreur" />
-
-                        <h:outputText value="Password: *" />  
-                        <p:password id="feedback" value="#{bureauProGphy.mdp}" feedback="true"/>  
-                    </h:panelGrid>  
-
-                </p:panel>  
-
-                <!-- Envoie le formulaire et passe a la page test2.xhtml -->
-                <p:commandButton value="Save" action="#{bureauProGphy.saveBureauProGphy}"/>  
-
-            </h:form>
-			
-        </h:panelGrid>  
-    </p:tab>  
-
-//-------------------------------------------------------------------------------------------------
-	
-    <p:tab id="tab2" title="Suppression d'un membre">  
-        <h:panelGrid columns="2" cellpadding="10">  
 		
             <h:form>  
-                <h3>Inline</h3>  
-                <p:calendar value="#{beans.Etudiant.dateNaissance}" mode="inline" id="inlineCal"/>     
-                <p:commandButton value="Submit" />  
-            </h:form>
-					
+
+                <p:growl id="growl" sticky="true" showDetail="true"/>  
+
+                <p:wizard flowListener="#{userWizard.onFlowProcess}">  
+
+                    <p:tab id="personal" title="Nouvel adhérent">  
+
+                        <p:panel header="Données personnelles">  
+
+                            <h:messages errorClass="error"/>  
+
+                            <h:panelGrid columns="3" columnClasses="label, value" styleClass="grid">  
+
+                                <h:outputText value="Titre : *" />  
+                                <p:selectOneMenu value="#{beans.Etudiant.titres}">  
+                                    <f:selectItems value="#{etudiant.titres}" var="titres" itemValue="#{titres.getNomTitre()}" /> 
+                                </p:selectOneMenu>
+                                <p></p>  
+
+                                <h:outputText value="Nom : *" />  
+                                <h:inputText id="nom" value="#{etudiant.nom}" >
+                                <f:ajax event="blur" render="nomMessage" />
+                                </h:inputText>
+                                <h:message id="nomMessage" for="nom" errorClass="erreur" />  
+
+                                <h:outputText value="Prénom : *" />  
+                                <h:inputText id="prenom" value="#{etudiant.prenom}" >
+                                <f:ajax event="blur" render="prenomMessage" />
+                                </h:inputText>
+                                <h:message id="prenomMessage" for="prenom" errorClass="erreur" /> 
+
+                                <h:outputText value="Numéro de sécurité sociale : *" />  
+                                <h:inputText id="numSS" value="#{etudiant.numeroSS}" >
+                                <f:ajax event="blur" render="numSSMessage" />
+                                </h:inputText>
+                                <h:message id="numSSMessage" for="numSS" errorClass="erreur" />  
+
+                                <h:outputText value="Date de naissance (jj/mm/aa) : *" />
+                                <p:calendar value="#{etudiant.dateNaissance}" id="popupButtonCal" showOn="button" />
+                                <p></p>
+
+                            </h:panelGrid>  
+                        </p:panel>  
+                    </p:tab>  
+
+                    <p:tab id="address" title="Coordonnées">  
+                        <p:panel header="Détails de l'adresse">  
+
+                            <h:messages errorClass="error"/>  
+
+                            <h:panelGrid columns="3" columnClasses="label, value">  
+
+                                <h:outputText value="Numéro : *" />  
+                                <h:inputText id="numRue" value="#{coordonnees.numRue}" >
+                                <f:ajax event="blur" render="numRueMessage" />
+                                </h:inputText>
+                                <h:message id="numRueMessage" for="numRue" errorClass="erreur" /> 
+
+                                <h:outputText value="Type de voie : *" />  
+                                <p:selectOneMenu value="#{coordonnees.voies}">  
+                                    <f:selectItems value="#{coordonnees.voies}" var="voies" itemValue="#{voies.getNomVoie()}" /> 
+                                </p:selectOneMenu>
+                                <p></p>
+
+                                <h:outputText value="Nom de la rue : *" />  
+                                <h:inputText id="rue" value="#{coordonnees.rue}" >
+                                <f:ajax event="blur" render="rueMessage" />
+                                </h:inputText>
+                                <h:message id="rueMessage" for="rue" errorClass="erreur" /> 
+
+                                <h:outputText value="Code postal : *" />  
+                                <h:inputText id="CP" value="#{coordonnees.codePostal}" >
+                                <f:ajax event="blur" render="CPMessage" />
+                                </h:inputText>
+                                <h:message id="CPMessage" for="CP" errorClass="erreur" />
+
+                                <h:outputText value="Ville : *" />  
+                                <h:inputText id="ville" value="#{coordonnees.ville}" >
+                                <f:ajax event="blur" render="villeMessage" />
+                                </h:inputText>
+                                <h:message id="villeMessage" for="ville" errorClass="erreur" />
+
+                                <h:outputText value="Pays : *" />  
+                                <h:inputText id="pays" value="#{coordonnees.pays}" >
+                                <f:ajax event="blur" render="paysMessage" />
+                                </h:inputText>
+                                <h:message id="paysMessage" for="pays" errorClass="erreur" />
+
+                            </h:panelGrid>  
+                        </p:panel>  
+                    </p:tab>  
+
+                    <p:tab id="contact" title="Contact">  
+                        <p:panel header="Informations contact">  
+
+                            <h:messages errorClass="error"/>  
+
+                            <h:panelGrid columns="3" columnClasses="label, value">  
+
+                            <h:outputText value="Email : *" />  
+                            <h:inputText id="eMail" value="#{coordonnees.eMail}" >
+                            <f:ajax event="blur" render="eMailMessage" />
+                            </h:inputText>
+                            <h:message id="eMailMessage" for="eMail" errorClass="erreur" />
+
+                            <h:outputText value="Telephone fixe : *" />  
+                            <h:inputText id="telFixe" value="#{coordonnees.telFixe}" >
+                            <f:ajax event="blur" render="telFixeMessage" />
+                            </h:inputText>
+                            <h:message id="telFixeMessage" for="telFixe" errorClass="erreur" />
+
+                            <h:outputText value="Téléphone mobile : *" />  
+                            <h:inputText id="telPortable" value="#{coordonnees.telPortable}" >
+                            <f:ajax event="blur" render="telPortableMessage" />
+                            </h:inputText>
+                            <h:message id="telPortableMessage" for="telPortable" errorClass="erreur" />
+
+                            </h:panelGrid>  
+                        </p:panel>  
+                    </p:tab>  
+
+                   <p:tab id="other" title="Autres">  
+                        <p:panel header="Scolarité">  
+
+                            <h:messages errorClass="error"/>  
+
+                            <h:panelGrid columns="3" columnClasses="label, value"> 
+
+                            <h:outputText value="Année de promotion : *" />  
+                            <h:inputText id="promotion" value="#{etudiant.promotion}" >
+                            <f:ajax event="blur" render="promotionMessage" />
+                            </h:inputText>
+                            <h:message id="promotionMessage" for="promotion" errorClass="erreur" />
+
+                        </h:panelGrid>
+                    </p:panel> 		   
+
+                    <!-- Envoie le formulaire -->
+                    <p:commandButton value="Enregistrer" action="#{etudiant.saveNewAdherent}"/> 
+
+                   </p:tab>
+                </p:wizard>  
+
+            </h:form>  
+						
         </h:panelGrid>  
     </p:tab>  
- 
-//-------------------------------------------------------------------------------------------------
-
-    <p:tab id="tab3" title="Modification">  
-        <h:panelGrid columns="2" cellpadding="10">  
- 
-        </h:panelGrid>  
-    </p:tab> 
 
 //-------------------------------------------------------------------------------------------------
  
@@ -127,7 +228,7 @@
         </h:panelGrid>  
     </p:tab>  
 </p:tabView>  
-//---------------------------------------------------------------------------------------------------------------- 
+ 
             <!-- Fin du bloc "contenu" -->
         </ui:define> 
         <!-- Fin du template "layout" -->
