@@ -15,7 +15,21 @@
 <p:tabView id="tabView">  
     <p:tab id="tab00" title="Liste des projets en cours">  
         <h:panelGrid columns="2" cellpadding="10">
+                    <h:form>  
+                        <p:dataTable id="tableProjetEnCours" var="projet" value="#{projet.getProjet()}" sortMode="multiple" rows="5" paginator="true">  
+                            <f:facet name="header">  
+                                Projets  
+                            </f:facet>  
 
+                            <p:column sortBy="nomProjet" headerText="Nom du projet">  
+                                <h:outputText value="#{projet.nomProjet}" />  
+                            </p:column>  
+
+                            <p:column sortBy="societe" headerText="Societe">  
+                                <h:outputText value="#{projet.client.societe}" />  
+                            </p:column> 
+                        </p:dataTable>
+                    </h:form>
         </h:panelGrid>  
     </p:tab>  
 

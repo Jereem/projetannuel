@@ -24,7 +24,7 @@ public class Projet implements Serializable{
 	private ArrayList<BureauProGphy> membresDuBureau;
 
 	public Projet() {
-		throw new UnsupportedOperationException();
+		this.nomProjet = "New project";
 	}
 
 	public Client getClient() {
@@ -129,7 +129,7 @@ public class Projet implements Serializable{
         try {
             /* Récupération des paramètres d'URL saisis par l'utilisateur */
             String paramNomProjet = this.getNomProjet();
-            int paramClient = this.getClient().getSiren();
+            long paramClient = this.getClient().getSiren();
             /* Création de l'objet gérant les requêtes préparées */
             PreparedStatement ps = b.prepareStatement("INSERT INTO projetannuel.PROJET(Nom_Projet, Siret) VALUES (?,?)");
             /*
@@ -137,7 +137,7 @@ public class Projet implements Serializable{
              * setXXX() mises à disposition par l'objet PreparedStatement.
              */
             ps.setString(1, paramNomProjet);
-            ps.setInt(2, paramClient);
+            ps.setLong(2, paramClient);
             /* Exécution de la requête */
             int statut = ps.executeUpdate();
             return "success";
@@ -168,7 +168,7 @@ public class Projet implements Serializable{
             clientp.setNom(result.getString("Nom_Personne"));
             clientp.setPrenom(result.getString("Prenom_Personne"));
             clientp.setTitres(result.getString("Titre"));
-            clientp.setSiren(result.getInt("Siret"));
+            clientp.setSiren(result.getLong("Siret"));
             clientp.setSociete(result.getString("Societe"));
             projet.setClient(clientp);
             //store all data into a List

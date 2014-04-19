@@ -11,11 +11,11 @@ import javax.faces.bean.SessionScoped;
 public class Client extends Personne implements Serializable{
 
 	private String societe;
-	private int siren;
+	private long siren;
 	private String qualite;
 
 	public Client() {
-		throw new UnsupportedOperationException();
+		this.societe = "NewSociete";
 	}
 
 	public String getSociete() {
@@ -30,7 +30,7 @@ public class Client extends Personne implements Serializable{
 		this.societe = societe;
 	}
 
-	public int getSiren() {
+	public long getSiren() {
 		return this.siren;
 	}
 
@@ -38,7 +38,7 @@ public class Client extends Personne implements Serializable{
 	 * 
 	 * @param siren
 	 */
-	public void setSiren(int siren) {
+	public void setSiren(long siren) {
 		this.siren = siren;
 	}
 
