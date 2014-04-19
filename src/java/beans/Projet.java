@@ -182,12 +182,20 @@ public class Projet implements Serializable{
             int idproj = result.getInt("Id_Projet");
             BureauProGphy chefProjet = new BureauProGphy();
             Statement statement = con.createStatement();
-            ResultSet resultat2 = statement.executeQuery( "select Nom_Personne from Projet natural join travaille natural join adherent natural join personne natural join membre_bureau natural join est_elu where Id_Projet = "+idproj+" and poste = 'Chef de Projets' and Actif = 1;" );
+            ResultSet resultat2 = statement.executeQuery( "select Nom_Personne from Projet natural join supervise natural join adherent natural join personne natural join membre_bureau natural join est_elu where Id_Projet = "+idproj+" and poste = 'Chef de Projets' and Actif = 1;" );
             while ( resultat2.next() ) {
                 chefProjet.setNom(resultat2.getString( "Nom_Personne" ));
                 /* Traiter ici les valeurs récupérées. */
             }
             projet.setChefDeProjet(chefProjet);
+            BureauProGphy commercial = new BureauProGphy();
+            Statement statement2 = con.createStatement();
+            ResultSet resultat3 = statement.executeQuery( "select Nom_Personne from Projet natural join supervise natural join adherent natural join personne natural join membre_bureau natural join est_elu where Id_Projet = "+idproj+" and poste = 'Commercial' and Actif = 1;" );
+            while ( resultat3.next() ) {
+                commercial.setNom(resultat3.getString( "Nom_Personne" ));
+                /* Traiter ici les valeurs récupérées. */
+            }
+            projet.setCommercial(commercial);
         }
         return list;
     }

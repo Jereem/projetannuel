@@ -36,6 +36,10 @@
                             <p:column sortBy="nomChef" headerText="Nom du CdP">  
                                 <h:outputText value="#{projet.chefDeProjet.nom}" />  
                             </p:column>  
+                            
+                            <p:column sortBy="nomComm" headerText="Nom du commercial">  
+                                <h:outputText value="#{projet.commercial.nom}" />  
+                            </p:column> 
                         </p:dataTable>
                     </h:form>
         </h:panelGrid>  
