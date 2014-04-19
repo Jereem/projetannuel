@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -21,11 +22,28 @@ public class Projet implements Serializable{
 	private ArrayList<Etudiant> devellopeurs;
 	private String nomProjet;
 	private ArrayList<Documents> documents;
-	private ArrayList<BureauProGphy> membresDuBureau;
+        private BureauProGphy chefDeProjet;
+        private BureauProGphy commercial;
 
 	public Projet() {
 		this.nomProjet = "New project";
 	}
+
+    public BureauProGphy getChefDeProjet() {
+        return chefDeProjet;
+    }
+
+    public void setChefDeProjet(BureauProGphy chefDeProjet) {
+        this.chefDeProjet = chefDeProjet;
+    }
+
+    public BureauProGphy getCommercial() {
+        return commercial;
+    }
+
+    public void setCommercial(BureauProGphy commercial) {
+        this.commercial = commercial;
+    }
 
 	public Client getClient() {
 		return this.client;
@@ -107,18 +125,6 @@ public class Projet implements Serializable{
 		throw new UnsupportedOperationException();
 	}
 
-	public ArrayList<BureauProGphy> getMembresDuBureau() {
-		return this.membresDuBureau;
-	}
-
-	/**
-	 * 
-	 * @param membresDuBureau
-	 */
-	public void setMembresDuBureau(ArrayList<BureauProGphy> membresDuBureau) {
-		this.membresDuBureau = membresDuBureau;
-	}
-
         // Methodes pour la BDD
     public String saveProjet() throws SQLException {
         ConnectBDD con = new ConnectBDD();
@@ -157,7 +163,7 @@ public class Projet implements Serializable{
         if (con == null) {
             throw new SQLException("Can't get database connection");
         }
-        PreparedStatement ps = con.prepareStatement("select Nom_Projet, Societe, Siret, Qualite, Titre, Nom_Personne, Prenom_Personne from Projet natural join client natural join Personne");
+        PreparedStatement ps = con.prepareStatement("select Id_Projet, Nom_Projet, Societe, Siret, Qualite, Titre, Nom_Personne, Prenom_Personne from Projet natural join client natural join Personne");
         //get customer data from database
         ResultSet result = ps.executeQuery();
         List<Projet> list = new ArrayList<>();
@@ -173,6 +179,15 @@ public class Projet implements Serializable{
             projet.setClient(clientp);
             //store all data into a List
             list.add(projet);
+            int idproj = result.getInt("Id_Projet");
+            BureauProGphy chefProjet = new BureauProGphy();
+            Statement statement = con.createStatement();
+            ResultSet resultat2 = statement.executeQuery( "select Nom_Personne from Projet natural join travaille natural join adherent natural join personne natural join membre_bureau natural join est_elu where Id_Projet = "+idproj+" and poste = 'Chef de Projets' and Actif = 1;" );
+            while ( resultat2.next() ) {
+                chefProjet.setNom(resultat2.getString( "Nom_Personne" ));
+                /* Traiter ici les valeurs récupérées. */
+            }
+            projet.setChefDeProjet(chefProjet);
         }
         return list;
     }

@@ -28,6 +28,14 @@
                             <p:column sortBy="societe" headerText="Societe">  
                                 <h:outputText value="#{projet.client.societe}" />  
                             </p:column> 
+                            
+                            <p:column sortBy="nomClient" headerText="Nom du client">  
+                                <h:outputText value="#{projet.client.nom}" />  
+                            </p:column>  
+                            
+                            <p:column sortBy="nomChef" headerText="Nom du CdP">  
+                                <h:outputText value="#{projet.chefDeProjet.nom}" />  
+                            </p:column>  
                         </p:dataTable>
                     </h:form>
         </h:panelGrid>  
