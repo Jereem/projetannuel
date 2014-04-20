@@ -17,6 +17,7 @@ import java.util.List;
  * @author Teddy Delavallee
  */
 public class Tools {
+    
     // Methodes pour sauvegarder dans la BDD
     public String saveNewAdherent(beans.Etudiant adherent) throws SQLException {
         ConnectBDD b = new ConnectBDD();
