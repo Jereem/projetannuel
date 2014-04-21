@@ -7,12 +7,15 @@
 package tools;
 
 
+import beans.Documents;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 
@@ -28,18 +31,30 @@ public class DocumentsController implements Serializable {
     public Calendar calendar = Calendar.getInstance();
     
 	//admnistration ou projet
+    public DocumentsController() {
+        
+        try {
+            new DocumentsController("admninistration");
+        } catch (SQLException ex) {
+            Logger.getLogger(DocumentsController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 	public DocumentsController(String typeged) throws SQLException {
             
             root = new DefaultTreeNode("root", null);
            
             if (typeged=="administration"){
-            
-		
+            		
             TreeNode wiki = new DefaultTreeNode("WIKI", "Folder", root);
+            addDocument2Noeud(wiki,"wiki");
+            
             TreeNode modeles = new DefaultTreeNode("MODELES" ,"Folder", root);
             
             TreeNode mod = new DefaultTreeNode("modeles des fiches d'adhesion", "Folder", modeles);
+            addDocument2Noeud(mod,"modeles_adhesion");
+            
             TreeNode formul = new DefaultTreeNode("Formulaires CERFA", "Folder", modeles);
+            addDocument2Noeud(formul,"cerfa");
                 
         int cal= calendar.get(Calendar.YEAR );
         TreeNode nomanne;
@@ -52,13 +67,13 @@ public class DocumentsController implements Serializable {
                 nomannee=String.valueOf(i);
 		nomanne= new DefaultTreeNode(nomannee, "Folder", root);
                 statuts= new DefaultTreeNode("Statuts", "Folder", nomanne);
-                
+                addDocument2Noeud(mod,i,"modeles_adhesion");
                 pv= new DefaultTreeNode("PV d'assemble generale", "Folder", nomanne);
-                autres= new DefaultTreeNode("Autres documents", "Folder", nomanne);    
+                addDocument2Noeud(mod,i,"modeles_adhesion");
+                autres= new DefaultTreeNode("Autres documents", "Folder", nomanne);   
+                addDocument2Noeud(mod,i,"modeles_adhesion");
         }	
               
-		
-		
                 /*
 		//Documents
 		TreeNode expenses = new DefaultTreeNode("document", new Document("Expenses.doc", "30 KB", "Word Document"), work);
@@ -128,6 +143,7 @@ public class DocumentsController implements Serializable {
         
                 ResultSet result = ps.executeQuery();
                 String nom_projet;
+                
                 while (result.next()){
                 nom_projet=result.getString("Nom_Projet");
                 projet=new DefaultTreeNode(nom_projet, "Folder",nomanne );
@@ -193,5 +209,55 @@ public class DocumentsController implements Serializable {
         
         selectedNode = null;
     }
+    
+    /**
+     *
+     * @param noeud_pere
+     * @param type
+     */
+    public void addDocument2Noeud(TreeNode noeud_pere, String type) throws SQLException{
+        
+                //get database connection
+                ConnectBDD b = new ConnectBDD();
+                Connection con = b.getMyConnexion();
+                if (con == null) {
+                throw new SQLException("Can't get database connection");
+                 }
+                
+                PreparedStatement ps = con.prepareStatement("SELECT Id_Document, Nom_Document FROM DOCUMENT NATURAL JOIN DEPEND NATURAL JOIN META_DATA WHERE META_DATA.Nom_metadata='Type' AND Depend.Valeur="+type+" ;");    
+                ResultSet result = ps.executeQuery();
+                
+                 String res=null;
+                TreeNode new_node=null;
+                while (result.next()){
+                res=result.getString("Nom_Document");
+                new_node=new DefaultTreeNode(res, "Document", noeud_pere );         
+                }  
+                
+                
+    }
+    
+     public void addDocument2Noeud(TreeNode noeud_pere,int annee, String type) throws SQLException{
+        
+                //get database connection
+                ConnectBDD b = new ConnectBDD();
+                Connection con = b.getMyConnexion();
+                if (con == null) {
+                throw new SQLException("Can't get database connection");
+                 }
+                
+                PreparedStatement ps = con.prepareStatement("SELECT Id_Document, Nom_Document FROM DOCUMENT NATURAL JOIN DEPEND NATURAL JOIN META_DATA WHERE META_DATA.Nom_metadata='Type' AND Depend.Valeur="+type+" AND DOCUMENT.Anne="+annee+" ;");    
+                ResultSet result = ps.executeQuery();
+                
+                String res=null;
+                TreeNode new_node=null;
+                while (result.next()){
+                res=result.getString("Nom_Document");
+                new_node=new DefaultTreeNode(res, "Document", noeud_pere );         
+                } 
+     }
+    
+    
+    
 }
 					
