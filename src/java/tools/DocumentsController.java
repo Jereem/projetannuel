@@ -123,7 +123,7 @@ public class DocumentsController implements Serializable {
                 if (con == null) {
                 throw new SQLException("Can't get database connection");
                  }
-                PreparedStatement ps = con.prepareStatement("select Nom_Projet from projetannuel.Projet WHERE Projet.annee=i");
+                PreparedStatement ps = con.prepareStatement("SELECT MIN(document.ANNEE) AS annee,Id_Projet, Nom_Projet FROM projetannuel.PROJET NATURAL JOIN projetannuel.DOCUMENT  WHERE DOCUMENT.Annee="+i+" GROUP BY Id_Projet;");
         
                 ResultSet result = ps.executeQuery();
                 String nom_projet;
