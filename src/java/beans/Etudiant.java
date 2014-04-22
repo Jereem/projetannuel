@@ -131,7 +131,11 @@ public class Etudiant extends Personne implements Serializable {
             int paramPromo = this.getPromotion();
 		 
             /* Exécution d'une requête de modification de la BD (INSERT, UPDATE, DELETE, CREATE, etc.). */
-            b.getMyStatement().executeUpdate("INSERT INTO PERSONNE(Titre, Nom_Personne, Prenom_Personne) VALUES (" + paramTitre + "," + paramNom + "," + paramPrenom + "); SELECT @last:=LAST_INSERT_ID(); INSERT INTO ADHERENT (Id_Personne, Numero_SS, Date_Naissance, Promotion) VALUES (@last, " + paramNumeroSS + "," + paramdateNaissance + "," + paramPromo + "); INSERT INTO coordonnees (Id_Personne, Email, Rue ,Numero_De_Rue, Type_Voie, Ville, Code_Postal, Pays, Telephone_1, Telephone_2) VALUES (@last," + paramEmail + "," + paramNomRue + "," + paramNumRue + "," + paramTypeVoie +"," + paramVille +"," + paramCP +"," + paramPays +"," + paramTelFixe +"," + paramTelMobile +")");
+            b.getMyStatement().executeUpdate(""
+                    + "INSERT INTO PERSONNE(Titre, Nom_Personne, Prenom_Personne) VALUES (" + paramTitre + "," + paramNom + "," + paramPrenom + "); "
+                    + "SELECT @last:=LAST_INSERT_ID(); "
+                    + "INSERT INTO ADHERENT (Id_Personne, Numero_SS, Date_Naissance, Promotion) VALUES (@last, " + paramNumeroSS + "," + paramdateNaissance + "," + paramPromo + "); "
+                    + "INSERT INTO coordonnees (Id_Personne, Email, Rue ,Numero_De_Rue, Type_Voie, Ville, Code_Postal, Pays, Telephone_1, Telephone_2) VALUES (@last," + paramEmail + "," + paramNomRue + "," + paramNumRue + "," + paramTypeVoie +"," + paramVille +"," + paramCP +"," + paramPays +"," + paramTelFixe +"," + paramTelMobile +")");
             return "success";
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());

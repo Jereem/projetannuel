@@ -109,5 +109,64 @@ public class Documents implements Serializable{
 	public void setAnnee(int annee) {
 		this.annee = annee;
 	}
+        
+        /**
+	 * 
+	 * @param annee
+         * @param type
+         * @param projet
+     * @return 
+	 */
+        public Documents recupDocuments(String type,int annee,String projet){
+            Documents doc = null;
+            
+            
+            
+            
+            return doc;
+        }
 
+        /**
+	 * 
+	 * @param annee
+     * @return 
+	 */
+        public Documents recupDocuments(int annee){
+            Documents doc = null;
+            
+            
+            
+            
+            return doc;
+        }
+        
+         /**
+	 * 
+     * @param projet
+     * @return 
+	 */
+         public Documents recupDocuments(String projet){
+            Documents doc = null;
+            
+            
+            
+            
+            return doc;
+        }
+        
+          /**
+	 * 
+     * @param projet
+     * @param type
+     * @return 
+	 */
+         public Documents recupDocuments(String projet,String type){
+            Documents doc = null;
+            
+            
+            
+            
+            return doc;
+        }
+        
 }
