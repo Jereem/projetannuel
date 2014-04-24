@@ -19,9 +19,13 @@ public class Documents implements Serializable{
 	private int annee;
 
 	public Documents() {
-		throw new UnsupportedOperationException();
+		
 	}
 
+        public Documents(String nomDoc) {
+		this.nomDoc = nomDoc;
+	}
+        
 	public String getNomDoc() {
 		return this.nomDoc;
 	}

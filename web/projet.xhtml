@@ -10,7 +10,40 @@
     <ui:composition template="newTemplate.xhtml"> 
         <!-- Defini la partie nommée contenu dans le template par le bloc qui suit -->
         <ui:define name="content"> 
-            <h2>Projets</h2>           
+            <h2>Projets</h2>  
+            
+            <h:form id="documents">
+                <p:dialog id="dialog"  header="Documents du projet" 
+                          widgetVar="dlgclt" resizable="false"  
+                          modal="true"
+                          showEffect="bounce"
+                          hideEffect="explode">
+                    <p:ring id="basic" value="#{ringDoc.doc}" var="player">
+                        <p:outputPanel style="text-align:center;" layout="block">
+                                        #{Documents.nomDoc}
+                            <p:commandButton update=":form:detail" title="View" oncomplete="PF('dlg').show()">
+                                <f:setPropertyActionListener value="#{Documents}" target="#{ringDoc.selectedDoc}" />
+                            </p:commandButton>
+                        </p:outputPanel>
+                    </p:ring>
+                </p:dialog>
+            </h:form>
+            <h:form id="project">
+                <p:dialog id="dialog"  header="Projet" 
+                          widgetVar="dlgclt" resizable="false"  
+                          modal="true"
+                          showEffect="bounce"
+                          hideEffect="explode">
+                    <p:ring id="basic" value="#{ringDoc.doc}" var="player">
+                        <p:outputPanel style="text-align:center;" layout="block">
+                                        #{Documents.nomDoc}
+                            <p:commandButton update=":form:detail" title="View" oncomplete="PF('dlg').show()">
+                                <f:setPropertyActionListener value="#{Documents}" target="#{ringDoc.selectedDoc}" />
+                            </p:commandButton>
+                        </p:outputPanel>
+                    </p:ring>
+                </p:dialog>
+            </h:form>
             
 <p:tabView id="tabView">  
     <p:tab id="tab00" title="Liste des projets en cours">  
@@ -40,10 +73,28 @@
                             <p:column sortBy="nomComm" headerText="Nom du commercial">  
                                 <h:outputText value="#{projet.commercial.nom}" />  
                             </p:column> 
+
+                            <p:column headerText=" " >
+                                <p:commandLink process="@this" oncomplete="dlgclt.show()" update=":documents" >
+                                               <img src="Documents.png" width="18px" height="18px" />
+                            <f:setPropertyActionListener target="#{updateClient.selectedDoc}"  value="#{clt}"/> 
+                                </p:commandLink>
+                                <p:commandLink process="@this" oncomplete="dlgclt.show()" update=":project" >
+                                               <img src="magnify.png" width="16px" height="16px" />
+                            <f:setPropertyActionListener target="#{updateClient.selectedDoc}"  value="#{clt}"/> 
+                                </p:commandLink>
+                            </p:column>
+                            
                         </p:dataTable>
                     </h:form>
         </h:panelGrid>  
+                            
+    <p:dialog id="dialog" header="Dynamic Dialog" widgetVar="dlg" dynamic="true">
+        <h:outputText value="This content is loaded lazy." />
+    </p:dialog> 
     </p:tab>  
+    
+    
 
 //-------------------------------------------------------------------------------------------------
     <p:tab id="tab01" title="Liste des projets terminés">  
