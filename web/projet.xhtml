@@ -11,14 +11,15 @@
         <!-- Defini la partie nommée contenu dans le template par le bloc qui suit -->
         <ui:define name="content"> 
             <h2>Projets</h2>  
-            
-            <h:form id="documents">
+            <h:form id="form">
+</h:form>
+            <h:form id="upDocuments">
                 <p:dialog id="dialog"  header="Documents du projet" 
-                          widgetVar="dlgclt" resizable="false"  
+                          widgetVar="dlgclt3" resizable="false"  
                           modal="true"
                           showEffect="bounce"
                           hideEffect="explode">
-                    <p:ring id="basic" value="#{ringDoc.doc}" var="player">
+                    <p:ring id="basic" value="#{projet.documents}" var="doc">
                         <p:outputPanel style="text-align:center;" layout="block">
                                         #{Documents.nomDoc}
                             <p:commandButton update=":form:detail" title="View" oncomplete="PF('dlg').show()">
@@ -28,9 +29,25 @@
                     </p:ring>
                 </p:dialog>
             </h:form>
+            <h:form id="downDocuments">
+                <p:dialog id="dialog"  header="Documents du projet" 
+                          widgetVar="dlgclt2" resizable="false"  
+                          modal="true"
+                          showEffect="bounce"
+                          hideEffect="explode">
+                    <p:ring id="dlDoc" value="#{projet.documents}" var="doc">
+                        <p:outputPanel style="text-align:center;" layout="block">
+                                        #{Documents.nomDoc}
+                            <p:commandButton update=":form:detail" icon="bigdownload.png" title="View" oncomplete="PF('dlg').show()">
+                                <f:setPropertyActionListener value="#{Documents}" target="#{ringDoc.selectedDoc}" />
+                            </p:commandButton>
+                        </p:outputPanel>
+                    </p:ring>
+                </p:dialog>
+            </h:form>
             <h:form id="project">
                 <p:dialog id="dialog"  header="Projet" 
-                          widgetVar="dlgclt" resizable="false"  
+                          widgetVar="dlgclt1" resizable="false"  
                           modal="true"
                           showEffect="bounce"
                           hideEffect="explode">
@@ -75,12 +92,16 @@
                             </p:column> 
 
                             <p:column headerText=" " >
-                                <p:commandLink process="@this" oncomplete="dlgclt.show()" update=":documents" >
-                                               <img src="Documents.png" width="18px" height="18px" />
+                                <p:commandLink process="@this" oncomplete="dlgclt1.show()" update=":project" >
+                                               <img src="fiche.png" width="24px" height="24px" />
                             <f:setPropertyActionListener target="#{updateClient.selectedDoc}"  value="#{clt}"/> 
                                 </p:commandLink>
-                                <p:commandLink process="@this" oncomplete="dlgclt.show()" update=":project" >
-                                               <img src="magnify.png" width="16px" height="16px" />
+                                <p:commandLink process="@this" oncomplete="dlgclt2.show()" update=":downDocuments" >
+                                               <img src="download.png" width="24px" height="24px" />
+                            <f:setPropertyActionListener target="#{updateClient.selectedDoc}"  value="#{clt}"/> 
+                                </p:commandLink>
+                                <p:commandLink process="@this" oncomplete="dlgclt3.show()" update=":upDocuments" >
+                                               <img src="upload.png" width="24px" height="24px" />
                             <f:setPropertyActionListener target="#{updateClient.selectedDoc}"  value="#{clt}"/> 
                                 </p:commandLink>
                             </p:column>

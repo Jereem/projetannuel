@@ -16,6 +16,7 @@ public class Documents implements Serializable{
 	private ArrayList<MetaData> listMetaData;
 	private String emplacement;
 	private BureauProGphy auteur;
+        private Projet projet;
 	private int annee;
 
 	public Documents() {
@@ -25,6 +26,14 @@ public class Documents implements Serializable{
         public Documents(String nomDoc) {
 		this.nomDoc = nomDoc;
 	}
+
+    public Projet getProjet() {
+        return projet;
+    }
+
+    public void setProjet(Projet projet) {
+        this.projet = projet;
+    }
         
 	public String getNomDoc() {
 		return this.nomDoc;

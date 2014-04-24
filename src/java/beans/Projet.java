@@ -27,6 +27,7 @@ public class Projet implements Serializable{
 
 	public Projet() {
 		this.nomProjet = "New project";
+                this.documents = new ArrayList<>();
 	}
 
     public BureauProGphy getChefDeProjet() {
@@ -114,7 +115,7 @@ public class Projet implements Serializable{
 	 * @param document
 	 */
 	public void addDocument(Documents document) {
-		throw new UnsupportedOperationException();
+            this.documents.add(document);
 	}
 
 	/**
@@ -122,7 +123,6 @@ public class Projet implements Serializable{
 	 * @param document
 	 */
 	public void delDocument(Documents document) {
-		throw new UnsupportedOperationException();
 	}
 
         // Methodes pour la BDD
@@ -190,9 +190,21 @@ public class Projet implements Serializable{
             projet.setChefDeProjet(chefProjet);
             BureauProGphy commercial = new BureauProGphy();
             Statement statement2 = con.createStatement();
-            ResultSet resultat3 = statement.executeQuery( "select Nom_Personne from Projet natural join supervise natural join adherent natural join personne natural join membre_bureau natural join est_elu where Id_Projet = "+idproj+" and poste = 'Commercial' and Actif = 1;" );
+            ResultSet resultat3 = statement2.executeQuery( "select Nom_Personne from Projet natural join supervise natural join adherent natural join personne natural join membre_bureau natural join est_elu where Id_Projet = "+idproj+" and poste = 'Commercial' and Actif = 1;" );
             while ( resultat3.next() ) {
                 commercial.setNom(resultat3.getString( "Nom_Personne" ));
+                /* Traiter ici les valeurs récupérées. */
+            }
+            Statement statement3 = con.createStatement();
+            ResultSet resultat4 = statement3.executeQuery( "select Nom_Document, Extension, Annee, Emplacement, Id_Projet from document where Id_Projet = "+idproj+";" );
+            while ( resultat4.next() ) {
+                Documents doc = new Documents();
+                doc.setNomDoc(resultat4.getString("Nom_Document"));
+                doc.setTypeDoc(resultat4.getString("Extension"));
+                doc.setEmplacement(resultat4.getString("Emplacement"));
+                doc.setProjet(this);
+                doc.setAnnee(resultat4.getInt("Annee"));
+                projet.addDocument(doc);
                 /* Traiter ici les valeurs récupérées. */
             }
             projet.setCommercial(commercial);
