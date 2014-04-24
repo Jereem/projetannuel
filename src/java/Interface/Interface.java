@@ -9,5 +9,5 @@ package Interface;
  * @author Teddy Delavallee
  */
 public class Interface {
-    
+     
 }
