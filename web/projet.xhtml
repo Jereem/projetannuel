@@ -35,11 +35,10 @@
                           modal="true"
                           showEffect="bounce"
                           hideEffect="explode">
-                    <p:ring id="dlDoc" value="#{projet.documents}" var="doc">
+                    <p:ring id="essai" value="#{projet.documents}" var="documents">
                         <p:outputPanel style="text-align:center;" layout="block">
-                                        #{Documents.nomDoc}
-                            <p:commandButton update=":form:detail" icon="bigdownload.png" title="View" oncomplete="PF('dlg').show()">
-                                <f:setPropertyActionListener value="#{Documents}" target="#{ringDoc.selectedDoc}" />
+                                        #{documents.nomDoc}
+                            <p:commandButton icon="ui-icon-disk" title="Télécharger">
                             </p:commandButton>
                         </p:outputPanel>
                     </p:ring>
@@ -93,16 +92,16 @@
 
                             <p:column headerText=" " >
                                 <p:commandLink process="@this" oncomplete="dlgclt1.show()" update=":project" >
-                                               <img src="fiche.png" width="24px" height="24px" />
-                            <f:setPropertyActionListener target="#{updateClient.selectedDoc}"  value="#{clt}"/> 
+                                    <img src="fiche.png" width="24px" height="24px" />
+                                    <f:setPropertyActionListener target="#{updateClient.selectedDoc}"  value="#{clt}"/> 
                                 </p:commandLink>
                                 <p:commandLink process="@this" oncomplete="dlgclt2.show()" update=":downDocuments" >
-                                               <img src="download.png" width="24px" height="24px" />
-                            <f:setPropertyActionListener target="#{updateClient.selectedDoc}"  value="#{clt}"/> 
+                                    <img src="download.png" width="24px" height="24px" />
+                                    <f:setPropertyActionListener target="#{projet.documents}"  value="#{projet.documents}"/> 
                                 </p:commandLink>
                                 <p:commandLink process="@this" oncomplete="dlgclt3.show()" update=":upDocuments" >
-                                               <img src="upload.png" width="24px" height="24px" />
-                            <f:setPropertyActionListener target="#{updateClient.selectedDoc}"  value="#{clt}"/> 
+                                    <img src="upload.png" width="24px" height="24px" />
+                                    <f:setPropertyActionListener target="#{updateClient.selectedDoc}"  value="#{clt}"/> 
                                 </p:commandLink>
                             </p:column>
                             
