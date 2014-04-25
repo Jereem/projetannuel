@@ -11,6 +11,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import org.primefaces.event.SelectEvent;
 import tools.ConnectBDD;
 
 @ManagedBean
@@ -30,6 +31,7 @@ public class Projet implements Serializable{
                 this.documents = new ArrayList<>();
 	}
 
+        
     public BureauProGphy getChefDeProjet() {
         return chefDeProjet;
     }
@@ -124,6 +126,10 @@ public class Projet implements Serializable{
 	 */
 	public void delDocument(Documents document) {
 	}
+        
+        public void onProjectChosen(SelectEvent event) {
+            Projet projet = (Projet) event.getObject();
+        }
 
         // Methodes pour la BDD
     public String saveProjet() throws SQLException {

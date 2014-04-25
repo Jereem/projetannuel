@@ -10,32 +10,33 @@
     <ui:composition template="newTemplate.xhtml"> 
         <!-- Defini la partie nommée contenu dans le template par le bloc qui suit -->
         <ui:define name="content"> 
-            <h2>Projets</h2>  
-            <h:form id="form">
-</h:form>
+            <h2>Projets</h2>
+
             <h:form id="upDocuments">
                 <p:dialog id="dialog"  header="Documents du projet" 
                           widgetVar="dlgclt3" resizable="false"  
                           modal="true"
                           showEffect="bounce"
                           hideEffect="explode">
-                    <p:ring id="basic" value="#{projet.documents}" var="doc">
-                        <p:outputPanel style="text-align:center;" layout="block">
-                                        #{Documents.nomDoc}
-                            <p:commandButton update=":form:detail" title="View" oncomplete="PF('dlg').show()">
-                                <f:setPropertyActionListener value="#{Documents}" target="#{ringDoc.selectedDoc}" />
-                            </p:commandButton>
-                        </p:outputPanel>
-                    </p:ring>
+
                 </p:dialog>
             </h:form>
             <h:form id="downDocuments">
-                <p:dialog id="dialog"  header="Documents du projet" 
+                <p:dialog id="dialog"  header="Documents du projet #{ProjetDialog.selectedProjet.nomProjet}" width="1000px"
                           widgetVar="dlgclt2" resizable="false"  
                           modal="true"
                           showEffect="bounce"
                           hideEffect="explode">
-                    <p:ring id="essai" value="#{projet.documents}" var="documents">
+                    <p:dataTable id="tableProjetEnCours3" var="documents" value="#{ProjetDialog.selectedProjet.getDocuments()}" sortMode="multiple" rows="5" paginator="true">  
+                        <f:facet name="header">  
+                            Documents  
+                        </f:facet>  
+
+                        <p:column sortBy="nomProjet" headerText="Documents">  
+                            <h:outputText value="#{documents.nomDoc}" />  
+                        </p:column>
+                    </p:dataTable>
+                    <p:ring id="basic" value="#{projet.getDocuments()}" var="documents">
                         <p:outputPanel style="text-align:center;" layout="block">
                                         #{documents.nomDoc}
                             <p:commandButton icon="ui-icon-disk" title="Télécharger">
@@ -50,17 +51,9 @@
                           modal="true"
                           showEffect="bounce"
                           hideEffect="explode">
-                    <p:ring id="basic" value="#{ringDoc.doc}" var="player">
-                        <p:outputPanel style="text-align:center;" layout="block">
-                                        #{Documents.nomDoc}
-                            <p:commandButton update=":form:detail" title="View" oncomplete="PF('dlg').show()">
-                                <f:setPropertyActionListener value="#{Documents}" target="#{ringDoc.selectedDoc}" />
-                            </p:commandButton>
-                        </p:outputPanel>
-                    </p:ring>
+
                 </p:dialog>
             </h:form>
-            
 <p:tabView id="tabView">  
     <p:tab id="tab00" title="Liste des projets en cours">  
         <h:panelGrid columns="2" cellpadding="10">
@@ -97,7 +90,7 @@
                                 </p:commandLink>
                                 <p:commandLink process="@this" oncomplete="dlgclt2.show()" update=":downDocuments" >
                                     <img src="download.png" width="24px" height="24px" />
-                                    <f:setPropertyActionListener target="#{projet.documents}"  value="#{projet.documents}"/> 
+                                    <f:setPropertyActionListener target="#{projetDialog.selectedProjet}"  value="#{projet}"/> 
                                 </p:commandLink>
                                 <p:commandLink process="@this" oncomplete="dlgclt3.show()" update=":upDocuments" >
                                     <img src="upload.png" width="24px" height="24px" />
