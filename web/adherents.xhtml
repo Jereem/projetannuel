@@ -14,27 +14,30 @@
             <p:tabView id="tabView">  
   
                     <p:tab id="tab1" title="Liste des adhérents">  
-        <h:panelGrid columns="2" cellpadding="10">  
+        <h:panelGrid columns="2" cellpadding="10">                      
                     
-                    <h:form>  
-                        <p:dataTable id="tableAdherent" var="etudiant" value="#{etudiant.getAdherent()}" sortMode="multiple" rows="5" paginator="true">  
-                            <f:facet name="header">  
-                                Adhérents  
-                            </f:facet>  
+            <h:form>  
 
-                            <p:column sortBy="nom" headerText="Nom">  
-                                <h:outputText value="#{etudiant.nom}" />  
-                            </p:column>  
+                <p:dataTable id="tableAdherent" var="etudiant" value="#{etudiant.getAdherent()}" sortMode="multiple" rows="10" paginator="true">  
+                    <f:facet name="header">                         
+                        ADHERENTS  
+                    </f:facet>  
 
-                            <p:column sortBy="prenom" headerText="Prenom">  
-                                <h:outputText value="#{etudiant.prenom}" />  
-                            </p:column>  
+                    <p:column sortBy="nom" headerText="Nom">  
+                        <h:outputText value="#{etudiant.nom}" />  
+                    </p:column>  
 
-                            <p:column sortBy="promo" headerText="Promo">  
-                                <h:outputText value="#{etudiant.promotion}" />  
-                            </p:column>  
-                        </p:dataTable>
-                    </h:form>
+                    <p:column sortBy="prenom" headerText="Prenom">  
+                        <h:outputText value="#{etudiant.prenom}" />  
+                    </p:column>  
+
+                    <p:column sortBy="promo" headerText="Promo">  
+                        <h:outputText value="#{etudiant.promotion}" />  
+                    </p:column>  
+
+                </p:dataTable>
+
+            </h:form>
 					
         </h:panelGrid>  
     </p:tab>  
@@ -42,27 +45,31 @@
 //-------------------------------------------------------------------------------------------------
                 
 	<p:tab id="tab2" title="Liste des anciens adhérents">  
-        <h:panelGrid columns="2" cellpadding="10">  
-                    
-					<h:form>  
-                        <p:dataTable id="tableOldAdherent" var="etudiant" value="#{etudiant.getOldAdherent()}" sortMode="multiple" rows="5" paginator="true">  
-                            <f:facet name="header">  
-                                Adhérents  
-                            </f:facet>  
+        <h:panelGrid columns="2" cellpadding="10">                  
+					
+            <h:form>  
 
-                            <p:column sortBy="nom" headerText="Nom">  
-                                <h:outputText value="#{etudiant.nom}" />  
-                            </p:column>  
+                <p:dataTable id="tableOldAdherent" var="etudiant" value="#{etudiant.getOldAdherent()}" sortMode="multiple" rows="10" paginator="true">  
 
-                            <p:column sortBy="prenom" headerText="Prenom">  
-                                <h:outputText value="#{etudiant.prenom}" />  
-                            </p:column>  
+                    <f:facet name="header">                                  
+                        ANCIENS ADHERENTS                              
+                    </f:facet>  
 
-                            <p:column sortBy="promo" headerText="Promo">  
-                                <h:outputText value="#{etudiant.promotion}" />  
-                            </p:column>  
-                        </p:dataTable>
-                    </h:form>
+                    <p:column sortBy="nom" headerText="Nom">  
+                        <h:outputText value="#{etudiant.nom}" />  
+                    </p:column>  
+
+                    <p:column sortBy="prenom" headerText="Prenom">  
+                        <h:outputText value="#{etudiant.prenom}" />  
+                    </p:column>  
+
+                    <p:column sortBy="promo" headerText="Promo">  
+                        <h:outputText value="#{etudiant.promotion}" />  
+                    </p:column>  
+
+                </p:dataTable>
+
+            </h:form>
 					
         </h:panelGrid>  
     </p:tab>  

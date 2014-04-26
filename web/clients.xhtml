@@ -18,22 +18,18 @@
         <h:panelGrid columns="2" cellpadding="10">
 		
             <h:form>  
-                <p:dataTable id="tableAdherent" var="etudiant" value="#{etudiant.getAdherent()}" sortMode="multiple" rows="5" paginator="true">  
+                <p:dataTable id="tableClient" var="client" value="#{etudiant.getAdherent()}" sortMode="multiple" rows="10" paginator="true">  
                     <f:facet name="header">  
-                        Adhérents  
+                        CLIENTS  
                     </f:facet>  
 
                 <p:column sortBy="nom" headerText="Nom">  
-                    <h:outputText value="#{etudiant.nom}" />  
+                    <h:outputText value="#{client.nom}" />  
                 </p:column>  
 
                 <p:column sortBy="prenom" headerText="Prenom">  
-                    <h:outputText value="#{etudiant.prenom}" />  
-                </p:column>  
-
-                <p:column sortBy="promo" headerText="Promo">  
-                    <h:outputText value="#{etudiant.promotion}" />  
-                </p:column>  
+                    <h:outputText value="#{client.prenom}" />  
+                </p:column>   
 
                 </p:dataTable>
             </h:form>
@@ -47,22 +43,18 @@
         <h:panelGrid columns="2" cellpadding="10">  
 		
              <h:form>  
-                <p:dataTable id="tableOldAdherent" var="etudiant" value="#{etudiant.getOldAdherent()}" sortMode="multiple" rows="5" paginator="true">  
+                <p:dataTable id="tableClient" var="client" value="#{etudiant.getOldAdherent()}" sortMode="multiple" rows="10" paginator="true">  
                     <f:facet name="header">  
-                        Anciens Adhérents  
+                        ANCIENS CLIENTS 
                     </f:facet>  
 
                 <p:column sortBy="nom" headerText="Nom">  
-                    <h:outputText value="#{etudiant.nom}" />  
+                    <h:outputText value="#{client.nom}" />  
                 </p:column>  
 
                 <p:column sortBy="prenom" headerText="Prenom">  
-                    <h:outputText value="#{etudiant.prenom}" />  
-				</p:column>  
-
-                <p:column sortBy="promo" headerText="Promo">  
-                    <h:outputText value="#{etudiant.promotion}" />  
-                </p:column>  
+                    <h:outputText value="#{client.prenom}" />  		
+                </p:column>   
 							
                 </p:dataTable>
             </h:form>
@@ -77,37 +69,45 @@
                         
             <h:form>  
                             
-                <p:panel header="Nouvel adhérent">                                  
+                <p:panel header="Nouveau client">                                  
                     <h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5"> 
 
                         <h:outputText value="Titre: *" />  
-                        <p:selectOneMenu value="#{beans.Etudiant.titres}">  
-                            <f:selectItems value="#{etudiant.titres}" var="titres" itemValue="#{titres.getNomTitre()}" /> 
+                        <p:selectOneMenu value="#{beans.Client.titres}">  
+                            <f:selectItems value="#{client.titres}" var="titres" itemValue="#{titres.getNomTitre()}" /> 
                         </p:selectOneMenu>
                         <p></p>
                                
                         <h:outputText value="Nom : *" />  
-                        <h:inputText id="nom" value="#{etudiant.nom}" >
+                        <h:inputText id="nom" value="#{client.nom}" >
                             <f:ajax event="blur" render="nomMessage" />
                         </h:inputText>
                         <h:message id="nomMessage" for="nom" errorClass="erreur" />
 
                         <h:outputText value="Prénom : *" />  
-                        <h:inputText id="prenom" value="#{etudiant.prenom}" >
+                        <h:inputText id="prenom" value="#{client.prenom}" >
                             <f:ajax event="blur" render="prenomMessage" />
                         </h:inputText>
                         <h:message id="prenomMessage" for="prenom" errorClass="erreur" />
 
-                        <h:outputText value="Numéro de sécurité sociale : *" />  
-                        <h:inputText id="numSS" value="#{etudiant.numeroSS}" >
-                            <f:ajax event="blur" render="numSSMessage" />
+                        <h:outputText value="Nom de la société : *" />  
+                        <h:inputText id="nomSociete" value="#{client.nom}" >
+                            <f:ajax event="blur" render="nomSocieteMessage" />
                         </h:inputText>
-                        <h:message id="numSSMessage" for="numSS" errorClass="erreur" />                                    
+                        <h:message id="nomSocieteMessage" for="nomSociete" errorClass="erreur" />
+                        
+                        <h:outputText value="Numéro de Siret : *" />  
+                        <h:inputText id="numSiret" value="#{client.numeroSS}" >
+                            <f:ajax event="blur" render="numSiretMessage" />
+                        </h:inputText>
+                        <h:message id="numSiretMessage" for="numSiret" errorClass="erreur" />                                    
 
-                        <h:outputText value="Date de naissance (jj/mm/aa): *" />
-                        <p:calendar value="#{etudiant.dateNaissance}" id="popupButtonCal" showOn="button" />
-                        <p></p>
-
+                        <h:outputText value="Poste : *" />  
+                        <h:inputText id="nomPoste" value="#{client.nom}" >
+                            <f:ajax event="blur" render="nomPosteMessage" />
+                        </h:inputText>
+                        <h:message id="nomPosteMessage" for="nomPoste" errorClass="erreur" />
+                        
                     </h:panelGrid>  
                 </p:panel>  
                            
@@ -169,22 +169,10 @@
                         <h:message id="telPortableMessage" for="telPortable" errorClass="erreur" />                                    
 
                     </h:panelGrid>
-                </p:panel> 
-                           
-                <p:panel header="Scolarité">                           
-                    <h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
-
-                        <h:outputText value="Année de promotion : *" />  
-                        <h:inputText id="promotion" value="#{etudiant.promotion}" >
-                            <f:ajax event="blur" render="promotionMessage" />
-                        </h:inputText>
-                        <h:message id="promotionMessage" for="promotion" errorClass="erreur" />
-
-                    </h:panelGrid>
-                </p:panel> 
+                </p:panel>
 
                 <!-- Envoie le formulaire -->
-                <p:commandButton value="Enregistrer" action="#{etudiant.saveNewAdherent}"/>  
+                <p:commandButton value="Enregistrer" action="#{client.saveNewAdherent}"/>  
 
             </h:form>  
 
