@@ -10,50 +10,9 @@
     <ui:composition template="newTemplate.xhtml"> 
         <!-- Defini la partie nommée contenu dans le template par le bloc qui suit -->
         <ui:define name="content"> 
+            <h:form id="form"> 
             <h2>Projets</h2>
-
-            <h:form id="upDocuments">
-                <p:dialog id="dialog"  header="Documents du projet" 
-                          widgetVar="dlgclt3" resizable="false"  
-                          modal="true"
-                          showEffect="bounce"
-                          hideEffect="explode">
-
-                </p:dialog>
-            </h:form>
-            <h:form id="downDocuments">
-                <p:dialog id="dialog"  header="Documents du projet #{ProjetDialog.selectedProjet.nomProjet}" width="1000px"
-                          widgetVar="dlgclt2" resizable="false"  
-                          modal="true"
-                          showEffect="bounce"
-                          hideEffect="explode">
-                    <p:dataTable id="tableProjetEnCours3" var="documents" value="#{ProjetDialog.selectedProjet.getDocuments()}" sortMode="multiple" rows="5" paginator="true">  
-                        <f:facet name="header">  
-                            Documents  
-                        </f:facet>  
-
-                        <p:column sortBy="nomProjet" headerText="Documents">  
-                            <h:outputText value="#{documents.nomDoc}" />  
-                        </p:column>
-                    </p:dataTable>
-                    <p:ring id="basic" value="#{projet.getDocuments()}" var="documents">
-                        <p:outputPanel style="text-align:center;" layout="block">
-                                        #{documents.nomDoc}
-                            <p:commandButton icon="ui-icon-disk" title="Télécharger">
-                            </p:commandButton>
-                        </p:outputPanel>
-                    </p:ring>
-                </p:dialog>
-            </h:form>
-            <h:form id="project">
-                <p:dialog id="dialog"  header="Projet" 
-                          widgetVar="dlgclt1" resizable="false"  
-                          modal="true"
-                          showEffect="bounce"
-                          hideEffect="explode">
-
-                </p:dialog>
-            </h:form>
+            
 <p:tabView id="tabView">  
     <p:tab id="tab00" title="Liste des projets en cours">  
         <h:panelGrid columns="2" cellpadding="10">
@@ -84,29 +43,63 @@
                             </p:column> 
 
                             <p:column headerText=" " >
-                                <p:commandLink process="@this" oncomplete="dlgclt1.show()" update=":project" >
+                                <p:commandLink process="@this" oncomplete="dlgclt1.show()" update=":form" >
                                     <img src="fiche.png" width="24px" height="24px" />
                                     <f:setPropertyActionListener target="#{updateClient.selectedDoc}"  value="#{clt}"/> 
                                 </p:commandLink>
-                                <p:commandLink process="@this" oncomplete="dlgclt2.show()" update=":downDocuments" >
+                                <p:commandLink process="@this" oncomplete="down.show()" update=":form" >
                                     <img src="download.png" width="24px" height="24px" />
                                     <f:setPropertyActionListener target="#{projetDialog.selectedProjet}"  value="#{projet}"/> 
                                 </p:commandLink>
-                                <p:commandLink process="@this" oncomplete="dlgclt3.show()" update=":upDocuments" >
+                                <p:commandLink process="@this" oncomplete="dlgclt3.show()" update=":form" >
                                     <img src="upload.png" width="24px" height="24px" />
                                     <f:setPropertyActionListener target="#{updateClient.selectedDoc}"  value="#{clt}"/> 
                                 </p:commandLink>
                             </p:column>
                             
                         </p:dataTable>
+                        
+                        <p:dialog id="dialog"  header="Documents du projet #{ProjetDialog.selectedProjet.nomProjet}" width="1000px"
+                                  widgetVar="down" resizable="false"  
+                                  modal="true"
+                                  showEffect="bounce"
+                                  hideEffect="explode">
+                            <p:dataTable id="tableProjetEnCours3" var="documents" value="#{ProjetDialog.selectedProjet.getDocuments()}" sortMode="multiple" rows="5" paginator="true">  
+                                <f:facet name="header">  
+                                    Documents  
+                                </f:facet>  
+                                <p:column sortBy="nomProjet" headerText="Documents">  
+                                    <h:outputText value="#{documents.nomDoc}" />  
+                                </p:column>
+                            </p:dataTable>
+                            <p:ring id="basic" value="#{projet.getDocuments()}" var="documents">
+                                <p:outputPanel style="text-align:center;" layout="block">
+                                        #{documents.nomDoc}
+                                    <p:commandButton icon="ui-icon-disk" title="Télécharger">
+                                    </p:commandButton>
+                                </p:outputPanel>
+                            </p:ring>
+                        </p:dialog>
+
+                        <p:dialog id="dialog0"  header="Documents du projet" 
+                                  widgetVar="dlgclt3" resizable="false"  
+                                  modal="true"
+                                  showEffect="bounce"
+                                  hideEffect="explode">
+
+                        </p:dialog>
+
+                        <p:dialog id="dialog2"  header="Projet" 
+                                  widgetVar="dlgclt1" resizable="false"  
+                                  modal="true"
+                                  showEffect="bounce"
+                                  hideEffect="explode">
+
+                        </p:dialog>
                     </h:form>
         </h:panelGrid>  
-                            
-    <p:dialog id="dialog" header="Dynamic Dialog" widgetVar="dlg" dynamic="true">
-        <h:outputText value="This content is loaded lazy." />
-    </p:dialog> 
     </p:tab>  
-    
+                
     
 
 //-------------------------------------------------------------------------------------------------
@@ -142,7 +135,7 @@
     </p:tab>  
    
 </p:tabView>  
-
+</h:form>
             <!-- Fin du bloc "contenu" -->
         </ui:define> 
         <!-- Fin du template "layout" -->
