@@ -10,16 +10,15 @@ package Interface;
  *
  * @author Teddy Delavallee
  */
-import beans.Documents;
 import beans.Projet;
 import java.io.Serializable;
-import java.util.List;
  
 public class ProjetDialog implements Serializable {
  
     private Projet selectedProjet;
  
     public ProjetDialog() {
+        selectedProjet = new Projet();
     }
 
     public Projet getSelectedProjet() {

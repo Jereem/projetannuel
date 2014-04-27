@@ -43,13 +43,17 @@
                             </p:column> 
 
                             <p:column headerText=" " >
-                                <p:commandLink process="@this" oncomplete="dlgclt1.show()" update=":form" >
+                                <p:commandLink 
+                                    process="@this"
+                                    partialSubmit="true"
+                                    oncomplete="dlgclt1.show()" 
+                                    update=":form" >
                                     <img src="fiche.png" width="24px" height="24px" />
                                     <f:setPropertyActionListener target="#{updateClient.selectedDoc}"  value="#{clt}"/> 
                                 </p:commandLink>
                                 <p:commandLink process="@this" oncomplete="down.show()" update=":form" >
                                     <img src="download.png" width="24px" height="24px" />
-                                    <f:setPropertyActionListener target="#{projetDialog.selectedProjet}"  value="#{projet}"/> 
+                                    <f:setPropertyActionListener value="#{projet}" target="#{projetDialog.selectedProjet}"/> 
                                 </p:commandLink>
                                 <p:commandLink process="@this" oncomplete="dlgclt3.show()" update=":form" >
                                     <img src="upload.png" width="24px" height="24px" />
@@ -86,7 +90,6 @@
                                   modal="true"
                                   showEffect="bounce"
                                   hideEffect="explode">
-
                         </p:dialog>
 
                         <p:dialog id="dialog2"  header="Projet" 
@@ -94,7 +97,6 @@
                                   modal="true"
                                   showEffect="bounce"
                                   hideEffect="explode">
-
                         </p:dialog>
                     </h:form>
         </h:panelGrid>  
