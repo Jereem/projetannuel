@@ -19,22 +19,23 @@
 		
             <h:form>  
 
-                <p:dataTable id="dataTable" var="bureauProGphy" value="#{bureauProGphy.getBureauProGphy(true)}" sortMode="multiple" rows="5" paginator="true">  
-                <f:facet name="header">  
-                    Membres du bureau 
-                </f:facet>  
+                <p:dataTable id="dataTable" var="bureauProGphy" value="#{bureauProGphy.getBureauProGphy(true)}" sortMode="multiple" rows="10" paginator="true">  
 
-                <p:column sortBy="pseudo" headerText="Pseudo">  
-                    <h:outputText value="#{bureauProGphy.identifiant}" />  
-                </p:column>  
+                    <f:facet name="header">  
+                        MEMBRES DU BUREAU
+                    </f:facet>  
 
-                <p:column sortBy="mdp" headerText="Mdp">  
-                    <h:outputText value="#{bureauProGphy.mdp}" />  
-                </p:column>  
+                    <p:column sortBy="pseudo" headerText="Pseudo">  
+                        <h:outputText value="#{bureauProGphy.identifiant}" />  
+                    </p:column>  
 
-                <p:column sortBy="actif" headerText="Actif">  
-                    <h:outputText value="#{bureauProGphy.bool2String()}" />  
-                </p:column>  
+                    <p:column sortBy="mdp" headerText="Mdp">  
+                        <h:outputText value="#{bureauProGphy.mdp}" />  
+                    </p:column>  
+
+                    <p:column sortBy="actif" headerText="Actif">  
+                        <h:outputText value="#{bureauProGphy.bool2String()}" />  
+                    </p:column>  
 
                 </p:dataTable>
 				
@@ -50,22 +51,23 @@
 		
             <h:form>  
 
-                <p:dataTable id="dataTable" var="bureauProGphy" value="#{bureauProGphy.getBureauProGphy(false)}" sortMode="multiple" rows="5" paginator="true">  
-                <f:facet name="header">  
-                    Anciens membres du bureau 
-                </f:facet>  
+                <p:dataTable id="dataTable" var="bureauProGphy" value="#{bureauProGphy.getBureauProGphy(false)}" sortMode="multiple" rows="10" paginator="true" >  
 
-                <p:column sortBy="pseudo" headerText="Pseudo">  
-                    <h:outputText value="#{bureauProGphy.identifiant}" />  
-                </p:column>  
+                    <f:facet name="header">  
+                        ANCIENS MEMBRES DU BUREAU 
+                    </f:facet>  
 
-                <p:column sortBy="mdp" headerText="Mdp">  
-                    <h:outputText value="#{bureauProGphy.mdp}" />  
-                </p:column>  
+                    <p:column sortBy="pseudo" headerText="Pseudo">  
+                        <h:outputText value="#{bureauProGphy.identifiant}" />  
+                    </p:column>  
 
-                <p:column sortBy="actif" headerText="Actif">  
-                    <h:outputText value="#{bureauProGphy.bool2String()}" />  
-                </p:column>  
+                    <p:column sortBy="mdp" headerText="Mdp">  
+                        <h:outputText value="#{bureauProGphy.mdp}" />  
+                    </p:column>  
+
+                    <p:column sortBy="actif" headerText="Actif">  
+                        <h:outputText value="#{bureauProGphy.bool2String()}" />  
+                    </p:column>  
 
                 </p:dataTable>
 				
@@ -82,7 +84,7 @@
                         
             <h:form>  
                             
-                <p:panel header="Nouvel adhérent">  
+                <p:panel header="Nouveau membre">  
                     <h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5"> 
                                     
                         <h:outputText value="Titre: *" />                                      
