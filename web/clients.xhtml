@@ -30,7 +30,7 @@
                 <p:column sortBy="prenom" headerText="Prenom">  
                     <h:outputText value="#{client.prenom}" />  
                 </p:column>   
-
+                    
                 </p:dataTable>
             </h:form>
 					
@@ -43,7 +43,7 @@
         <h:panelGrid columns="2" cellpadding="10">  
 		
              <h:form>  
-                <p:dataTable id="tableClient" var="client" value="#{etudiant.getOldAdherent()}" sortMode="multiple" rows="10" paginator="true">  
+                <p:dataTable id="tableClient" var="client" value="#{client.getOldClient()}" sortMode="multiple" rows="10" paginator="true">  
                     <f:facet name="header">  
                         ANCIENS CLIENTS 
                     </f:facet>  
@@ -97,7 +97,7 @@
                         <h:message id="nomSocieteMessage" for="nomSociete" errorClass="erreur" />
                         
                         <h:outputText value="Numéro de Siret : *" />  
-                        <h:inputText id="numSiret" value="#{client.numeroSS}" >
+                        <h:inputText id="numSiret" value="#{client.siren}" >
                             <f:ajax event="blur" render="numSiretMessage" />
                         </h:inputText>
                         <h:message id="numSiretMessage" for="numSiret" errorClass="erreur" />                                    
