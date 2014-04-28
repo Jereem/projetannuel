@@ -127,12 +127,13 @@ public class BureauProGphy extends Etudiant implements Serializable {
     
 
     // Methodes pour la BDD
-    public String saveBureauProGphy() throws SQLException {
+    public String saveBureauProGphy(Etudiant etu) throws SQLException {
         ConnectBDD con = new ConnectBDD();
         Connection b = con.getMyConnexion();
         if (b == null) {
             throw new SQLException("Can't get database connection");
         }
+        etu.saveNewAdherent();
         try {
             /* Récupération des paramètres d'URL saisis par l'utilisateur */
             String paramIdentifiant = this.getIdentifiant();

@@ -227,7 +227,7 @@ public class Etudiant extends Personne implements Serializable {
         ConnectBDD b = new ConnectBDD();
         if (b == null) {
             throw new SQLException("Can't get database connection");
-        }		
+        }
         try {
             /* Récupération des paramètres d'URL saisis par l'utilisateur */
             String paramNom = this.getNom();
