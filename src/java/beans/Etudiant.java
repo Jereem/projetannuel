@@ -223,4 +223,27 @@ public class Etudiant extends Personne implements Serializable {
         return list;
     }
 
+    public String delAdherent () throws SQLException{
+        ConnectBDD b = new ConnectBDD();
+        if (b == null) {
+            throw new SQLException("Can't get database connection");
+        }
+        try {
+            /* Récupération des paramètres d'URL saisis par l'utilisateur */
+            String paramNom = this.getNom();
+            String paramPrenom = this.getPrenom();
+	
+        /* Exécution d'une requête de modification de la BD (INSERT, UPDATE, DELETE, CREATE, etc.). */
+        b.getMyStatement().executeUpdate(""
+                + "DELETE FROM PERSONNE where Nom_Personne=’"+paramNom+"’ AND Prenom_Personne=’"+paramPrenom+"’");
+        return "success";    
+        }
+        catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+            return "failed";
+        }
+    }
+
 }

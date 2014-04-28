@@ -18,7 +18,7 @@
         <h:panelGrid columns="2" cellpadding="10">
 		
             <h:form>  
-                <p:dataTable id="tableClient" var="client" value="#{etudiant.getAdherent()}" sortMode="multiple" rows="10" paginator="true">  
+                <p:dataTable id="tableClient" var="client" value="#{client.getClient()}" sortMode="multiple" rows="10" paginator="true">  
                     <f:facet name="header">  
                         CLIENTS  
                     </f:facet>  
@@ -30,7 +30,7 @@
                 <p:column sortBy="prenom" headerText="Prenom">  
                     <h:outputText value="#{client.prenom}" />  
                 </p:column>   
-
+                    
                 </p:dataTable>
             </h:form>
 					
@@ -43,7 +43,7 @@
         <h:panelGrid columns="2" cellpadding="10">  
 		
              <h:form>  
-                <p:dataTable id="tableClient" var="client" value="#{etudiant.getOldAdherent()}" sortMode="multiple" rows="10" paginator="true">  
+                <p:dataTable id="tableClient" var="client" value="#{client.getOldClient()}" sortMode="multiple" rows="10" paginator="true">  
                     <f:facet name="header">  
                         ANCIENS CLIENTS 
                     </f:facet>  
@@ -91,13 +91,13 @@
                         <h:message id="prenomMessage" for="prenom" errorClass="erreur" />
 
                         <h:outputText value="Nom de la société : *" />  
-                        <h:inputText id="nomSociete" value="#{client.nom}" >
+                        <h:inputText id="nomSociete" value="#{client.societe}" >
                             <f:ajax event="blur" render="nomSocieteMessage" />
                         </h:inputText>
                         <h:message id="nomSocieteMessage" for="nomSociete" errorClass="erreur" />
                         
                         <h:outputText value="Numéro de Siret : *" />  
-                        <h:inputText id="numSiret" value="#{client.numeroSS}" >
+                        <h:inputText id="numSiret" value="#{client.siren}" >
                             <f:ajax event="blur" render="numSiretMessage" />
                         </h:inputText>
                         <h:message id="numSiretMessage" for="numSiret" errorClass="erreur" />                                    
@@ -172,7 +172,7 @@
                 </p:panel>
 
                 <!-- Envoie le formulaire -->
-                <p:commandButton value="Enregistrer" action="#{client.saveNewAdherent}"/>  
+                <p:commandButton value="Enregistrer" action="#{client.saveNewClient}"/>  
 
             </h:form>  
 
