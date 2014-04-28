@@ -119,7 +119,8 @@
                             
                 </p:panel>  
                            
-                <p:panel header="Coordonnées">                           
+                <p:panel header="Coordonnées">     
+                    
                     <h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
                                                                         
                         <h:outputText value="Numéro : *" />              
@@ -194,9 +195,30 @@
                           
                 </p:panel> 
 
+                <p:panel header="Création connexion">                           
+
+                    <h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
+
+                        <h:outputText value="Identifiant : *" />                         
+                        <h:inputText id="identifiant" value="#{bureauprogphy.identifiant}" >
+                            <f:ajax event="blur" render="identifiantMessage" />
+                            <p></p>
+                        </h:inputText>
+                        <h:message id="identifiantMessage" for="identifiant" errorClass="erreur" />
+
+                        <h:outputText value="Mot de passe : *" />                         
+                        <h:inputText id="mdp" value="#{bureauprogphy.mdp}" >
+                            <f:ajax event="blur" render="mdpMessage" />
+                        </h:inputText>
+                        <h:message id="mdpMessage" for="mdp" errorClass="erreur" />
+                              
+                    </h:panelGrid>
+                          
+                </p:panel> 
+                
                 <!-- Envoie le formulaire -->       
-                <p:commandButton value="Enregistrer" action="#{etudiant.saveNewAdherent}"/>  
-                       
+                <p:commandButton value="Enregistrer" action="#{etudiant.saveNewAdherent}"/> 
+
             </h:form>  
                    
         </h:panelGrid>                  
