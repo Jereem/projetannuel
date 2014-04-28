@@ -42,18 +42,22 @@
                                 <h:outputText value="#{projet.commercial.nom}" />  
                             </p:column> 
 
+                            <p:column headerText="Progression" width="25px" >
+                                <p:progressBar value="#{projet.progression}" labelTemplate="{value}%" displayOnly="true" style="width:80px"/>
+                            </p:column>
+                            
                             <p:column headerText=" " >
                                 <p:commandLink 
                                     process="@this"
                                     partialSubmit="true"
-                                    oncomplete="dlgclt1.show()" 
+                                    oncomplete="fiche.show()" 
                                     update=":form" >
                                     <img src="fiche.png" width="24px" height="24px" />
-                                    <f:setPropertyActionListener target="#{updateClient.selectedDoc}"  value="#{clt}"/> 
+                                    <f:setPropertyActionListener target="#{projet}"  value="#{projet}"/> 
                                 </p:commandLink>
                                 <p:commandLink process="@this" oncomplete="down.show()" update=":form" >
                                     <img src="download.png" width="24px" height="24px" />
-                                    <f:setPropertyActionListener value="#{projet}" target="#{projetDialog.selectedProjet}"/> 
+                                    <f:setPropertyActionListener value="#{projet}" target="#{ProjetDialog.selectedProjet}"/> 
                                 </p:commandLink>
                                 <p:commandLink process="@this" oncomplete="dlgclt3.show()" update=":form" >
                                     <img src="upload.png" width="24px" height="24px" />
@@ -61,22 +65,21 @@
                                 </p:commandLink>
                             </p:column>
                             
+                            
+                            
                         </p:dataTable>
                         
                         <p:dialog id="dialog"  header="Documents du projet #{ProjetDialog.selectedProjet.nomProjet}" width="1000px"
-                                  widgetVar="down" resizable="false"  
-                                  modal="true"
+                                  widgetVar="down" resizable="false"
                                   showEffect="bounce"
                                   hideEffect="explode">
-                            <p:dataTable id="tableProjetEnCours3" var="documents" value="#{ProjetDialog.selectedProjet.getDocuments()}" sortMode="multiple" rows="5" paginator="true">  
-                                <f:facet name="header">  
-                                    Documents  
-                                </f:facet>  
+                            <p:dataTable id="tableProjetEnCours5" var="documents" value="#{ProjetDialog.selectedProjet.getDoc()}" sortMode="multiple" rows="5" paginator="true">  
+        
                                 <p:column sortBy="nomProjet" headerText="Documents">  
                                     <h:outputText value="#{documents.nomDoc}" />  
                                 </p:column>
                             </p:dataTable>
-                            <p:ring id="basic" value="#{projet.getDocuments()}" var="documents">
+                            <p:ring id="basic" value="#{ProjetDialog.selectedProjet.documents}" var="documents">
                                 <p:outputPanel style="text-align:center;" layout="block">
                                         #{documents.nomDoc}
                                     <p:commandButton icon="ui-icon-disk" title="Télécharger">
@@ -92,8 +95,8 @@
                                   hideEffect="explode">
                         </p:dialog>
 
-                        <p:dialog id="dialog2"  header="Projet" 
-                                  widgetVar="dlgclt1" resizable="false"  
+                        <p:dialog id="dialog2"  header="Projet #{Projet.nomProjet}" 
+                                  widgetVar="fiche" resizable="false"  
                                   modal="true"
                                   showEffect="bounce"
                                   hideEffect="explode">

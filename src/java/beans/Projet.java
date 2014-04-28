@@ -7,10 +7,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Iterator;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 import org.primefaces.event.SelectEvent;
 import tools.ConnectBDD;
 
@@ -25,13 +25,22 @@ public class Projet implements Serializable{
 	private ArrayList<Documents> documents;
         private BureauProGphy chefDeProjet;
         private BureauProGphy commercial;
+        private Documents selectedDocument;
+        private int progression;
 
 	public Projet() {
 		this.nomProjet = "New project";
                 this.documents = new ArrayList<>();
 	}
 
-        
+        public String getDoc(){
+    Iterator<Documents> it = documents.iterator();
+ 
+while (it.hasNext()) {
+       Documents s = it.next();
+}
+    return "success";
+}
     public BureauProGphy getChefDeProjet() {
         return chefDeProjet;
     }
@@ -131,6 +140,16 @@ public class Projet implements Serializable{
             Projet projet = (Projet) event.getObject();
         }
 
+    public int getProgression() {
+        return progression;
+    }
+
+    public void setProgression(int progression) {
+        this.progression = progression;
+    }
+        
+        
+
         // Methodes pour la BDD
     public String saveProjet() throws SQLException {
         ConnectBDD con = new ConnectBDD();
@@ -214,9 +233,17 @@ public class Projet implements Serializable{
                 /* Traiter ici les valeurs récupérées. */
             }
             projet.setCommercial(commercial);
+            Statement statement5 = con.createStatement();
+            ResultSet resultat5 = statement5.executeQuery( "SELECT (count(*)/12*100) as nb_etapes FROM projetannuel.est_en_phase where Id_Projet = "+idproj+";" );
+            while ( resultat5.next() ) {
+                projet.setProgression(Math.round(resultat5.getInt("nb_etapes")));
+                /* Traiter ici les valeurs récupérées. */
+            }
         }
         return list;
     }
+    
+    
 //        //methode surchargée qui prend en paramètre un boolean actif
 //      public List<BureauProGphy> getProjet(Boolean actif) throws SQLException {
 //        //get database connection

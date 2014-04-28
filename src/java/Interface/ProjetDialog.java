@@ -21,6 +21,10 @@ public class ProjetDialog implements Serializable {
         selectedProjet = new Projet();
     }
 
+    public ProjetDialog(Projet pSelectedProjet) {
+        selectedProjet = pSelectedProjet;
+    }
+    
     public Projet getSelectedProjet() {
         return selectedProjet;
     }
