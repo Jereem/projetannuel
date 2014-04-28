@@ -17,10 +17,14 @@
     <p:tab id="tab00" title="Liste des projets en cours">  
         <h:panelGrid columns="2" cellpadding="10">
                     <h:form>  
-                        <p:dataTable id="tableProjetEnCours" var="projet" value="#{projet.getProjet()}" sortMode="multiple" rows="5" paginator="true">  
+                        <p:dataTable id="tableProjetEnCours" var="projet" value="#{projet.getProjet(true)}" sortMode="multiple" rows="5" paginator="true">  
                             <f:facet name="header">  
                                 Projets  
                             </f:facet>  
+                            
+                            <p:column headerText="Progression" width="25px" >
+                                <p:progressBar value="#{projet.progression}" labelTemplate="{value}%" displayOnly="true" style="width:80px"/>
+                            </p:column>
 
                             <p:column sortBy="nomProjet" headerText="Nom du projet">  
                                 <h:outputText value="#{projet.nomProjet}" />  
@@ -42,9 +46,7 @@
                                 <h:outputText value="#{projet.commercial.nom}" />  
                             </p:column> 
 
-                            <p:column headerText="Progression" width="25px" >
-                                <p:progressBar value="#{projet.progression}" labelTemplate="{value}%" displayOnly="true" style="width:80px"/>
-                            </p:column>
+                            
                             
                             <p:column headerText=" " >
                                 <p:commandLink 
@@ -110,7 +112,60 @@
 //-------------------------------------------------------------------------------------------------
     <p:tab id="tab01" title="Liste des projets terminés">  
         <h:panelGrid columns="2" cellpadding="10">
+            <h:form>  
+                        <p:dataTable id="tableProjetFinit" var="projet" value="#{projet.getProjet(false)}" sortMode="multiple" rows="5" paginator="true">  
+                            <f:facet name="header">  
+                                Projets  
+                            </f:facet>  
+                            
+                            <p:column headerText="Progression" width="25px" >
+                                <p:progressBar value="#{projet.progression}" labelTemplate="{value}%" displayOnly="true" style="width:80px"/>
+                            </p:column>
 
+                            <p:column sortBy="nomProjet" headerText="Nom du projet">  
+                                <h:outputText value="#{projet.nomProjet}" />  
+                            </p:column>  
+
+                            <p:column sortBy="societe" headerText="Societe">  
+                                <h:outputText value="#{projet.client.societe}" />  
+                            </p:column> 
+                            
+                            <p:column sortBy="nomClient" headerText="Nom du client">  
+                                <h:outputText value="#{projet.client.nom}" />  
+                            </p:column>  
+                            
+                            <p:column sortBy="nomChef" headerText="Nom du CdP">  
+                                <h:outputText value="#{projet.chefDeProjet.nom}" />  
+                            </p:column>  
+                            
+                            <p:column sortBy="nomComm" headerText="Nom du commercial">  
+                                <h:outputText value="#{projet.commercial.nom}" />  
+                            </p:column> 
+
+                            
+                            
+                            <p:column headerText=" " >
+                                <p:commandLink 
+                                    process="@this"
+                                    partialSubmit="true"
+                                    oncomplete="fiche.show()" 
+                                    update=":form" >
+                                    <img src="fiche.png" width="24px" height="24px" />
+                                    <f:setPropertyActionListener target="#{projet}"  value="#{projet}"/> 
+                                </p:commandLink>
+                                <p:commandLink process="@this" oncomplete="down.show()" update=":form" >
+                                    <img src="download.png" width="24px" height="24px" />
+                                    <f:setPropertyActionListener value="#{projet}" target="#{ProjetDialog.selectedProjet}"/> 
+                                </p:commandLink>
+                                <p:commandLink process="@this" oncomplete="dlgclt3.show()" update=":form" >
+                                    <img src="upload.png" width="24px" height="24px" />
+                                    <f:setPropertyActionListener target="#{updateClient.selectedDoc}"  value="#{clt}"/> 
+                                </p:commandLink>
+                            </p:column>
+                            
+                        </p:dataTable>
+                        
+                    </h:form>
         </h:panelGrid>  
     </p:tab>  
 
@@ -119,7 +174,29 @@
   
     <p:tab id="tab1" title="Ajout d'un projet">  
         <h:panelGrid columns="2" cellpadding="10">
+               <h:form>  
+                            
+                <p:panel header="Nouveau projet">  
+                    <h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5"> 
 
+                        <p:multiSelectListbox value="#{client.selection}" effect="slide">
+                            <f:selectItems value="#{multiSelectListboxBean.categories}" />
+                        </p:multiSelectListbox>
+
+                        <h:outputText value="Nom : *" />                                      
+                        <h:inputText id="nom" value="#{etudiant.nom}" >                                   
+                            <f:ajax event="blur" render="nomMessage" />                                   
+                        </h:inputText>                                   
+                        <h:message id="nomMessage" for="nom" errorClass="erreur" />
+                              
+                    </h:panelGrid>  
+                            
+                </p:panel>  
+
+                <!-- Envoie le formulaire -->       
+                <p:commandButton value="Enregistrer" action="#{etudiant.saveNewAdherent}"/>  
+                       
+            </h:form>  
         </h:panelGrid>  
     </p:tab>  
 

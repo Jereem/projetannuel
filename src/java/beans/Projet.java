@@ -181,14 +181,20 @@ while (it.hasNext()) {
 
     }
 
-    public List<Projet> getProjet() throws SQLException {
+    public List<Projet> getProjet(Boolean actif) throws SQLException {
         //get database connection
         ConnectBDD b = new ConnectBDD();
         Connection con = b.getMyConnexion();
         if (con == null) {
             throw new SQLException("Can't get database connection");
         }
-        PreparedStatement ps = con.prepareStatement("select Id_Projet, Nom_Projet, Societe, Siret, Qualite, Titre, Nom_Personne, Prenom_Personne from Projet natural join client natural join Personne");
+        PreparedStatement ps;
+        if (actif == true) {
+            ps = con.prepareStatement("select Id_Projet, Nom_Projet, Societe, Siret, Qualite, Titre, Nom_Personne, Prenom_Personne from Projet natural join client natural join Personne");
+        } else {
+            ps = con.prepareStatement("select Id_Projet, Nom_Projet, Societe, Siret, Qualite, Titre, Nom_Personne, Prenom_Personne from Projet natural join client natural join Personne natural join est_en_phase where Nom_Etape = 'clôture du projet'");
+        }
+
         //get customer data from database
         ResultSet result = ps.executeQuery();
         List<Projet> list = new ArrayList<>();
