@@ -201,12 +201,31 @@
     <p:tab id="tab4" title="Suppression d'un adhérent">  
         <h:panelGrid columns="2" cellpadding="10">  
 		
-                    <h:form>  
-                        <h3>Inline</h3>  
-                        <p:calendar value="#{etudiant.dateNaissance}" mode="inline" id="inlineCal"/>     
-                        <p:commandButton value="Submit" />  
-                    </h:form>
-					
+            <h:form>  
+                            
+                <p:panel header="Supression">                                  
+                    <h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5"> 
+
+                        <h:outputText value="Nom : *" />  
+                        <h:inputText id="nom" value="#{etudiant.nom}" >
+                            <f:ajax event="blur" render="nomMessage" />
+                        </h:inputText>
+                        <h:message id="nomMessage" for="nom" errorClass="erreur" />
+
+                        <h:outputText value="Prénom : *" />  
+                        <h:inputText id="prenom" value="#{etudiant.prenom}" >
+                            <f:ajax event="blur" render="prenomMessage" />
+                        </h:inputText>
+                        <h:message id="prenomMessage" for="prenom" errorClass="erreur" />
+                                 
+                    </h:panelGrid>  
+                </p:panel>
+
+                <!-- Envoie le formulaire -->
+                <p:commandButton value="Supprimer" action="#{etudiant.delAdherent}"/>
+                                
+            </h:form>
+
         </h:panelGrid>  
     </p:tab>  
 
