@@ -91,7 +91,7 @@
                         <h:message id="prenomMessage" for="prenom" errorClass="erreur" />
 
                         <h:outputText value="Nom de la société : *" />  
-                        <h:inputText id="nomSociete" value="#{client.nom}" >
+                        <h:inputText id="nomSociete" value="#{client.societe}" >
                             <f:ajax event="blur" render="nomSocieteMessage" />
                         </h:inputText>
                         <h:message id="nomSocieteMessage" for="nomSociete" errorClass="erreur" />
@@ -172,7 +172,7 @@
                 </p:panel>
 
                 <!-- Envoie le formulaire -->
-                <p:commandButton value="Enregistrer" action="#{client.saveNewAdherent}"/>  
+                <p:commandButton value="Enregistrer" action="#{client.saveNewClient}"/>  
 
             </h:form>  
 

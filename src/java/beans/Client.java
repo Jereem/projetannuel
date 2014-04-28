@@ -61,6 +61,46 @@ public class Client extends Personne implements Serializable{
 		throw new UnsupportedOperationException();
 	}
 
+        // Methodes pour sauvegarder dans la BDD
+    public String saveNewClient() throws SQLException {
+        ConnectBDD b = new ConnectBDD();
+        if (b == null) {
+            throw new SQLException("Can't get database connection");
+        }
+        try {
+            /* Récupération des paramètres d'URL saisis par l'utilisateur */
+            String paramTitre = this.getTitresString().toString();
+            String paramNom = this.getNom();
+            String paramPrenom = this.getPrenom();
+            String paramNomSociete = this.getSociete();
+            long paramNumeroSiret = this.getSiren();
+            String paramPoste = this.getPoste();
+            int paramNumRue = this.getCoordonnees().getNumRue();
+            String paramTypeVoie = this.getCoordonnees().getVoiesString();
+            String paramNomRue = this.getCoordonnees().getRue();
+            String paramCP = this.getCoordonnees().getCodePostal();
+            String paramVille = this.getCoordonnees().getVille();
+            String paramPays = this.getCoordonnees().getPays();
+            String paramEmail = this.getCoordonnees().geteMail();
+            int paramTelFixe = this.getCoordonnees().getTelFixe();
+            int paramTelMobile = this.getCoordonnees().getTelPortable();
+		 
+            /* Exécution d'une requête de modification de la BD (INSERT, UPDATE, DELETE, CREATE, etc.). */
+            b.getMyStatement().executeUpdate(""
+                    + "INSERT INTO PERSONNE(Titre, Nom_Personne, Prenom_Personne) VALUES (" + paramTitre + "," + paramNom + "," + paramPrenom + "); "
+                    + "SELECT @last:=LAST_INSERT_ID(); "
+                    + "INSERT INTO CLIENT (Id_Personne, Siret, Societe, Qualite) VALUES (@last, " + paramNumeroSiret + "," + paramNomSociete + "," + paramPoste + "); "
+                    + "INSERT INTO COORDONNEES (Id_Personne, Email, Rue ,Numero_De_Rue, Type_Voie, Ville, Code_Postal, Pays, Telephone_1, Telephone_2) VALUES (@last," + paramEmail + "," + paramNomRue + "," + paramNumRue + "," + paramTypeVoie +"," + paramVille +"," + paramCP +"," + paramPays +"," + paramTelFixe +"," + paramTelMobile +")");
+            return "success";
+        } catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+            return "failed";
+        }
+    }
+        
+        
         public List<Client> getClient() throws SQLException {
         //get database connection
         ConnectBDD b = new ConnectBDD();
