@@ -227,18 +227,35 @@
 //-------------------------------------------------------------------------------------------------
           
     <p:tab id="tab4" title="Suppression d'un membre du bureau">  
-                    
-        <h:form>  
-                        
-            <h3>Inline</h3>  
+        <h:panelGrid columns="2" cellpadding="10">  
+		
+            <h:form>  
+                            
+                <p:panel header="Supression">                                  
+                    <h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5"> 
 
-            <p:calendar value="#{beans.Etudiant.dateNaissance}" mode="inline" id="inlineCal"/>     
-                        
-            <p:commandButton value="Submit" />  
-                    
-        </h:form>
-                
-    </p:tab>
+                        <h:outputText value="Nom : *" />  
+                        <h:inputText id="nom" value="#{membre.nom}" >
+                            <f:ajax event="blur" render="nomMessage" />
+                        </h:inputText>
+                        <h:message id="nomMessage" for="nom" errorClass="erreur" />
+
+                        <h:outputText value="Prénom : *" />  
+                        <h:inputText id="prenom" value="#{membre.prenom}" >
+                            <f:ajax event="blur" render="prenomMessage" />
+                        </h:inputText>
+                        <h:message id="prenomMessage" for="prenom" errorClass="erreur" />
+                                 
+                    </h:panelGrid>  
+                </p:panel>
+
+                <!-- Envoie le formulaire -->
+                <p:commandButton value="Supprimer" action="#{membre.delBureauProGphy}"/>
+                                
+            </h:form>
+
+        </h:panelGrid>  
+    </p:tab>  
  
 //-------------------------------------------------------------------------------------------------
 
