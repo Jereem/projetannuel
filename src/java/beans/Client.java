@@ -87,10 +87,11 @@ public class Client extends Personne implements Serializable{
 		 
             /* Exécution d'une requête de modification de la BD (INSERT, UPDATE, DELETE, CREATE, etc.). */
             b.getMyStatement().executeUpdate(""
-                    + "INSERT INTO PERSONNE(Titre, Nom_Personne, Prenom_Personne) VALUES (" + paramTitre + "," + paramNom + "," + paramPrenom + "); "
+                    + "INSERT INTO PERSONNE(Titre, Nom_Personne, Prenom_Personne) VALUES ('" + paramTitre + "','" + paramNom + "','" + paramPrenom + "'); "
                     + "SELECT @last:=LAST_INSERT_ID(); "
-                    + "INSERT INTO CLIENT (Id_Personne, Siret, Societe, Qualite) VALUES (@last, " + paramNumeroSiret + "," + paramNomSociete + "," + paramPoste + "); "
-                    + "INSERT INTO COORDONNEES (Id_Personne, Email, Rue ,Numero_De_Rue, Type_Voie, Ville, Code_Postal, Pays, Telephone_1, Telephone_2) VALUES (@last," + paramEmail + "," + paramNomRue + "," + paramNumRue + "," + paramTypeVoie +"," + paramVille +"," + paramCP +"," + paramPays +"," + paramTelFixe +"," + paramTelMobile +")");
+                    + "INSERT INTO CLIENT (Id_Personne, Siret, Societe, Qualite) VALUES (@last, '" + paramNumeroSiret + "','" + paramNomSociete + "','" + paramPoste + "'); "
+                    + "INSERT INTO COORDONNEES (Id_Personne, Email, Rue ,Numero_De_Rue, Type_Voie, Ville, Code_Postal, Pays, Telephone_1, Telephone_2) VALUES (@last,'" + paramEmail + "','" + paramNomRue + "','" + paramNumRue + "','" + paramTypeVoie +"','" + paramVille +"','" + paramCP +"','" + paramPays + "','" + paramTelFixe +"','" + paramTelMobile +"')");
+            b.getMyConnexion().commit();
             return "success";
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());

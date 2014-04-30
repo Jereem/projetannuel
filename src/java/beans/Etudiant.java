@@ -235,7 +235,7 @@ public class Etudiant extends Personne implements Serializable {
 	
         /* Exécution d'une requête de modification de la BD (INSERT, UPDATE, DELETE, CREATE, etc.). */
         b.getMyStatement().executeUpdate(""
-                + "DELETE FROM PERSONNE where Nom_Personne=’"+paramNom+"’ AND Prenom_Personne=’"+paramPrenom+"’");
+                + "DELETE FROM PERSONNE where Id_Personne = (SELECT Id_Personne from Personne where Nom_Personne='"+paramNom+"' AND Prenom_Personne='"+paramPrenom+"')");
         return "success";    
         }
         catch (SQLException ex) {
