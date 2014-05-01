@@ -173,4 +173,27 @@ public class Client extends Personne implements Serializable{
 //        System.out.println(list);
         return list;
     }
+    
+    public String delClient () throws SQLException{
+        ConnectBDD b = new ConnectBDD();
+        if (b == null) {
+            throw new SQLException("Can't get database connection");
+        }
+        try {
+            /* Récupération des paramètres d'URL saisis par l'utilisateur */
+            String paramNom = this.getNom();
+            String paramPrenom = this.getPrenom();
+	
+        /* Exécution d'une requête de modification de la BD (INSERT, UPDATE, DELETE, CREATE, etc.). */
+        b.getMyStatement().executeUpdate(""
+                + "INSERT INTO est_en_phase (Id_Projet, Nom_Etape, Date_etape) VALUES ((SELECT Id_Projet FROM projet WHERE Siret =(SELECT Siret FROM client WHERE Id_Personne =(SELECT Id_Personne FROM personne WHERE Nom_Personne='"+paramNom+"' AND Prenom_Personne='"+paramPrenom+"'))),'clôture du projet', CURRENT_DATE());");
+        return "success";    
+        }
+        catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+            return "failed";
+        }
+    }
 }
