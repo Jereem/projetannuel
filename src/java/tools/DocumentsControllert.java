@@ -26,7 +26,14 @@ public class DocumentsControllert implements Serializable {
  
     public DocumentsControllert() {
         root = new DefaultTreeNode("root", null);
- 
+        
+        TreeNode modeles = new DefaultTreeNode("MODELES", "Folder", root);
+            
+            TreeNode facture = new DefaultTreeNode("FACTURE", "Folder", modeles);
+            TreeNode devis = new DefaultTreeNode("DEVIS", "Folder", modeles);
+            TreeNode cdc = new DefaultTreeNode("CAHIER DES CHARGES", "Folder", modeles);
+            TreeNode cdconception = new DefaultTreeNode("CAHIER DE CONCEPTION", "Folder", modeles);
+                
      
 	        TreeNode node = new DefaultTreeNode("List","folder", root);  
 		TreeNode node0 = new DefaultTreeNode("Provider", node);  

@@ -1,11 +1,11 @@
 package beans;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.io.Serializable;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -18,6 +18,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import tools.ConnectBDD;
+import tools.Tools;
 
 @ManagedBean
 @RequestScoped
@@ -88,6 +89,12 @@ public class Etudiant extends Personne implements Serializable {
         this.promotion = promotion;
     }
     
+    
+    @Override
+    public Titres getTitre(){
+         return super.getTitre();
+    }
+    
     // Methodes
     
     /**
@@ -118,7 +125,9 @@ public class Etudiant extends Personne implements Serializable {
             String paramNom = this.getNom();
             String paramPrenom = this.getPrenom();
             long paramNumeroSS = this.getNumeroSS();
-            Date paramdateNaissance = this.getDateNaissance();
+            Date javaDateNaissance=this.getDateNaissance();
+            Tools tls= new Tools();
+            String paramdateNaissance = tls.dateJavaToSQL(javaDateNaissance);          
             int paramNumRue = this.getCoordonnees().getNumRue();
             String paramTypeVoie = this.getCoordonnees().getVoiesString();
             String paramNomRue = this.getCoordonnees().getRue();
@@ -131,11 +140,18 @@ public class Etudiant extends Personne implements Serializable {
             int paramPromo = this.getPromotion();
 		 
             /* Exécution d'une requête de modification de la BD (INSERT, UPDATE, DELETE, CREATE, etc.). */
-            b.getMyStatement().executeUpdate(""
+           /* b.getMyStatement().executeUpdate(""
                     + "INSERT INTO PERSONNE(Titre, Nom_Personne, Prenom_Personne) VALUES (" + paramTitre + "," + paramNom + "," + paramPrenom + "); "
                     + "SELECT @last:=LAST_INSERT_ID(); "
                     + "INSERT INTO ADHERENT (Id_Personne, Numero_SS, Date_Naissance, Promotion) VALUES (@last, " + paramNumeroSS + "," + paramdateNaissance + "," + paramPromo + "); "
-                    + "INSERT INTO coordonnees (Id_Personne, Email, Rue ,Numero_De_Rue, Type_Voie, Ville, Code_Postal, Pays, Telephone_1, Telephone_2) VALUES (@last," + paramEmail + "," + paramNomRue + "," + paramNumRue + "," + paramTypeVoie +"," + paramVille +"," + paramCP +"," + paramPays +"," + paramTelFixe +"," + paramTelMobile +")");
+                    + "INSERT INTO coordonnees (Id_Personne, Email, Rue ,Numero_De_Rue, Type_Voie, Ville, Code_Postal, Pays, Telephone_1, Telephone_2) VALUES (@last," + paramEmail + "," + paramNomRue + "," + paramNumRue + "," + paramTypeVoie +"," + paramVille +"," + paramCP +"," + paramPays +"," + paramTelFixe +"," + paramTelMobile +");");
+            System.out.println("je fais des requetes");
+            */
+            b.getMyStatement().executeUpdate("INSERT INTO PERSONNE(Titre, Nom_Personne, Prenom_Personne) VALUES (" + paramTitre + "," + paramNom + "," + paramPrenom + ")");
+            b.getMyStatement().executeQuery("SELECT @last:=LAST_INSERT_ID()");
+            b.getMyStatement().executeUpdate("INSERT INTO ADHERENT (Id_Personne, Numero_SS, Date_Naissance, Promotion) VALUES (@last, \" + paramNumeroSS + \",\" + paramdateNaissance + \",\" + paramPromo + \")");
+            b.getMyStatement().executeUpdate("INSERT INTO coordonnees (Id_Personne, Email, Rue ,Numero_De_Rue, Type_Voie, Ville, Code_Postal, Pays, Telephone_1, Telephone_2) VALUES (@last," + paramEmail + "," + paramNomRue + "," + paramNumRue + "," + paramTypeVoie +"," + paramVille +"," + paramCP +"," + paramPays +"," + paramTelFixe +"," + paramTelMobile +")");
+            
             return "success";
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());

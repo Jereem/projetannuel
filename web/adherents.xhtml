@@ -86,7 +86,7 @@
                     <h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5"> 
 
                         <h:outputText value="Titre: *" />  
-                        <p:selectOneMenu value="#{beans.Etudiant.titres}">  
+                        <p:selectOneMenu value="#{etudiant.titres}">  
                             <f:selectItems value="#{etudiant.titres}" var="titres" itemValue="#{titres.getNomTitre()}" /> 
                         </p:selectOneMenu>
                         <p></p>
@@ -109,7 +109,7 @@
                         </h:inputText>
                         <h:message id="numSSMessage" for="numSS" errorClass="erreur" />                                    
 
-                        <h:outputText value="Date de naissance (jj/mm/aa): *" />
+                        <h:outputText value="Date de naissance (jj/mm/aaaa): *" />
                         <p:calendar value="#{etudiant.dateNaissance}" id="popupButtonCal" showOn="button" />
                         <p></p>
 

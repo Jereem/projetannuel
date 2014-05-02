@@ -16,6 +16,8 @@ import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 
@@ -24,6 +26,8 @@ import org.primefaces.model.TreeNode;
  *
  * @author jeremygillet
  */
+@ManagedBean
+@SessionScoped 
 public class DocumentsController implements Serializable {
 	
     private TreeNode root;
@@ -39,6 +43,7 @@ public class DocumentsController implements Serializable {
             Logger.getLogger(DocumentsController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
 	public DocumentsController(String typeged) throws SQLException {
             
             root = new DefaultTreeNode("root", null);
