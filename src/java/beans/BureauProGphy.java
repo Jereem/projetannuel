@@ -125,8 +125,7 @@ public class BureauProGphy extends Etudiant implements Serializable {
 
     }
     
-
-    // Methodes pour la BDD
+    // Methode pour sauvegarder un membre du bureau dans la BDD
     public String saveBureauProGphy(Etudiant etu) throws SQLException {
         ConnectBDD con = new ConnectBDD();
         Connection b = con.getMyConnexion();
@@ -158,6 +157,7 @@ public class BureauProGphy extends Etudiant implements Serializable {
 
     }
 
+    // Methode pour afficher la liste des membres actuels
     public List<BureauProGphy> getBureauProGphy() throws SQLException {
         //get database connection
         ConnectBDD b = new ConnectBDD();
@@ -180,8 +180,9 @@ public class BureauProGphy extends Etudiant implements Serializable {
         }
         return list;
     }
-        //methode surchargée qui prend en paramètre un boolean actif
-      public List<BureauProGphy> getBureauProGphy(Boolean actif) throws SQLException {
+    
+    // Methode pour afficher la liste des anciens membres
+    public List<BureauProGphy> getBureauProGphy(Boolean actif) throws SQLException {
         //get database connection
         ConnectBDD b = new ConnectBDD();
         Connection con = b.getMyConnexion();
@@ -212,7 +213,8 @@ public class BureauProGphy extends Etudiant implements Serializable {
         }
         return list;
     }
-      
+    
+    // Methode pour supprimer un membre du bureau de la liste des membres actuels (membre archivé dans la liste des anciens membres)
     public String delBureauProGphy () throws SQLException{
         ConnectBDD b = new ConnectBDD();
         if (b == null) {

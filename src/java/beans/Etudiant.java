@@ -106,7 +106,7 @@ public class Etudiant extends Personne implements Serializable {
         throw new UnsupportedOperationException();
     }
 
-    // Methodes pour sauvegarder dans la BDD
+    // Methode pour sauvegarder un adhérent dans la BDD
     public String saveNewAdherent() throws SQLException {
         ConnectBDD b = new ConnectBDD();
         if (b == null) {
@@ -145,6 +145,7 @@ public class Etudiant extends Personne implements Serializable {
         }
     }
     
+    // Methode pour afficher la liste des adhérents actuels
     public List<Etudiant> getAdherent() throws SQLException {
         //get database connection
         ConnectBDD b = new ConnectBDD();
@@ -184,6 +185,7 @@ public class Etudiant extends Personne implements Serializable {
         return list;
     }
     
+    // Methode pour afficher la liste des anciens adhérents
     public List<Etudiant> getOldAdherent() throws SQLException {
         //get database connection
         ConnectBDD b = new ConnectBDD();
@@ -223,6 +225,7 @@ public class Etudiant extends Personne implements Serializable {
         return list;
     }
 
+    // Methode pour supprimer un adhérent de la liste des adhérents actuels (adhérent archivé dans la liste des anciens adhérents)
     public String delAdherent () throws SQLException{
         ConnectBDD b = new ConnectBDD();
         if (b == null) {
@@ -246,4 +249,39 @@ public class Etudiant extends Personne implements Serializable {
         }
     }
 
+    // Methode pour sauvegarder un adhérent dans la BDD
+    public String modifyAdherent() throws SQLException {
+        ConnectBDD b = new ConnectBDD();
+        if (b == null) {
+            throw new SQLException("Can't get database connection");
+        }
+        try {
+            /* Récupération des paramètres d'URL saisis par l'utilisateur */
+            String paramTitre = this.getTitresString().toString();
+            String paramNom = this.getNom();
+            String paramPrenom = this.getPrenom();
+            long paramNumeroSS = this.getNumeroSS();
+            Date paramdateNaissance = this.getDateNaissance();
+            /*int paramNumRue = this.getCoordonnees().getNumRue();
+            String paramTypeVoie = this.getCoordonnees().getVoiesString();
+            String paramNomRue = this.getCoordonnees().getRue();
+            String paramCP = this.getCoordonnees().getCodePostal();
+            String paramVille = this.getCoordonnees().getVille();
+            String paramPays = this.getCoordonnees().getPays();
+            String paramEmail = this.getCoordonnees().geteMail();
+            int paramTelFixe = this.getCoordonnees().getTelFixe();
+            int paramTelMobile = this.getCoordonnees().getTelPortable();
+            int paramPromo = this.getPromotion();*/
+		 
+            /* Exécution d'une requête de modification de la BD (INSERT, UPDATE, DELETE, CREATE, etc.). */
+            b.getMyStatement().executeUpdate(""
+            );
+            return "success";
+        } catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+            return "failed";
+        }
+    }
 }

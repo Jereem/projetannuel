@@ -61,7 +61,8 @@ public class Client extends Personne implements Serializable{
 		throw new UnsupportedOperationException();
 	}
 
-        // Methodes pour sauvegarder dans la BDD
+        
+    // Methode pour sauvegarder un client dans la BDD
     public String saveNewClient() throws SQLException {
         ConnectBDD b = new ConnectBDD();
         if (b == null) {
@@ -101,8 +102,8 @@ public class Client extends Personne implements Serializable{
         }
     }
         
-        
-        public List<Client> getClient() throws SQLException {
+    // Methode pour afficher la liste des clients actuels    
+    public List<Client> getClient() throws SQLException {
         //get database connection
         ConnectBDD b = new ConnectBDD();
         Connection con = b.getMyConnexion();
@@ -137,7 +138,8 @@ public class Client extends Personne implements Serializable{
 //        System.out.println(list);
         return list;
     }
-        
+    
+    // Methode pour afficher la liste des anciens clients
     public List<Client> getOldClient() throws SQLException {
         //get database connection
         ConnectBDD b = new ConnectBDD();
@@ -174,6 +176,7 @@ public class Client extends Personne implements Serializable{
         return list;
     }
     
+    // Methode pour supprimer un client de la liste des clients actuels (client archivé dans la liste des anciens clients)
     public String delClient () throws SQLException{
         ConnectBDD b = new ConnectBDD();
         if (b == null) {
@@ -190,6 +193,40 @@ public class Client extends Personne implements Serializable{
         return "success";    
         }
         catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+            return "failed";
+        }
+    }
+    
+    // Methode pour sauvegarder un client dans la BDD
+    public String modifyClient() throws SQLException {
+        ConnectBDD b = new ConnectBDD();
+        if (b == null) {
+            throw new SQLException("Can't get database connection");
+        }
+        try {
+            /* Récupération des paramètres d'URL saisis par l'utilisateur */
+            String paramNom = this.getNom();
+            String paramPrenom = this.getPrenom();
+            String paramPoste = this.getPoste();
+            /*int paramNumRue = this.getCoordonnees().getNumRue();
+            String paramTypeVoie = this.getCoordonnees().getVoiesString();
+            String paramNomRue = this.getCoordonnees().getRue();
+            String paramCP = this.getCoordonnees().getCodePostal();
+            String paramVille = this.getCoordonnees().getVille();
+            String paramPays = this.getCoordonnees().getPays();
+            String paramEmail = this.getCoordonnees().geteMail();
+            int paramTelFixe = this.getCoordonnees().getTelFixe();
+            int paramTelMobile = this.getCoordonnees().getTelPortable();*/
+		 
+            /* Exécution d'une requête de modification de la BD (INSERT, UPDATE, DELETE, CREATE, etc.). */
+            b.getMyStatement().executeUpdate(""
+                    + "UPDATE CLIENT SET Qualite='"+paramPoste+"' WHERE Id_Personne = (SELECT Id_Personne FROM PERSONNE WHERE Nom_Personne='"+paramNom+"' AND Prenom_Personne='"+paramPrenom+"');");
+            b.getMyConnexion().commit();
+            return "success";
+        } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
