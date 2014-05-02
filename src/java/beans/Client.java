@@ -109,7 +109,7 @@ public class Client extends Personne implements Serializable{
         if (con == null) {
             throw new SQLException("Can't get database connection");
         }
-        PreparedStatement ps = con.prepareStatement("select * from projetannuel.CLIENT natural join projetannuel.PERSONNE natural join projetannuel.COORDONNEES natural join projetannuel.PROJET natural join projetannuel.est_en_phase where Nom_Etape != 'clôture du projet'");
+        PreparedStatement ps = con.prepareStatement("select * from projetannuel.CLIENT natural join projetannuel.PERSONNE natural join projetannuel.COORDONNEES natural join projetannuel.PROJET natural join projetannuel.est_en_phase where Nom_Etape != 'clôture du projet'AND Id_est_en_phase IN(SELECT max(Id_est_en_phase) FROM est_en_phase GROUP BY Id_Projet);");
         //get customer data from database
         ResultSet result = ps.executeQuery();
         List<Client> list = new ArrayList<>();
