@@ -2,9 +2,11 @@ package beans;
 
 import java.util.ArrayList;
 import java.io.Serializable;
+import java.sql.SQLException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
+import tools.ConnectBDD;
 
 @ManagedBean
 @RequestScoped
@@ -181,5 +183,26 @@ public class Documents implements Serializable{
             
             return doc;
         }
-        
+         
+    public void saveDocument(Documents myDoc, int id_projet, String Identifiant) throws SQLException {
+        ConnectBDD b = new ConnectBDD();
+        if (b == null) {
+            throw new SQLException("Can't get database connection");
+        }
+        try {
+           String paramnom=myDoc.nomDoc;
+           String paramext=myDoc.typeDoc;//extension 
+           int paramannee=myDoc.annee;
+           String paramemplacement=myDoc.getEmplacement(); //emplacement
+            //int paramidprojet=myDoc.projet.getIdprojet()//id projet
+           String paramidentifiant=myDoc.auteur.getIdentifiant(); //identifiant
+          
+           b.getMyStatement().executeUpdate("INSERT INTO DOCUMENT ('Nom_Document','Extension','Annee','Emplacement','Id_Projet','Identifiant') VALUES (paramnom,paramext,paramannee,paramemplacement,paramidentifiant)");
+        }
+        catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+        }
+    }
 }
