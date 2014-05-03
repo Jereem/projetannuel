@@ -249,7 +249,7 @@ public class EtudiantTest {
         coordonnes.setCodePostal("28160");
         coordonnes.setVille("Ville");
         coordonnes.setPays("Pays");
-        coordonnes.seteMail("Email");
+        coordonnes.setEmail("Email");
         coordonnes.setTelFixe(0237477007);
         coordonnes.setTelPortable(0237477007);
         adherent.setCoordonnees(coordonnes);

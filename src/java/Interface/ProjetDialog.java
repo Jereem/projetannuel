@@ -68,7 +68,7 @@ public class ProjetDialog implements Serializable {
             coordonnes.setCodePostal(result.getString("Code_Postal"));
             coordonnes.setVille(result.getString("Ville"));
             coordonnes.setPays(result.getString("Pays"));
-            coordonnes.seteMail(result.getString("Email"));
+            coordonnes.setEmail(result.getString("Email"));
             coordonnes.setTelFixe(result.getInt("Telephone_1"));
             coordonnes.setTelPortable(result.getInt("Telephone_2"));
             client.setCoordonnees(coordonnes);

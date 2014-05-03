@@ -37,7 +37,7 @@ public class Tools {
             String paramCP = adherent.getCoordonnees().getCodePostal();
             String paramVille = adherent.getCoordonnees().getVille();
             String paramPays = adherent.getCoordonnees().getPays();
-            String paramEmail = adherent.getCoordonnees().geteMail();
+            String paramEmail = adherent.getCoordonnees().getEmail();
             int paramTelFixe = adherent.getCoordonnees().getTelFixe();
             int paramTelMobile = adherent.getCoordonnees().getTelPortable();
             int paramPromo = adherent.getPromotion();
@@ -80,7 +80,7 @@ public class Tools {
             coordonnes.setCodePostal(result.getString("Code_Postal"));
             coordonnes.setVille(result.getString("Ville"));
             coordonnes.setPays(result.getString("Pays"));
-            coordonnes.seteMail(result.getString("Email"));
+            coordonnes.setEmail(result.getString("Email"));
             coordonnes.setTelFixe(result.getInt("Telephone_1"));
             coordonnes.setTelPortable(result.getInt("Telephone_2"));
             adherent.setCoordonnees(coordonnes);
@@ -119,7 +119,7 @@ public class Tools {
             coordonnes.setCodePostal(result.getString("Code_Postal"));
             coordonnes.setVille(result.getString("Ville"));
             coordonnes.setPays(result.getString("Pays"));
-            coordonnes.seteMail(result.getString("Email"));
+            coordonnes.setEmail(result.getString("Email"));
             coordonnes.setTelFixe(result.getInt("Telephone_1"));
             coordonnes.setTelPortable(result.getInt("Telephone_2"));
             adherent.setCoordonnees(coordonnes);
