@@ -17,7 +17,7 @@
     <p:tab id="tab00" title="Liste des projets en cours">  
         <h:panelGrid columns="2" cellpadding="10">
                     <h:form>  
-                        <p:dataTable id="tableProjetEnCours" var="projet" value="#{projet.getProjet(true)}" sortMode="multiple" rows="5" paginator="true">  
+                        <p:dataTable id="tableProjetEnCours" var="projet" value="#{projetManaged.getProjet(true)}" sortMode="multiple" rows="5" paginator="true">  
                             <f:facet name="header">  
                                 Projets  
                             </f:facet>  
@@ -57,12 +57,12 @@
                                     <img src="fiche.png" width="24px" height="24px" />
                                     <f:setPropertyActionListener target="#{projet}"  value="#{projet}"/> 
                                 </p:commandLink>
-                                <p:commandButton value="Select Projet" icon="ui-icon-extlink" actionListener="#{Interface.ProjetDialog.putDocuments}">  
+                                <p:commandButton value="Select Projet" icon="ui-icon-extlink" actionListener="#{projetDialog.putDocuments()}">  
                                     <p:ajax event="dialogReturn" listener="#{projetDialog.selectedProjet}" update="growl" />  
                                 </p:commandButton>
                                 <p:commandLink process="@this" oncomplete="down.show()" update=":form" >
                                     <img src="download.png" width="24px" height="24px" />
-                                    <f:setPropertyActionListener value="#{projet}" target="#{ProjetDialog.selectedProjet}"/> 
+                                    <f:setPropertyActionListener value="#{projet}" target="#{managedProjet.selectedProjet}"/> 
                                 </p:commandLink>
                                 <p:commandLink process="@this" oncomplete="dlgclt3.show()" update=":form" >
                                     <img src="upload.png" width="24px" height="24px" />
@@ -72,17 +72,17 @@
                             
                         </p:dataTable>
                         
-                        <p:dialog id="dialog"  header="Documents du projet #{ProjetDialog.selectedProjet.nomProjet}" width="1000px"
+                        <p:dialog id="dialog"  header="Documents du projet #{managedProjet.selectedProjet.nomProjet}" width="1000px"
                                   widgetVar="down" resizable="false"
                                   showEffect="bounce"
                                   hideEffect="explode">
-                            <p:dataTable id="tableProjetEnCours5" var="documents" value="#{ProjetDialog.selectedProjet.getDoc()}" sortMode="multiple" rows="5" paginator="true">  
+                            <p:dataTable id="tableProjetEnCours5" var="documents" value="#{managedProjet.selectedProjet.getDocuments()}" sortMode="multiple" rows="5" paginator="true">  
         
                                 <p:column sortBy="nomProjet" headerText="Documents">  
                                     <h:outputText value="#{documents.nomDoc}" />  
                                 </p:column>
                             </p:dataTable>
-                            <p:ring id="basic" value="#{ProjetDialog.selectedProjet.documents}" var="documents">
+                            <p:ring id="basic" value="#{managedProjet.selectedProjet.documents}" var="documents">
                                 <p:outputPanel style="text-align:center;" layout="block">
                                         #{documents.nomDoc}
                                     <p:commandButton icon="ui-icon-disk" title="Télécharger">
@@ -114,7 +114,7 @@
     <p:tab id="tab01" title="Liste des projets terminés">  
         <h:panelGrid columns="2" cellpadding="10">
             <h:form>  
-                        <p:dataTable id="tableProjetFinit" var="projet" value="#{projet.getProjet(false)}" sortMode="multiple" rows="5" paginator="true">  
+                <p:dataTable id="tableProjetFinit" var="projet" value="#{ProjetManaged.getProjet(false)}" sortMode="multiple" rows="5" paginator="true">  
                             <f:facet name="header">  
                                 Projets  
                             </f:facet>  

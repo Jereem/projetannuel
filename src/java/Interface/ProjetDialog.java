@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package Interface;
 
@@ -20,10 +15,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import org.primefaces.context.RequestContext;
+import org.primefaces.event.SelectEvent;
 import tools.ConnectBDD;
  
-public class ProjetDialog implements Serializable {
+@ManagedBean
+@SessionScoped
+
+public class ProjetDialog {
  
     private Projet selectedProjet;
     private List<Client> selectedClients;
@@ -31,16 +34,18 @@ public class ProjetDialog implements Serializable {
     public ProjetDialog() throws SQLException {
         selectedProjet = new Projet();
         selectedClients = new ArrayList();
-        selectedClients = getClient();
-    }
- 
-    public ProjetDialog(Projet pSelectedProjet) {
-        selectedProjet = pSelectedProjet;
+//        selectedClients = getClient();
     }
     
     public void putDocuments() {  
             RequestContext.getCurrentInstance().openDialog("selectedProjet");  
         }  
+//    public void onProjetChosen(SelectEvent event) {  
+//            Projet projet = (Projet) event.getObject();  
+//            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Projet Selected", "Model:" + Projet.);  
+//  
+//            FacesContext.getCurrentInstance().addMessage(null, message);  
+//        }  
     
     public Projet getSelectedProjet() {
         return selectedProjet;

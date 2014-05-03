@@ -2,11 +2,13 @@ package beans;
 
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.validation.constraints.*;
 
 @ManagedBean
-@ViewScoped
+@RequestScoped
 
 public class Coordonnees implements Serializable {
 

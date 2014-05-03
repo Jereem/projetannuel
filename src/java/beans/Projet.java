@@ -10,38 +10,51 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Iterator;
 import java.util.List;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import org.primefaces.event.SelectEvent;
 import tools.ConnectBDD;
 
-@ManagedBean
-@RequestScoped
+public class Projet implements Serializable {
 
-public class Projet implements Serializable{
+    private int ID;
+    private Client client;
+    private ArrayList<Etudiant> devellopeurs;
+    private String nomProjet;
+    private ArrayList<Documents> documents;
+    private BureauProGphy chefDeProjet;
+    private BureauProGphy commercial;
+    private Documents selectedDocument;
+    private int progression;
 
-	private Client client;
-	private ArrayList<Etudiant> devellopeurs;
-	private String nomProjet;
-	private ArrayList<Documents> documents;
-        private BureauProGphy chefDeProjet;
-        private BureauProGphy commercial;
-        private Documents selectedDocument;
-        private int progression;
+    public Projet() {
+        this.nomProjet = "New project";
+        this.documents = new ArrayList<>();
+    }
 
-	public Projet() {
-		this.nomProjet = "New project";
-                this.documents = new ArrayList<>();
-	}
+    public int getID() {
+        return ID;
+    }
 
-        public String getDoc(){
-    Iterator<Documents> it = documents.iterator();
- 
-while (it.hasNext()) {
-       Documents s = it.next();
-}
-    return "success";
-}
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public Documents getSelectedDocument() {
+        return selectedDocument;
+    }
+
+    public void setSelectedDocument(Documents selectedDocument) {
+        this.selectedDocument = selectedDocument;
+    }
+
+    public String getDoc() {
+        Iterator<Documents> it = documents.iterator();
+
+        while (it.hasNext()) {
+            Documents s = it.next();
+        }
+        return "success";
+    }
+
     public BureauProGphy getChefDeProjet() {
         return chefDeProjet;
     }
@@ -58,88 +71,88 @@ while (it.hasNext()) {
         this.commercial = commercial;
     }
 
-	public Client getClient() {
-		return this.client;
-	}
+    public Client getClient() {
+        return this.client;
+    }
 
-	/**
-	 * 
-	 * @param client
-	 */
-	public void setClient(Client client) {
-		this.client = client;
-	}
+    /**
+     *
+     * @param client
+     */
+    public void setClient(Client client) {
+        this.client = client;
+    }
 
-	public ArrayList<Etudiant> getDevellopeurs() {
-		return this.devellopeurs;
-	}
+    public ArrayList<Etudiant> getDevellopeurs() {
+        return this.devellopeurs;
+    }
 
-	/**
-	 * 
-	 * @param devellopeurs
-	 */
-	public void setDevellopeurs(ArrayList<Etudiant> devellopeurs) {
-		this.devellopeurs = devellopeurs;
-	}
+    /**
+     *
+     * @param devellopeurs
+     */
+    public void setDevellopeurs(ArrayList<Etudiant> devellopeurs) {
+        this.devellopeurs = devellopeurs;
+    }
 
-	public String getNomProjet() {
-		return this.nomProjet;
-	}
+    public String getNomProjet() {
+        return this.nomProjet;
+    }
 
-	/**
-	 * 
-	 * @param nomProjet
-	 */
-	public void setNomProjet(String nomProjet) {
-		this.nomProjet = nomProjet;
-	}
+    /**
+     *
+     * @param nomProjet
+     */
+    public void setNomProjet(String nomProjet) {
+        this.nomProjet = nomProjet;
+    }
 
-	/**
-	 * 
-	 * @param etudiant
-	 */
-	public void addEtudiant(Etudiant etudiant) {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     *
+     * @param etudiant
+     */
+    public void addEtudiant(Etudiant etudiant) {
+        throw new UnsupportedOperationException();
+    }
 
-	/**
-	 * 
-	 * @param etudiant
-	 */
-	public void delEtudiant(Etudiant etudiant) {
-		throw new UnsupportedOperationException();
-	}
+    /**
+     *
+     * @param etudiant
+     */
+    public void delEtudiant(Etudiant etudiant) {
+        throw new UnsupportedOperationException();
+    }
 
-	public ArrayList<Documents> getDocuments() {
-		return this.documents;
-	}
+    public List<Documents> getDocuments() {
+        return this.documents;
+    }
 
-	/**
-	 * 
-	 * @param documents
-	 */
-	public void setDocuments(ArrayList<Documents> documents) {
-		this.documents = documents;
-	}
+    /**
+     *
+     * @param documents
+     */
+    public void setDocuments(ArrayList<Documents> documents) {
+        this.documents = documents;
+    }
 
-	/**
-	 * 
-	 * @param document
-	 */
-	public void addDocument(Documents document) {
-            this.documents.add(document);
-	}
+    /**
+     *
+     * @param document
+     */
+    public void addDocument(Documents document) {
+        this.documents.add(document);
+    }
 
-	/**
-	 * 
-	 * @param document
-	 */
-	public void delDocument(Documents document) {
-	}
-        
-        public void onProjectChosen(SelectEvent event) {
-            Projet projet = (Projet) event.getObject();
-        }
+    /**
+     *
+     * @param document
+     */
+    public void delDocument(Documents document) {
+    }
+
+    public void onProjectChosen(SelectEvent event) {
+        Projet projet = (Projet) event.getObject();
+    }
 
     public int getProgression() {
         return progression;
@@ -148,10 +161,8 @@ while (it.hasNext()) {
     public void setProgression(int progression) {
         this.progression = progression;
     }
-        
-        
 
-        // Methodes pour la BDD
+    // Methodes pour la BDD
     public String saveProjet() throws SQLException {
         ConnectBDD con = new ConnectBDD();
         Connection b = con.getMyConnexion();
@@ -216,22 +227,22 @@ while (it.hasNext()) {
             int idproj = result.getInt("Id_Projet");
             BureauProGphy chefProjet = new BureauProGphy();
             Statement statement = con.createStatement();
-            ResultSet resultat2 = statement.executeQuery( "select Nom_Personne from Projet natural join supervise natural join adherent natural join personne natural join membre_bureau natural join est_elu where Id_Projet = "+idproj+" and poste = 'Chef de Projets' and Actif = 1;" );
-            while ( resultat2.next() ) {
-                chefProjet.setNom(resultat2.getString( "Nom_Personne" ));
+            ResultSet resultat2 = statement.executeQuery("select Nom_Personne from Projet natural join supervise natural join adherent natural join personne natural join membre_bureau natural join est_elu where Id_Projet = " + idproj + " and poste = 'Chef de Projets' and Actif = 1;");
+            while (resultat2.next()) {
+                chefProjet.setNom(resultat2.getString("Nom_Personne"));
                 /* Traiter ici les valeurs récupérées. */
             }
             projet.setChefDeProjet(chefProjet);
             BureauProGphy commercial = new BureauProGphy();
             Statement statement2 = con.createStatement();
-            ResultSet resultat3 = statement2.executeQuery( "select Nom_Personne from Projet natural join supervise natural join adherent natural join personne natural join membre_bureau natural join est_elu where Id_Projet = "+idproj+" and poste = 'Commercial' and Actif = 1;" );
-            while ( resultat3.next() ) {
-                commercial.setNom(resultat3.getString( "Nom_Personne" ));
+            ResultSet resultat3 = statement2.executeQuery("select Nom_Personne from Projet natural join supervise natural join adherent natural join personne natural join membre_bureau natural join est_elu where Id_Projet = " + idproj + " and poste = 'Commercial' and Actif = 1;");
+            while (resultat3.next()) {
+                commercial.setNom(resultat3.getString("Nom_Personne"));
                 /* Traiter ici les valeurs récupérées. */
             }
             Statement statement3 = con.createStatement();
-            ResultSet resultat4 = statement3.executeQuery( "select Nom_Document, Extension, Annee, Emplacement, Id_Projet from document where Id_Projet = "+idproj+";" );
-            while ( resultat4.next() ) {
+            ResultSet resultat4 = statement3.executeQuery("select Nom_Document, Extension, Annee, Emplacement, Id_Projet from document where Id_Projet = " + idproj + ";");
+            while (resultat4.next()) {
                 Documents doc = new Documents();
                 doc.setNomDoc(resultat4.getString("Nom_Document"));
                 doc.setTypeDoc(resultat4.getString("Extension"));
@@ -243,16 +254,15 @@ while (it.hasNext()) {
             }
             projet.setCommercial(commercial);
             Statement statement5 = con.createStatement();
-            ResultSet resultat5 = statement5.executeQuery( "SELECT (count(*)/12*100) as nb_etapes FROM projetannuel.est_en_phase where Id_Projet = "+idproj+";" );
-            while ( resultat5.next() ) {
+            ResultSet resultat5 = statement5.executeQuery("SELECT (count(*)/12*100) as nb_etapes FROM projetannuel.est_en_phase where Id_Projet = " + idproj + ";");
+            while (resultat5.next()) {
                 projet.setProgression(Math.round(resultat5.getInt("nb_etapes")));
                 /* Traiter ici les valeurs récupérées. */
             }
         }
         return list;
     }
-    
-    
+
 //        //methode surchargée qui prend en paramètre un boolean actif
 //      public List<BureauProGphy> getProjet(Boolean actif) throws SQLException {
 //        //get database connection

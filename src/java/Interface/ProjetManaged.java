@@ -1,11 +1,14 @@
-package tools;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
-import Interface.ProjetDialog;
+package Interface;
+
 import beans.BureauProGphy;
 import beans.Client;
-import beans.Coordonnees;
 import beans.Documents;
-import beans.Etudiant;
 import beans.Projet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,22 +16,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
-
+import tools.ConnectBDD;
 @ManagedBean
-@RequestScoped
+@SessionScoped
 /**
  *
- * @author Teddy Delavallee
+ * @author teddy
  */
-public class Tools {
+public class ProjetManaged {
+    private Projet selectedProjet;
     
-    public List<Projet> getProjetx(Boolean actif) throws SQLException {
-        ProjetDialog slctProj = new ProjetDialog();
+    public List<Projet> getProjet(Boolean actif) throws SQLException {
         //get database connection
         ConnectBDD b = new ConnectBDD();
         Connection con = b.getMyConnexion();
@@ -55,7 +56,6 @@ public class Tools {
             clientp.setSiren(result.getLong("Siret"));
             clientp.setSociete(result.getString("Societe"));
             projet.setClient(clientp);
-            slctProj.setSelectedProjet(projet);
             int idproj = result.getInt("Id_Projet");
             BureauProGphy chefProjet = new BureauProGphy();
             Statement statement = con.createStatement();
@@ -79,7 +79,7 @@ public class Tools {
                 doc.setNomDoc(resultat4.getString("Nom_Document"));
                 doc.setTypeDoc(resultat4.getString("Extension"));
                 doc.setEmplacement(resultat4.getString("Emplacement"));
-                doc.setProjet(projet);
+                doc.setProjet(selectedProjet);
                 doc.setAnnee(resultat4.getInt("Annee"));
                 projet.addDocument(doc);
                 /* Traiter ici les valeurs récupérées. */
@@ -93,46 +93,8 @@ public class Tools {
             }
             //store all data into a List
             list.add(projet);
-            ProjetDialog selectedproj = new ProjetDialog();
-            selectedproj.setSelectedProjet(projet);
+            this.selectedProjet = projet;
         }
         return list;
     }
-    
-    /**
-     *prend une date au format java et la convertie au format SQL
-     * @param datejava (dd-mm-aaaa)
-     * @return dateSQl (aaaa-mm-dd)
-     */
-    public String dateJavaToSQL(Date datejava){
-        String convert = datejava.toString();
-         String dd =convert.substring(0,2);
-         String mm= convert.substring(3,5);
-         String aa= convert.substring(6,10);
-       
-         String dateSQL=aa+"-"+mm+"-"+dd;
-        
-         System.out.println(dateSQL);
-        return dateSQL;
-    }
-    
-    /**
-     * prend une date au format SQL et la convertie au format date de java
-     * @param dateSQL (aaaa-mm-dd)
-     * @return dateJava (dd-mm-aaaa)
-     */
-    public Date dateSQLToJava(String dateSQL){
-         String aaaa= dateSQL.substring(0,4);
-         String mm= dateSQL.substring(5,7);
-         String dd= dateSQL.substring(8,10);
-       
-         Date dateJava = null;
-         dateJava.setYear(Integer.parseInt(aaaa));
-         dateJava.setMonth(Integer.parseInt(mm));
-         dateJava.setDate(Integer.parseInt(dd));
-     
-        return dateJava;
-    }
-    
 }
-
