@@ -20,6 +20,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import org.primefaces.context.RequestContext;
 import tools.ConnectBDD;
  
 public class ProjetDialog implements Serializable {
@@ -37,6 +38,9 @@ public class ProjetDialog implements Serializable {
         selectedProjet = pSelectedProjet;
     }
     
+    public void putDocuments() {  
+            RequestContext.getCurrentInstance().openDialog("selectedProjet");  
+        }  
     
     public Projet getSelectedProjet() {
         return selectedProjet;
