@@ -1,5 +1,6 @@
 package beans;
 
+import Interface.ProjetDialog;
 import java.util.ArrayList;
 import java.io.Serializable;
 import java.sql.Connection;
@@ -182,6 +183,7 @@ while (it.hasNext()) {
     }
 
     public List<Projet> getProjet(Boolean actif) throws SQLException {
+        ProjetDialog slctProj = new ProjetDialog();
         //get database connection
         ConnectBDD b = new ConnectBDD();
         Connection con = b.getMyConnexion();
@@ -210,6 +212,7 @@ while (it.hasNext()) {
             projet.setClient(clientp);
             //store all data into a List
             list.add(projet);
+            slctProj.setSelectedProjet(projet);
             int idproj = result.getInt("Id_Projet");
             BureauProGphy chefProjet = new BureauProGphy();
             Statement statement = con.createStatement();
