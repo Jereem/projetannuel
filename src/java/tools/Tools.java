@@ -135,14 +135,14 @@ public class Tools {
     
     /**
      *prend une date au format java et la convertie au format SQL
-     * @param datejava (dd-mm-aa)
-     * @return dateSQl (aa-mm-dd)
+     * @param datejava (dd-mm-aaaa)
+     * @return dateSQl (aaaa-mm-dd)
      */
     public String dateJavaToSQL(Date datejava){
         String convert = datejava.toString();
          String dd =convert.substring(0,2);
          String mm= convert.substring(3,5);
-         String aa= convert.substring(6,8);
+         String aa= convert.substring(6,10);
        
          String dateSQL=aa+"-"+mm+"-"+dd;
         
@@ -152,16 +152,16 @@ public class Tools {
     
     /**
      * prend une date au format SQL et la convertie au format date de java
-     * @param dateSQL (aa-mm-dd)
-     * @return dateJava (dd-mm-aa)
+     * @param dateSQL (aaaa-mm-dd)
+     * @return dateJava (dd-mm-aaaa)
      */
     public Date dateSQLToJava(String dateSQL){
-         String aa= dateSQL.substring(0,2);
-         String mm= dateSQL.substring(3,5);
-         String dd= dateSQL.substring(6,8);
+         String aaaa= dateSQL.substring(0,4);
+         String mm= dateSQL.substring(5,7);
+         String dd= dateSQL.substring(8,10);
        
          Date dateJava = null;
-         dateJava.setYear(Integer.parseInt(aa));
+         dateJava.setYear(Integer.parseInt(aaaa));
          dateJava.setMonth(Integer.parseInt(mm));
          dateJava.setDate(Integer.parseInt(dd));
      

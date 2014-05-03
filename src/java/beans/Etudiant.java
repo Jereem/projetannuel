@@ -31,7 +31,7 @@ public class Etudiant extends Personne implements Serializable {
     private long numeroSS;
     private ArrayList<Competences> listeCompetences;
     @NotNull ( message = "Veuillez saisir une date de naissance" )
-    @Pattern(regexp = "^(\\d\\d)\\/(\\d\\d)\\/(\\d\\d)$", message = "Merci de saisir une date valide (jj/mm/aa)")
+   // @Pattern(regexp = "^(\\d\\d)\\/(\\d\\d)\\/(\\d\\d)$", message = "Merci de saisir une date valide (jj/mm/aa)")
     private Date dateNaissance;
     private boolean AJourCotisation;
     @NotNull ( message = "Veuillez saisir une année de promotion" )
@@ -116,6 +116,7 @@ public class Etudiant extends Personne implements Serializable {
     // Methode pour sauvegarder un adhérent dans la BDD
     public String saveNewAdherent() throws SQLException {
         ConnectBDD b = new ConnectBDD();
+        System.out.println("je fais des requetes");
         if (b == null) {
             throw new SQLException("Can't get database connection");
         }
@@ -127,7 +128,8 @@ public class Etudiant extends Personne implements Serializable {
             long paramNumeroSS = this.getNumeroSS();
             Date javaDateNaissance=this.getDateNaissance();
             Tools tls= new Tools();
-            String paramdateNaissance = tls.dateJavaToSQL(javaDateNaissance);          
+            String paramdateNaissance = tls.dateJavaToSQL(javaDateNaissance);
+            System.out.println(paramdateNaissance);
             int paramNumRue = this.getCoordonnees().getNumRue();
             String paramTypeVoie = this.getCoordonnees().getVoiesString();
             String paramNomRue = this.getCoordonnees().getRue();
@@ -145,11 +147,13 @@ public class Etudiant extends Personne implements Serializable {
                     + "SELECT @last:=LAST_INSERT_ID(); "
                     + "INSERT INTO ADHERENT (Id_Personne, Numero_SS, Date_Naissance, Promotion) VALUES (@last, " + paramNumeroSS + "," + paramdateNaissance + "," + paramPromo + "); "
                     + "INSERT INTO coordonnees (Id_Personne, Email, Rue ,Numero_De_Rue, Type_Voie, Ville, Code_Postal, Pays, Telephone_1, Telephone_2) VALUES (@last," + paramEmail + "," + paramNomRue + "," + paramNumRue + "," + paramTypeVoie +"," + paramVille +"," + paramCP +"," + paramPays +"," + paramTelFixe +"," + paramTelMobile +");");
-            System.out.println("je fais des requetes");
+            
             */
+            
             b.getMyStatement().executeUpdate("INSERT INTO PERSONNE(Titre, Nom_Personne, Prenom_Personne) VALUES (" + paramTitre + "," + paramNom + "," + paramPrenom + ")");
-            b.getMyStatement().executeQuery("SELECT @last:=LAST_INSERT_ID()");
-            b.getMyStatement().executeUpdate("INSERT INTO ADHERENT (Id_Personne, Numero_SS, Date_Naissance, Promotion) VALUES (@last, \" + paramNumeroSS + \",\" + paramdateNaissance + \",\" + paramPromo + \")");
+            ResultSet result= b.getMyStatement().executeQuery("SELECT @last:=LAST_INSERT_ID()");
+            int id_pers=result.getInt(1);
+            b.getMyStatement().executeUpdate("INSERT INTO ADHERENT (Id_Personne, Numero_SS, Date_Naissance, Promotion) VALUES (@last, " + paramNumeroSS + "," + paramdateNaissance + "," + paramPromo + ")");
             b.getMyStatement().executeUpdate("INSERT INTO coordonnees (Id_Personne, Email, Rue ,Numero_De_Rue, Type_Voie, Ville, Code_Postal, Pays, Telephone_1, Telephone_2) VALUES (@last," + paramEmail + "," + paramNomRue + "," + paramNumRue + "," + paramTypeVoie +"," + paramVille +"," + paramCP +"," + paramPays +"," + paramTelFixe +"," + paramTelMobile +")");
             
             return "success";
