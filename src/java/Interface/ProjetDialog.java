@@ -32,10 +32,11 @@ public class ProjetDialog implements Serializable {
         selectedClients = new ArrayList();
         selectedClients = getClient();
     }
-
+ 
     public ProjetDialog(Projet pSelectedProjet) {
         selectedProjet = pSelectedProjet;
     }
+    
     
     public Projet getSelectedProjet() {
         return selectedProjet;
