@@ -12,7 +12,7 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>success</from-outcome>
-            <to-view-id>/test2.xhtml</to-view-id>
+            <to-view-id>/success.xhtml</to-view-id>
         </navigation-case>	
     </navigation-rule>
 </faces-config>
