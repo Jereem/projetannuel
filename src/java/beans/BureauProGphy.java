@@ -23,7 +23,7 @@ public class BureauProGphy extends Etudiant implements Serializable {
     private Poste poste;
     private ArrayList<Integer> anneesMembre;
     @NotNull
-    @Size( min = 1, max = 13, message = "L'identifiant doit contenir au moins 13 caractères" )
+    @Size( min = 1, max = 13, message = "L'identifiant doit contenir moins de 13 caractères" )
     private String identifiant;
     @NotNull
     private String mdp;

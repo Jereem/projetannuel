@@ -23,7 +23,18 @@ import tools.ConnectBDD;
 public class UtilisateurManaged {
 
     private BureauProGphy selectedUtilisateur;
-    private BureauProGphy tryUtilisateur;
+    private boolean validationComplete = false;
+
+    public UtilisateurManaged(){
+        selectedUtilisateur = new BureauProGphy();
+    }
+    public boolean isValidationComplete() {
+        return validationComplete;
+    }
+
+    public void setValidationComplete(boolean validationComplete) {
+        this.validationComplete = validationComplete;
+    }
 
     public BureauProGphy getSelectedUtilisateur() {
         return selectedUtilisateur;
@@ -33,36 +44,26 @@ public class UtilisateurManaged {
         this.selectedUtilisateur = selectedUtilisateur;
     }
 
-    public BureauProGphy getTryUtilisateur() {
-        return tryUtilisateur;
-    }
-
-    public void setTryUtilisateur(BureauProGphy tryUtilisateur) {
-        this.tryUtilisateur = tryUtilisateur;
-    }
-    
-    public String connexion() throws SQLException{
-        Boolean utilOK = false;
+    public String connexion() throws SQLException {
         ConnectBDD b = new ConnectBDD();
         Connection con = b.getMyConnexion();
         if (con == null) {
             throw new SQLException("Can't get database connection");
         }
-        PreparedStatement ps = con.prepareStatement("select count(*) as nbutil from MEMBRE_BUREAU where Identifiant = " + this.tryUtilisateur.getIdentifiant() +" Mot_de_Passe = " + this.tryUtilisateur.getMdp() +"");
+        PreparedStatement ps = con.prepareStatement("select count(*) as nbutil from MEMBRE_BUREAU where Identifiant = '" + this.selectedUtilisateur.getIdentifiant() + "' and Mot_de_Passe = '" + this.selectedUtilisateur.getMdp() + "' and actif = 1");
         //get customer data from database
         ResultSet result = ps.executeQuery();
         while (result.next()) {
-            if (result.getInt("nbutil") > 0){
-                utilOK = true;
+            int nbutil = result.getInt("nbutil");
+            if (nbutil > 0) {
+                this.validationComplete = true;
             }
         }
-        if (utilOK) {
-            this.selectedUtilisateur = this.tryUtilisateur;
-        return "tableauBord";
+        if (this.validationComplete) {
+            return "tableauBord";
+        } else {
+            return "index";
         }
-        else {
-                return "index";
-            }
     }
 
 }
