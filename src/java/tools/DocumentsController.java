@@ -260,6 +260,17 @@ public class DocumentsController implements Serializable {
                 res=result.getString("Nom_Document");
                 new_node=new DefaultTreeNode(res, "Document", noeud_pere );         
                 } 
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
      }
     
     

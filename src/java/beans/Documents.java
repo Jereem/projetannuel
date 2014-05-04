@@ -194,7 +194,7 @@ public class Documents implements Serializable{
            String paramext=myDoc.typeDoc;//extension 
            int paramannee=myDoc.annee;
            String paramemplacement=myDoc.getEmplacement(); //emplacement
-            //int paramidprojet=myDoc.projet.getIdprojet()//id projet
+           int paramidprojet=myDoc.projet.getID();//id projet
            String paramidentifiant=myDoc.auteur.getIdentifiant(); //identifiant
           
            b.getMyStatement().executeUpdate("INSERT INTO DOCUMENT ('Nom_Document','Extension','Annee','Emplacement','Id_Projet','Identifiant') VALUES (paramnom,paramext,paramannee,paramemplacement,paramidentifiant)");
