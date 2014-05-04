@@ -9,13 +9,16 @@ package tools;
  *
  * @author jeremygillet
  */
+import java.awt.event.ActionEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 import org.primefaces.model.DefaultTreeNode;
 import org.primefaces.model.TreeNode;
 
@@ -26,89 +29,103 @@ public class TreeBean {
 
     private TreeNode root_admin;
     private TreeNode root_projet;
+    
+    private TreeNode selectedNode;  
 
     public TreeBean() throws SQLException {
         root_admin = new DefaultTreeNode("Root", null);
         root_projet = new DefaultTreeNode("Root", null);
 
         Calendar calendar = Calendar.getInstance();
-        
 
-            TreeNode wiki = new DefaultTreeNode("WIKI", root_admin);
-            addDocument2Noeud(wiki,"wiki");
+        TreeNode wiki = new DefaultTreeNode("WIKI", root_admin);
+        addDocument2Noeud(wiki, "wiki");
 
-            TreeNode modeles_ad = new DefaultTreeNode("MODELES", root_admin);
+        TreeNode modeles_ad = new DefaultTreeNode("MODELES", root_admin);
 
-            TreeNode mod = new DefaultTreeNode("modeles des fiches d'adhesion", modeles_ad);
-            //addDocument2Noeud(mod, "modeles_adhesion");
+        TreeNode mod = new DefaultTreeNode("modeles des fiches d'adhesion", modeles_ad);
+        addDocument2Noeud(mod, "modeles_adhesion");
 
-            TreeNode formul = new DefaultTreeNode("Formulaires CERFA", modeles_ad);
-            // addDocument2Noeud(formul, "cerfa");
+        TreeNode formul = new DefaultTreeNode("Formulaires CERFA", modeles_ad);
+        addDocument2Noeud(formul, "cerfa");
 
-            
-            int cal = calendar.get(Calendar.YEAR);
-            TreeNode nomanne;
-            String nomannee;
-            TreeNode statuts;
-            TreeNode pv;
-            TreeNode autres;
+        int cal = calendar.get(Calendar.YEAR);
+        TreeNode nomanne;
+        String nomannee;
+        TreeNode statuts;
+        TreeNode pv;
+        TreeNode autres;
 
-            for (int i = 2012; i <= cal; i++) {
-                nomannee = String.valueOf(i);
-                nomanne = new DefaultTreeNode(nomannee, root_admin);
-                statuts = new DefaultTreeNode("Statuts", nomanne);
-                // addDocument2Noeud(mod, i, "modeles_adhesion");
-                pv = new DefaultTreeNode("PV d'assemble generale", nomanne);
-                // addDocument2Noeud(mod, i, "modeles_adhesion");
-                autres = new DefaultTreeNode("Autres documents", nomanne);
-                // addDocument2Noeud(mod, i, "modeles_adhesion");
+        for (int i = 2012; i <= cal; i++) {
+            nomannee = String.valueOf(i);
+            nomanne = new DefaultTreeNode(nomannee, root_admin);
+            statuts = new DefaultTreeNode("Statuts", nomanne);
+            addDocument2Noeud(mod, i, "modeles_adhesion");
+            pv = new DefaultTreeNode("PV d'assemble generale", nomanne);
+            addDocument2Noeud(mod, i, "PV");
+            autres = new DefaultTreeNode("Autres documents", nomanne);
+            addDocument2Noeud(mod, i, "autres");
+        }
+
+        TreeNode modeles = new DefaultTreeNode("MODELES", root_projet);
+
+        TreeNode facture = new DefaultTreeNode("FACTURE", modeles);
+        TreeNode devis = new DefaultTreeNode("DEVIS", modeles);
+        TreeNode cdc = new DefaultTreeNode("CAHIER DES CHARGES", modeles);
+        TreeNode cdconception = new DefaultTreeNode("CAHIER DE CONCEPTION", modeles);
+
+        TreeNode nomAnne;
+        String nomAnnee;
+        TreeNode recueil_besoin;
+        TreeNode facture_spe;
+        TreeNode devis_spe;
+        TreeNode cdc_spe;
+        TreeNode cahier_conception_spe;
+        TreeNode autre_spe;
+        TreeNode projet;
+
+        for (int j = 2012; j <= cal; j++) {
+            nomAnnee = String.valueOf(j);
+            nomAnne = new DefaultTreeNode(nomAnnee, root_projet);
+            //get database connection
+            ConnectBDD b = new ConnectBDD();
+            Connection con = b.getMyConnexion();
+            if (con == null) {
+                throw new SQLException("Can't get database connection here");
             }
-    
-            
-            TreeNode modeles = new DefaultTreeNode("MODELES", root_projet);
+            // PreparedStatement ps = con.prepareStatement("SELECT MIN(document.ANNEE) AS annee,Id_Projet, Nom_Projet FROM projetannuel.PROJET NATURAL JOIN projetannuel.DOCUMENT  WHERE DOCUMENT.Annee=" + j + " GROUP BY Id_Projet HAVING annee = "+ j +" ORDER BY Nom_Projet ;");
+            PreparedStatement ps = con.prepareStatement("SELECT document.ANNEE AS annee,Id_Projet, Nom_Projet FROM projetannuel.PROJET NATURAL JOIN projetannuel.DOCUMENT   GROUP BY Id_Projet HAVING MIN(ANNEE)=" + j + " ORDER BY Nom_Projet;");
+            ResultSet result = ps.executeQuery();
+            String nom_projet;
+            String id_pro;
+            int id_proj;
 
-            TreeNode facture = new DefaultTreeNode("FACTURE", modeles);
-            TreeNode devis = new DefaultTreeNode("DEVIS", modeles);
-            TreeNode cdc = new DefaultTreeNode("CAHIER DES CHARGES", modeles);
-            TreeNode cdconception = new DefaultTreeNode("CAHIER DE CONCEPTION", modeles);
-            
-            
-            TreeNode nomAnne;
-            String nomAnnee;
-            TreeNode recueil_besoin;
-            TreeNode facture_spe;
-            TreeNode devis_spe;
-            TreeNode cdc_spe;
-            TreeNode cahier_conception_spe;
-            TreeNode projet;
+            while (result.next()) {
+                nom_projet = result.getString("Nom_Projet");
+                id_pro = result.getString("Id_projet");
+                id_proj = Integer.valueOf(id_pro);
+                projet = new DefaultTreeNode(nom_projet, nomAnne);
 
-            for (int j = 2012; j <= cal; j++) {
-                nomAnnee = String.valueOf(j);
-                nomAnne = new DefaultTreeNode(nomAnnee, root_projet);
-                //get database connection
-                ConnectBDD b = new ConnectBDD();
-                Connection con = b.getMyConnexion();
-                if (con == null) {
-                    throw new SQLException("Can't get database connection");
-                }
-               // PreparedStatement ps = con.prepareStatement("SELECT MIN(document.ANNEE) AS annee,Id_Projet, Nom_Projet FROM projetannuel.PROJET NATURAL JOIN projetannuel.DOCUMENT  WHERE DOCUMENT.Annee=" + j + " GROUP BY Id_Projet HAVING annee = "+ j +" ORDER BY Nom_Projet ;");
-                  PreparedStatement ps = con.prepareStatement("SELECT document.ANNEE AS annee,Id_Projet, Nom_Projet FROM projetannuel.PROJET NATURAL JOIN projetannuel.DOCUMENT   GROUP BY Id_Projet HAVING MIN(ANNEE)="+ j + " ORDER BY Nom_Projet;");
-                ResultSet result = ps.executeQuery();
-                String nom_projet;
+                recueil_besoin = new DefaultTreeNode("RECUEIL DES BESOINS", projet);
+                addDocument2Noeud(recueil_besoin, j, id_proj, "Recueil des besoins");
 
-                while (result.next()) {
-                    nom_projet = result.getString("Nom_Projet");
-                    projet = new DefaultTreeNode(nom_projet, nomAnne);
+                facture_spe = new DefaultTreeNode("FACTURE", projet);
+                addDocument2Noeud(facture_spe, j, id_proj, "Facture");
 
-                    recueil_besoin = new DefaultTreeNode("RECUEIL DES BESOINS", projet);
-                    facture_spe = new DefaultTreeNode("FACTURE", projet);
-                    devis_spe = new DefaultTreeNode("DEVIS", projet);
-                    cdc_spe = new DefaultTreeNode("CAHIER DES CHARGES", projet);
-                    cahier_conception_spe = new DefaultTreeNode("CAHIER DE CONCEPTION", projet);
-                }
+                devis_spe = new DefaultTreeNode("DEVIS", projet);
+                addDocument2Noeud(devis_spe, j, id_proj, "devis");
+
+                cdc_spe = new DefaultTreeNode("CAHIER DES CHARGES", projet);
+                addDocument2Noeud(cdc_spe, j, id_proj, "cahier des charges");
+
+                cahier_conception_spe = new DefaultTreeNode("CAHIER DE CONCEPTION", projet);
+                addDocument2Noeud(cahier_conception_spe, j, id_proj, "cahier conception");
+
+                autre_spe = new DefaultTreeNode("AUTRES", projet);
+                addDocument2Noeud(autre_spe, j, id_proj, "autres");
             }
+        }
 
-        
     }
 
     public TreeNode getRoot_admin() {
@@ -122,6 +139,7 @@ public class TreeBean {
      *
      * @param noeud_pere
      * @param typ
+     * @throws java.sql.SQLException
      */
     public void addDocument2Noeud(TreeNode noeud_pere, String typ) throws SQLException{
                 String type=typ;
@@ -142,12 +160,35 @@ public class TreeBean {
                 res=result.getString("Nom_Document");
                 new_node=new DefaultTreeNode(res, noeud_pere);         
                 }  
-                
+                b.close();
                 
     }
     
 
-    public void addDocument2Noeud(TreeNode noeud_pere, int annee, String type) throws SQLException {
+    public void addDocument2Noeud(TreeNode noeud_pere, int annee, String typ) throws SQLException {
+
+         String type=typ;
+        //get database connection
+        ConnectBDD b = new ConnectBDD();
+        Connection con = b.getMyConnexion();
+        if (con == null) {
+            throw new SQLException("Can't get database connection");
+        }
+
+        PreparedStatement ps = con.prepareStatement("SELECT Id_Document, Nom_Document FROM DOCUMENT NATURAL JOIN DEPEND NATURAL JOIN META_DATA WHERE Depend.Valeur='"+ type +"' AND DOCUMENT.Annee='"+ annee +"' ;");
+        
+        ResultSet result = ps.executeQuery();
+        String res = null;
+        TreeNode new_node = null;
+        while (result.next()) {
+            res = result.getString("Nom_Document");
+            new_node = new DefaultTreeNode(res, noeud_pere);
+        }
+        b.close();
+    }
+    
+    
+      public void addDocument2Noeud(TreeNode noeud_pere, int annee, int id_projet, String type) throws SQLException {
 
         //get database connection
         ConnectBDD b = new ConnectBDD();
@@ -156,14 +197,32 @@ public class TreeBean {
             throw new SQLException("Can't get database connection");
         }
 
-        PreparedStatement ps = con.prepareStatement("SELECT Id_Document, Nom_Document FROM DOCUMENT NATURAL JOIN DEPEND NATURAL JOIN META_DATA WHERE META_DATA.Nom_metadata='Type' AND Depend.Valeur=" + type + " AND DOCUMENT.Anne=" + annee + " ;");
+        PreparedStatement ps = con.prepareStatement("SELECT Id_Document, Nom_Document FROM DOCUMENT NATURAL JOIN DEPEND NATURAL JOIN META_DATA WHERE Depend.Valeur='"+ type +"' AND DOCUMENT.Id_Projet="+ id_projet +" ;");
         
         ResultSet result = ps.executeQuery();
         String res = null;
         TreeNode new_node = null;
         while (result.next()) {
             res = result.getString("Nom_Document");
-            new_node = new DefaultTreeNode(res, "Document", noeud_pere);
+            new_node = new DefaultTreeNode(res, noeud_pere);
         }
+        
+        b.close();
     }
+      
+       public TreeNode getSelectedNode() {  
+        return selectedNode;  
+    }  
+       
+        public void setSelectedNode(TreeNode selectedNode) {  
+        this.selectedNode = selectedNode;  
+    }  
+        
+    public void displaySelectedSingle(ActionEvent event) {
+        if(selectedNode != null) {
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Selected", selectedNode.getData().toString());
+
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+	}     
 }				
