@@ -18,7 +18,7 @@
                     
             <h:form>  
 
-                <p:dataTable id="tableAdherent" var="etudiant" value="#{etudiant.getAdherent()}" sortMode="multiple" rows="10" paginator="true">  
+                <p:dataTable id="tableAdherent" var="etudiant" value="#{etudiantM.getAdherent()}" sortMode="multiple" rows="10" paginator="true">  
                     <f:facet name="header">                         
                         ADHERENTS  
                     </f:facet>  
@@ -49,7 +49,7 @@
 					
             <h:form>  
 
-                <p:dataTable id="tableOldAdherent" var="etudiant" value="#{etudiant.getOldAdherent()}" sortMode="multiple" rows="10" paginator="true">  
+                <p:dataTable id="tableOldAdherent" var="etudiant" value="#{etudiantM.getOldAdherent()}" sortMode="multiple" rows="10" paginator="true">  
 
                     <f:facet name="header">                                  
                         ANCIENS ADHERENTS                              
@@ -189,7 +189,7 @@
                 </p:panel> 
 
                 <!-- Envoie le formulaire -->
-                <p:commandButton value="Enregistrer" id="submit" action="#{etudiant.saveNewAdherent}"/>  
+                <p:commandButton value="Enregistrer" id="submit" action="#{etudiantM.saveNewAdherent}"/>  
 
             </h:form>  
 
@@ -222,7 +222,7 @@
                 </p:panel>
 
                 <!-- Envoie le formulaire -->
-                <p:commandButton value="Supprimer" action="#{etudiant.delAdherent}"/>
+                <p:commandButton value="Supprimer" action="#{etudiantM.delAdherent}"/>
                                 
             </h:form>
 
@@ -309,7 +309,7 @@
                         </p:panel>
 
                         <!-- Envoie le formulaire -->                
-                        <p:commandButton value="Modifier" action="#{etudiant.saveNewAdherent}"/>  
+                        <p:commandButton value="Modifier" action="#{etudiantM.modifyCoordonnees}"/>  
             
                     </h:form>  
 

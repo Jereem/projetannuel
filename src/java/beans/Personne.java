@@ -107,4 +107,34 @@ public class Personne implements Serializable {
 
     }
 
+    public String modifyCoordonnees() throws SQLException {
+        ConnectBDD b = new ConnectBDD();
+        if (b == null) {
+            throw new SQLException("Can't get database connection");
+        }
+        try {
+            /* Récupération des paramètres d'URL saisis par l'utilisateur */
+            String paramNom = this.getNom();
+            String paramPrenom = this.getPrenom();
+            int paramNumRue = this.getCoordonnees().getNumRue();
+            String paramTypeVoie = this.getCoordonnees().getVoiesString();
+            String paramNomRue = this.getCoordonnees().getRue();
+            String paramCP = this.getCoordonnees().getCodePostal();
+            String paramVille = this.getCoordonnees().getVille();
+            String paramPays = this.getCoordonnees().getPays();
+            String paramEmail = this.getCoordonnees().getEmail();
+            int paramTelFixe = this.getCoordonnees().getTelFixe();
+            int paramTelMobile = this.getCoordonnees().getTelPortable();
+		 
+            /* Exécution d'une requête de modification de la BDD (INSERT, UPDATE, DELETE, CREATE, etc.). */
+            b.getMyStatement().executeUpdate(""
+                    + "UPDATE COORDONNEES SET Numero_De_Rue='"+paramNumRue+"', Type_Voie='"+paramTypeVoie+"', Rue='"+paramNomRue+"', Code_Postal='"+paramCP+"', Ville='"+paramVille+"', Pays='"+paramPays+"', Emai='"+paramEmail+"', Telephone_1='"+paramTelFixe+"', Telephone_2='"+paramTelMobile+"' WHERE Id_Personne = (SELECT Id_Personne FROM PERSONNE WHERE Nom_Personne='"+paramNom+"' AND Prenom_Personne='"+paramPrenom+"')");
+            return "success";
+        } catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+            return "failed";
+        }
+    }
 }

@@ -261,21 +261,64 @@
 
     <p:tab id="tab5" title="Modification">  
         <h:panelGrid columns="2" cellpadding="10">  
+
             <p:tabView id="tabView">  
-  
+                                       
                 <p:tab id="tab1" title="Modification informations client">  
                     <h:panelGrid columns="2" cellpadding="10">
-							
+                        
+                        <h:form>
+
+                            <p:panel header="Saisir le nom et le prénom">                           
+                                <h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
+
+                                    <h:outputText value="Nom : *" />                         
+                                    <h:inputText id="nom" value="#{etudiant.nom}" >
+                                        <f:ajax event="blur" render="nomMessage" />
+                                        <p></p>
+                                    </h:inputText>
+                                    <h:message id="nomMessage" for="nom" errorClass="erreur" />
+
+                                    <h:outputText value="Prénom : *" />                         
+                                    <h:inputText id="prenom" value="#{etudiant.prenom}" >
+                                        <f:ajax event="blur" render="prenomMessage" />
+                                    </h:inputText>
+                                    <h:message id="prenomMessage" for="prenom" errorClass="erreur" />
+                              
+                                </h:panelGrid>
+                           </p:panel>
+                        
+                        </h:form>
+                        
                     </h:panelGrid>  	
                 </p:tab>  
 
                 //-------------------------------------------------------------------------------------------------
 	    
                 <p:tab id="tab2" title="Modification coordonnées">  
-                    <h:panelGrid columns="2" cellpadding="10">  		
- 
-                        <h:form>                   
+                    <h:panelGrid columns="2" cellpadding="10">  		                 
 
+                        <h:form>
+
+                            <p:panel header="Saisir le nom et le prénom">                           
+                                <h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
+
+                                    <h:outputText value="Nom : *" />                         
+                                    <h:inputText id="nom" value="#{etudiant.nom}" >
+                                        <f:ajax event="blur" render="nomMessage" />
+                                        <p></p>
+                                    </h:inputText>
+                                    <h:message id="nomMessage" for="nom" errorClass="erreur" />
+
+                                    <h:outputText value="Prénom : *" />                         
+                                    <h:inputText id="prenom" value="#{etudiant.prenom}" >
+                                        <f:ajax event="blur" render="prenomMessage" />
+                                    </h:inputText>
+                                    <h:message id="prenomMessage" for="prenom" errorClass="erreur" />
+                              
+                                </h:panelGrid>
+                           </p:panel>
+                            
                             <p:panel header="Coordonnées">                                               
                                 <h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">                                    
                         
@@ -337,7 +380,7 @@
                             </p:panel>
                             
                             <!-- Envoie le formulaire -->                
-                            <p:commandButton value="Modifier" action="#{etudiant.saveNewAdherent}"/>  
+                            <p:commandButton value="Modifier" action="#{etudiant.modifyCoordonnees}"/>  
                    
                         </h:form>  
 

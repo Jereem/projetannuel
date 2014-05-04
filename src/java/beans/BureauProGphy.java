@@ -30,6 +30,11 @@ public class BureauProGphy extends Etudiant implements Serializable {
     private boolean actif;
 
     // Getter et Setter
+    
+    public boolean isActif() {
+        return actif;
+    }
+    
     public Poste getPoste() {
         return this.poste;
     }
@@ -132,7 +137,7 @@ public class BureauProGphy extends Etudiant implements Serializable {
         if (b == null) {
             throw new SQLException("Can't get database connection");
         }
-        etu.saveNewAdherent();
+        //etu.saveNewAdherent();
         try {
             /* Récupération des paramètres d'URL saisis par l'utilisateur */
             String paramIdentifiant = this.getIdentifiant();

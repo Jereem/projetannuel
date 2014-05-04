@@ -10,125 +10,22 @@
     <ui:composition template="newTemplate.xhtml"> 
         <!-- Defini la partie nommée contenu dans le template par le bloc qui suit -->
         <ui:define name="content"> 
-            <h2>Bureau</h2> 
-
-
-            <p:tabView id="tabView">  
-
-                <p:tab id="tab1" title="Ajout d'un nouveau membre">  
-                    <h:panelGrid columns="2" cellpadding="10">  
-
-                        <h:form>  
-
-                            <p:panel header="Nouvel adhérent">  
-
-                                <h:panelGrid columns="3" cellpadding="5">  
-                                    <h:outputText value="Pseudo : *" />  
-
-                                    <h:inputText id="pseudo" value="#{bureauProGphy.identifiant}" >
-                                        <f:ajax event="blur" render="pseudoMessage" />
-                                    </h:inputText>
-                                    <h:message id="pseudoMessage" for="pseudo" errorClass="erreur" />
-
-                                    <h:outputText value="Password: *" />  
-                                    <p:password id="feedback" value="#{bureauProGphy.mdp}" feedback="true"/>  
-                                </h:panelGrid>  
-
-                            </p:panel>  
-
-                            <!-- Envoie le formulaire et passe a la page test2.xhtml -->
-                            <p:commandButton value="Save" action="#{bureauProGphy.saveBureauProGphy}"/>  
-
-                        </h:form>
-
-                    </h:panelGrid>  
-                </p:tab>  
-
-                //-------------------------------------------------------------------------------------------------
-
-                <p:tab id="tab2" title="Suppression d'un membre">  
-                    <h:panelGrid columns="2" cellpadding="10">  
-
-                        <h:form>  
-                            <h3>Inline</h3>  
-                            <p:calendar value="#{beans.Etudiant.dateNaissance}" mode="inline" id="inlineCal"/>     
-                            <p:commandButton value="Submit" />  
-                        </h:form>
-
-                    </h:panelGrid>  
-                </p:tab>  
-
-                //-------------------------------------------------------------------------------------------------
-
-                <p:tab id="tab3" title="Modification">  
-                    <h:panelGrid columns="2" cellpadding="10">  
-
-                    </h:panelGrid>  
-                </p:tab> 
-
-                //-------------------------------------------------------------------------------------------------
-
-                <p:tab id="tab4" title="Liste des membres actifs">  
-                    <h:panelGrid columns="2" cellpadding="10">  
-
-                        <h:form>  
-
-                            <p:dataTable id="dataTable" var="bureauProGphy" value="#{bureauProGphy.getBureauProGphy(true)}" sortMode="multiple" rows="5" paginator="true">  
-                                <f:facet name="header">  
-                                    Membres du bureau 
-                                </f:facet>  
-
-                                <p:column sortBy="pseudo" headerText="Pseudo">  
-                                    <h:outputText value="#{bureauProGphy.identifiant}" />  
-                                </p:column>  
-
-                                <p:column sortBy="mdp" headerText="Mdp">  
-                                    <h:outputText value="#{bureauProGphy.mdp}" />  
-                                </p:column>  
-
-                                <p:column sortBy="actif" headerText="Actif">  
-                                    <h:outputText value="#{bureauProGphy.bool2String()}" />  
-                                </p:column>  
-
-                            </p:dataTable>
-
-                        </h:form>
-
-                    </h:panelGrid>  
-                </p:tab>  
-
-                //-------------------------------------------------------------------------------------------------
-
-                <p:tab id="tab5" title="Liste des anciens membres">  
-                    <h:panelGrid columns="2" cellpadding="10">  
-
-                        <h:form>  
-
-                            <p:dataTable id="dataTable" var="bureauProGphy" value="#{bureauProGphy.getBureauProGphy(false)}" sortMode="multiple" rows="5" paginator="true">  
-                                <f:facet name="header">  
-                                    Anciens membres du bureau 
-                                </f:facet>  
-
-                                <p:column sortBy="pseudo" headerText="Pseudo">  
-                                    <h:outputText value="#{bureauProGphy.identifiant}" />  
-                                </p:column>  
-
-                                <p:column sortBy="mdp" headerText="Mdp">  
-                                    <h:outputText value="#{bureauProGphy.mdp}" />  
-                                </p:column>  
-
-                                <p:column sortBy="actif" headerText="Actif">  
-                                    <h:outputText value="#{bureauProGphy.bool2String()}" />  
-                                </p:column>  
-
-                            </p:dataTable>
-
-                        </h:form>
-
-                    </h:panelGrid>  
-                </p:tab>  
-            </p:tabView>  
-
+            <h2>Connexion</h2> 
+            <h:panelGrid columns="3" cellpadding="5">  
+                <h:form>
+                <h:outputText value="Pseudo : *" />  
+                <h:inputText 
+                    id="pseudo" value="#{utilisateurM.tryUtilisateur.identifiant}" >
+                    <f:ajax event="blur" render="pseudoMessage" />
+                </h:inputText>
+                <h:message id="pseudoMessage" for="pseudo" errorClass="erreur" />
+                <h:outputText value="Password: *" />  
+                <p:password id="feedback" value="#{bureauProGphy.mdp}" feedback="true"/> 
+                
+                <p:commandButton value="Enregistrer" action="#{utilisateurM.connexion()}"/>  
+                       
+            </h:form>  
+            </h:panelGrid>
             <!-- Fin du bloc "contenu" -->
         </ui:define> 
         <!-- Fin du template "layout" -->
