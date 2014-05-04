@@ -197,7 +197,10 @@ public class Documents implements Serializable{
            int paramidprojet=myDoc.projet.getID();//id projet
            String paramidentifiant=myDoc.auteur.getIdentifiant(); //identifiant
           
-           b.getMyStatement().executeUpdate("INSERT INTO DOCUMENT ('Nom_Document','Extension','Annee','Emplacement','Id_Projet','Identifiant') VALUES (paramnom,paramext,paramannee,paramemplacement,paramidentifiant)");
+           
+           
+           //enregistrement document
+           b.getMyStatement().executeUpdate("INSERT INTO DOCUMENT ('Nom_Document','Extension','Annee','Emplacement','Id_Projet','Identifiant') VALUES ("+ paramnom +"," +paramext+ ","+ paramannee +", "+ paramemplacement+" ,"+paramidprojet+", " + paramidentifiant+")");
         }
         catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());
