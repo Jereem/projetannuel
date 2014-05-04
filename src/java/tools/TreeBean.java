@@ -35,7 +35,7 @@ public class TreeBean {
         
 
             TreeNode wiki = new DefaultTreeNode("WIKI", root_admin);
-            // addDocument2Noeud(wiki, "wiki");
+            addDocument2Noeud(wiki,"wiki");
 
             TreeNode modeles_ad = new DefaultTreeNode("MODELES", root_admin);
 
@@ -118,31 +118,34 @@ public class TreeBean {
         return root_projet;
     }
 
-    /**
+   /**
      *
      * @param noeud_pere
-     * @param type
+     * @param typ
      */
-    public void addDocument2Noeud(TreeNode noeud_pere, String type) throws SQLException {
-
-        //get database connection
-        ConnectBDD b = new ConnectBDD();
-        Connection con = b.getMyConnexion();
-        if (con == null) {
-            throw new SQLException("Can't get database connection");
-        }
-
-        PreparedStatement ps = con.prepareStatement("SELECT Id_Document, Nom_Document FROM DOCUMENT NATURAL JOIN DEPEND NATURAL JOIN META_DATA WHERE META_DATA.Nom_metadata='Type' AND Depend.Valeur=" + type + " ;");
-        ResultSet result = ps.executeQuery();
-
-        String res = null;
-        TreeNode new_node = null;
-        while (result.next()) {
-            res = result.getString("Nom_Document");
-            new_node = new DefaultTreeNode(res, "Document", noeud_pere);
-        }
-
+    public void addDocument2Noeud(TreeNode noeud_pere, String typ) throws SQLException{
+                String type=typ;
+                //get database connection
+                ConnectBDD b = new ConnectBDD();
+                Connection con = b.getMyConnexion();
+                if (con == null) {
+                throw new SQLException("Can't get database connection");
+                 }
+                
+                PreparedStatement ps = con.prepareStatement("SELECT Id_Document, Nom_Document,Valeur FROM DOCUMENT NATURAL JOIN DEPEND WHERE Depend.Id_Metadata=1 AND Valeur ='"+ type +"' ;");    
+                ResultSet result = ps.executeQuery();
+                
+                String res=null;
+                TreeNode new_node=null;
+                while (result.next()){
+               
+                res=result.getString("Nom_Document");
+                new_node=new DefaultTreeNode(res, noeud_pere);         
+                }  
+                
+                
     }
+    
 
     public void addDocument2Noeud(TreeNode noeud_pere, int annee, String type) throws SQLException {
 
@@ -154,8 +157,8 @@ public class TreeBean {
         }
 
         PreparedStatement ps = con.prepareStatement("SELECT Id_Document, Nom_Document FROM DOCUMENT NATURAL JOIN DEPEND NATURAL JOIN META_DATA WHERE META_DATA.Nom_metadata='Type' AND Depend.Valeur=" + type + " AND DOCUMENT.Anne=" + annee + " ;");
+        
         ResultSet result = ps.executeQuery();
-
         String res = null;
         TreeNode new_node = null;
         while (result.next()) {
