@@ -45,7 +45,6 @@ public class EtudiantManaged {
     
     // Methode pour sauvegarder un adhérent dans la BDD
     public String saveNewAdherent() throws SQLException {
-        Etudiant etu = new Etudiant();
         ConnectBDD b = new ConnectBDD();
         System.out.println("je fais des requetes");
         if (b == null) {
@@ -53,24 +52,24 @@ public class EtudiantManaged {
         }
         try {
             /* Récupération des paramètres d'URL saisis par l'utilisateur */
-            String paramTitre = etu.getTitresString().toString();
-            String paramNom = etu.getNom();
-            String paramPrenom = etu.getPrenom();
-            long paramNumeroSS = etu.getNumeroSS();
-            Date javaDateNaissance=etu.getDateNaissance();
+            String paramTitre = this.selectedEtudiant.getTitresString().toString();
+            String paramNom = this.selectedEtudiant.getNom();
+            String paramPrenom = this.selectedEtudiant.getPrenom();
+            long paramNumeroSS = this.selectedEtudiant.getNumeroSS();
+            Date javaDateNaissance= this.selectedEtudiant.getDateNaissance();
             Tools tls= new Tools();
             String paramdateNaissance = tls.dateJavaToSQL(javaDateNaissance);
             System.out.println(paramdateNaissance);
-            int paramNumRue = etu.getCoordonnees().getNumRue();
-            String paramTypeVoie = etu.getCoordonnees().getVoiesString();
-            String paramNomRue = etu.getCoordonnees().getRue();
-            String paramCP = etu.getCoordonnees().getCodePostal();
-            String paramVille = etu.getCoordonnees().getVille();
-            String paramPays = etu.getCoordonnees().getPays();
-            String paramEmail = etu.getCoordonnees().getEmail();
-            int paramTelFixe = etu.getCoordonnees().getTelFixe();
-            int paramTelMobile = etu.getCoordonnees().getTelPortable();
-            int paramPromo = etu.getPromotion();
+            int paramNumRue = this.selectedEtudiant.getCoordonnees().getNumRue();
+            String paramTypeVoie = this.selectedEtudiant.getCoordonnees().getVoiesString();
+            String paramNomRue = this.selectedEtudiant.getCoordonnees().getRue();
+            String paramCP = this.selectedEtudiant.getCoordonnees().getCodePostal();
+            String paramVille = this.selectedEtudiant.getCoordonnees().getVille();
+            String paramPays = this.selectedEtudiant.getCoordonnees().getPays();
+            String paramEmail = this.selectedEtudiant.getCoordonnees().getEmail();
+            int paramTelFixe = this.selectedEtudiant.getCoordonnees().getTelFixe();
+            int paramTelMobile = this.selectedEtudiant.getCoordonnees().getTelPortable();
+            int paramPromo = this.selectedEtudiant.getPromotion();
 		 
             /* Exécution d'une requête de modification de la BD (INSERT, UPDATE, DELETE, CREATE, etc.). */
             /* b.getMyStatement().executeUpdate(""
@@ -177,15 +176,14 @@ public class EtudiantManaged {
 
     // Methode pour supprimer un adhérent de la liste des adhérents actuels (adhérent archivé dans la liste des anciens adhérents)
     public String delAdherent () throws SQLException{
-        Etudiant etu = new Etudiant();
         ConnectBDD b = new ConnectBDD();
         if (b == null) {
             throw new SQLException("Can't get database connection");
         }
         try {
             /* Récupération des paramètres d'URL saisis par l'utilisateur */
-            String paramNom = etu.getNom();
-            String paramPrenom = etu.getPrenom();
+            String paramNom = this.selectedEtudiant.getNom();
+            String paramPrenom = this.selectedEtudiant.getPrenom();
 	
         /* Exécution d'une requête de modification de la BD (INSERT, UPDATE, DELETE, CREATE, etc.). */
         b.getMyStatement().executeUpdate(""
@@ -202,18 +200,17 @@ public class EtudiantManaged {
     
     // Methode pour sauvegarder un adhérent dans la BDD
     public String modifyAdherent() throws SQLException {
-        Etudiant etu = new Etudiant();
         ConnectBDD b = new ConnectBDD();
         if (b == null) {
             throw new SQLException("Can't get database connection");
         }
         try {
             /* Récupération des paramètres d'URL saisis par l'utilisateur */
-            String paramTitre = etu.getTitresString().toString();
-            String paramNom = etu.getNom();
-            String paramPrenom = etu.getPrenom();
-            long paramNumeroSS = etu.getNumeroSS();
-            Date paramdateNaissance = etu.getDateNaissance();
+            String paramTitre = this.selectedEtudiant.getTitresString().toString();
+            String paramNom = this.selectedEtudiant.getNom();
+            String paramPrenom = this.selectedEtudiant.getPrenom();
+            long paramNumeroSS = this.selectedEtudiant.getNumeroSS();
+            Date paramdateNaissance = this.selectedEtudiant.getDateNaissance();
             /*int paramNumRue = this.getCoordonnees().getNumRue();
             String paramTypeVoie = this.getCoordonnees().getVoiesString();
             String paramNomRue = this.getCoordonnees().getRue();

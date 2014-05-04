@@ -18,7 +18,7 @@
         <h:panelGrid columns="2" cellpadding="10">
 		
             <h:form>  
-                <p:dataTable id="tableClient" var="client" value="#{client.getClient()}" sortMode="multiple" rows="10" paginator="true">  
+                <p:dataTable id="tableClient" var="client" value="#{clientM.getClient()}" sortMode="multiple" rows="10" paginator="true">  
                     <f:facet name="header">  
                         CLIENTS  
                     </f:facet>  
@@ -43,7 +43,7 @@
         <h:panelGrid columns="2" cellpadding="10">  
 		
              <h:form>  
-                <p:dataTable id="tableClient" var="client" value="#{client.getOldClient()}" sortMode="multiple" rows="10" paginator="true">  
+                <p:dataTable id="tableClient" var="client" value="#{clientM.getOldClient()}" sortMode="multiple" rows="10" paginator="true">  
                     <f:facet name="header">  
                         ANCIENS CLIENTS 
                     </f:facet>  
@@ -187,25 +187,23 @@
             <h:form>  
                             
                 <p:panel header="Supression">                                  
-                    <h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5"> 
+                    <h:panelGrid columns="1" style="margin-bottom:10px" cellpadding="5"> 
 
-                        <h:outputText value="Nom : *" />  
-                        <h:inputText id="nom" value="#{client.nom}" >
-                            <f:ajax event="blur" render="nomMessage" />
-                        </h:inputText>
-                        <h:message id="nomMessage" for="nom" errorClass="erreur" />
-
-                        <h:outputText value="Prénom : *" />  
-                        <h:inputText id="prenom" value="#{client.prenom}" >
-                            <f:ajax event="blur" render="prenomMessage" />
-                        </h:inputText>
-                        <h:message id="prenomMessage" for="prenom" errorClass="erreur" />
-                                 
+                        <h:outputText value="Nom des clients actuels : *" />
+                        <p:selectOneListbox id="nomClient" value="#{clientM.client}"  var="c" style="height:100px; width:600px;" >  
+                            <f:selectItems value="#{clientM.getClient()}" var="client" itemLabel="#{client.nom}" itemValue="#{client}" />  
+                            
+                            <p:column>  
+                                #{c.prenom} #{c.nom}
+                            </p:column>
+                            
+                        </p:selectOneListbox>
+                                                
                     </h:panelGrid>  
                 </p:panel>
 
                 <!-- Envoie le formulaire -->
-                <p:commandButton value="Supprimer" action="#{client.delClient}"/>
+                <p:commandButton value="Supprimer" action="#{clientM.delClient}"/>
                                 
             </h:form>
 
@@ -294,7 +292,7 @@
                             </p:panel>
                             
                             <!-- Envoie le formulaire -->                
-                            <p:commandButton value="Modifier" action="#{client.modifyCoordonnees}"/>  
+                            <p:commandButton value="Modifier" action="#{clientM.modifyCoordonnees}"/>  
 
                         </h:form>  
 
