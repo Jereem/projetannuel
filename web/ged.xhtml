@@ -10,7 +10,7 @@
     <ui:composition template="newTemplate.xhtml"> 
         <!-- Defini la partie nommée contenu dans le template par le bloc qui suit -->
         <ui:define name="content"> 
-            <h2>Bureau</h2> 
+            <h2>GED</h2> 
 
             
 <p:tabView id="tabView">  
@@ -137,12 +137,18 @@
          <br></br>
          <h:form id="form3">
 
-             <p:tree value="#{treeBean.root_admin}" var="node" id="tree">
-                 <p:treeNode id="treeNode">
-                     <h:outputText value="#{node}" id="lblNode"/>
+             <p:growl id="messages" showDetail="true" />
+              
+             <p:tree value="#{treeBean.root_admin}" var="node" id="treeSingle"
+                    selectionMode="single" 
+                    selection="#{treeBean.selectedNode}">
+                 <p:treeNode>
+                     <h:outputText value="#{node}" />
                  </p:treeNode>
              </p:tree>
-
+             
+    <p:commandButton value="Telecharger le document" update="messages"  
+                    actionListener="#{treeBean.displaySelectedSingle}" id="btnDisplay"/> 
          </h:form>
 
      </h:panelGrid>  
@@ -157,13 +163,23 @@
 
          <h:form id="form4">
 
-             <p:tree value="#{treeBean.root_projet}" var="node" id="tree">
-                 <p:treeNode id="treeNode">
-                     <h:outputText value="#{node}" id="lblNode"/>
+              <p:growl id="messages" showDetail="true" />
+              
+             <p:tree value="#{treeBean.root_projet}" var="node" id="treeSingle"
+                    selectionMode="single" 
+                    selection="#{treeBean.selectedNode}">
+                 <p:treeNode>
+                     <h:outputText value="#{node}" />
                  </p:treeNode>
              </p:tree>
+             
+    <p:commandButton value="Telecharger le document" update="messages"  
+                    actionListener="#{treeBean.displaySelectedSingle}" id="btnDisplay"/>  
+  
 
          </h:form>
+         
+         
 
      </h:panelGrid>  
 
