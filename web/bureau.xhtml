@@ -232,19 +232,17 @@
             <h:form>  
                             
                 <p:panel header="Supression">                                  
-                    <h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5"> 
+                    <h:panelGrid columns="1" style="margin-bottom:10px" cellpadding="5"> 
 
-                        <h:outputText value="Nom : *" />  
-                        <h:inputText id="nom" value="#{etudiant.nom}" >
-                            <f:ajax event="blur" render="nomMessage" />
-                        </h:inputText>
-                        <h:message id="nomMessage" for="nom" errorClass="erreur" />
-
-                        <h:outputText value="Prénom : *" />  
-                        <h:inputText id="prenom" value="#{etudiant.prenom}" >
-                            <f:ajax event="blur" render="prenomMessage" />
-                        </h:inputText>
-                        <h:message id="prenomMessage" for="prenom" errorClass="erreur" />
+                                                <h:outputText value="Nom des adhérents actuels : *" />
+                                                <p:selectOneListbox id="nomMembre" value="#{bureauM.selectedBureauProGphy}"  var="m" style="height:100px; width:600px;" >  
+                            <f:selectItems value="#{bureauM.getBureauProGphy()}" var="adherent" itemLabel="#{membre.identifiant}" itemValue="#{membre}" />  
+                            
+                            <p:column>  
+                                #{m.identifiant} (#{m.mdp})
+                            </p:column>
+                            
+                        </p:selectOneListbox>
                                  
                     </h:panelGrid>  
                 </p:panel>
@@ -286,12 +284,33 @@
                                     <h:message id="prenomMessage" for="prenom" errorClass="erreur" />
                               
                                 </h:panelGrid>
-                           </p:panel>
-                        
+                            </p:panel>
+
+                            <p:panel header="Informations diverses">                                               
+                                <h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">                                    
+                                                  
+                                    <h:outputText value="Identifiant : *" />  
+                                    <h:inputText id="identifiant" value="#{membre.identifiant}" >
+                                        <f:ajax event="blur" render="identifiantMessage" />
+                                    </h:inputText>
+                                    <h:message id="identifiantMessage" for="identifiant" errorClass="erreur" />                                    
+
+                                    <h:outputText value="Mot de passe : *" />  
+                                    <h:inputText id="mdp" value="#{membre.mdp}" >
+                                        <f:ajax event="blur" render="mdpMessage" />
+                                    </h:inputText>
+                                    <h:message id="mdpMessage" for="mdp" errorClass="erreur" /> 
+
+                                </h:panelGrid>  
+                            </p:panel>  
+
+                            <!-- Envoie le formulaire -->                
+                            <p:commandButton value="Modifier" action="#{bureauM.modifyCoordonnees}"/> 
+
                         </h:form>
                         
                     </h:panelGrid>  	
-                </p:tab>  
+                </p:tab>
 
                 //-------------------------------------------------------------------------------------------------
 	    
