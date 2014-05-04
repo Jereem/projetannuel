@@ -77,5 +77,16 @@ public Connection getMyConnexion() {
     public Statement getMyStatement() {
         return myStatement;
     }
+    
+    
+    
+    public void close() {
+        try {
+            this.myStatement.close();
+            this.myConnexion.close();    
+        } catch (SQLException ex) {
+           System.out.println("Mysql connection fermeture failed !!!");
+        }
+    }
    
 }

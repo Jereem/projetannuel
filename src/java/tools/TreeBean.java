@@ -196,7 +196,7 @@ public class TreeBean {
             throw new SQLException("Can't get database connection");
         }
 
-        PreparedStatement ps = con.prepareStatement("SELECT Id_Document, Nom_Document FROM DOCUMENT NATURAL JOIN DEPEND NATURAL JOIN META_DATA WHERE Depend.Valeur='"+ type +"' AND DOCUMENT.Id_Projet= "+ id_projet +" ;");
+        PreparedStatement ps = con.prepareStatement("SELECT Id_Document, Nom_Document FROM DOCUMENT NATURAL JOIN DEPEND NATURAL JOIN META_DATA WHERE Depend.Valeur='"+ type +"' AND DOCUMENT.Id_Projet="+ id_projet +" ;");
         
         ResultSet result = ps.executeQuery();
         String res = null;
@@ -205,5 +205,7 @@ public class TreeBean {
             res = result.getString("Nom_Document");
             new_node = new DefaultTreeNode(res, noeud_pere);
         }
+        
+        b.close();
     }
 }				
