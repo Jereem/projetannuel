@@ -12,9 +12,6 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import tools.ConnectBDD;
 
-@ManagedBean
-@RequestScoped
-
 public class Client extends Personne implements Serializable{
 
 	private String societe;
@@ -24,6 +21,14 @@ public class Client extends Personne implements Serializable{
 	public Client() {
 		this.societe = "NewSociete";
 	}
+
+    public String getQualite() {
+        return qualite;
+    }
+
+    public void setQualite(String qualite) {
+        this.qualite = qualite;
+    }
 
 	public String getSociete() {
 		return this.societe;
