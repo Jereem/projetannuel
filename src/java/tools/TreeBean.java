@@ -90,7 +90,7 @@ public class TreeBean {
                 ConnectBDD b = new ConnectBDD();
                 Connection con = b.getMyConnexion();
                 if (con == null) {
-                    throw new SQLException("Can't get database connection");
+                    throw new SQLException("Can't get database connection here");
                 }
                // PreparedStatement ps = con.prepareStatement("SELECT MIN(document.ANNEE) AS annee,Id_Projet, Nom_Projet FROM projetannuel.PROJET NATURAL JOIN projetannuel.DOCUMENT  WHERE DOCUMENT.Annee=" + j + " GROUP BY Id_Projet HAVING annee = "+ j +" ORDER BY Nom_Projet ;");
                   PreparedStatement ps = con.prepareStatement("SELECT document.ANNEE AS annee,Id_Projet, Nom_Projet FROM projetannuel.PROJET NATURAL JOIN projetannuel.DOCUMENT   GROUP BY Id_Projet HAVING MIN(ANNEE)="+ j + " ORDER BY Nom_Projet;");
@@ -139,6 +139,7 @@ public class TreeBean {
      *
      * @param noeud_pere
      * @param typ
+     * @throws java.sql.SQLException
      */
     public void addDocument2Noeud(TreeNode noeud_pere, String typ) throws SQLException{
                 String type=typ;
@@ -186,7 +187,7 @@ public class TreeBean {
     }
     
     
-      public void addDocument2Noeud(TreeNode noeud_pere, int annee,int id_projet, String type) throws SQLException {
+      public void addDocument2Noeud(TreeNode noeud_pere, int annee, int id_projet, String type) throws SQLException {
 
         //get database connection
         ConnectBDD b = new ConnectBDD();
@@ -195,7 +196,7 @@ public class TreeBean {
             throw new SQLException("Can't get database connection");
         }
 
-        PreparedStatement ps = con.prepareStatement("SELECT Id_Document, Nom_Document FROM DOCUMENT NATURAL JOIN DEPEND NATURAL JOIN META_DATA WHERE Depend.Valeur='"+ type +"' AND DOCUMENT.Annee=" + annee + " ;");
+        PreparedStatement ps = con.prepareStatement("SELECT Id_Document, Nom_Document FROM DOCUMENT NATURAL JOIN DEPEND NATURAL JOIN META_DATA WHERE Depend.Valeur='"+ type +"' AND DOCUMENT.Id_Projet= "+ id_projet +" ;");
         
         ResultSet result = ps.executeQuery();
         String res = null;
