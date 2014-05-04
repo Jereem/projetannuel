@@ -213,7 +213,7 @@ public class Etudiant extends Personne implements Serializable {
         if (con == null) {
             throw new SQLException("Can't get database connection");
         }
-        PreparedStatement ps = con.prepareStatement("select * from projetannuel.ADHERENT natural join projetannuel.PERSONNE natural join projetannuel.COORDONNEES where A_Jour_Cotisation = 0");
+        PreparedStatement ps = con.prepareStatement("SELECT * FROM projetannuel.ADHERENT NATURAL JOIN projetannuel.PERSONNE NATURAL JOIN projetannuel.COORDONNEES WHERE A_Jour_Cotisation = 0");
         //get customer data from database
         ResultSet result = ps.executeQuery();
         List<Etudiant> list = new ArrayList<>();

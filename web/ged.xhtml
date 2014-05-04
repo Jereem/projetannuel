@@ -116,11 +116,25 @@
 		
     </p:tab>
   -->
+  
+  
+  
  //-------------------------------------------------------------------------------------------------
  <p:tab id="tab3" title="Espace Administration">  
      <h:panelGrid columns="2" cellpadding="10">
 
+         <h:form enctype="multipart/form-data">
 
+    <p:messages showDetail="true"/>
+
+    <p:fileUpload value="#{fileUploadController.file}" mode="simple"/>
+
+    <p:commandButton value="Submit" ajax="false"
+                actionListener="#{fileUploadController.upload}"/>
+
+        </h:form>
+         
+         <br></br>
          <h:form id="form3">
 
              <p:tree value="#{treeBean.root_admin}" var="node" id="tree">
