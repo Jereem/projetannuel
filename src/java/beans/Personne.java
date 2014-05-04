@@ -122,7 +122,7 @@ public class Personne implements Serializable {
             String paramCP = this.getCoordonnees().getCodePostal();
             String paramVille = this.getCoordonnees().getVille();
             String paramPays = this.getCoordonnees().getPays();
-            String paramEmail = this.getCoordonnees().geteMail();
+            String paramEmail = this.getCoordonnees().getEmail();
             int paramTelFixe = this.getCoordonnees().getTelFixe();
             int paramTelMobile = this.getCoordonnees().getTelPortable();
 		 
