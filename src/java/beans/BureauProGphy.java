@@ -30,6 +30,11 @@ public class BureauProGphy extends Etudiant implements Serializable {
     private boolean actif;
 
     // Getter et Setter
+    
+    public boolean isActif() {
+        return actif;
+    }
+    
     public Poste getPoste() {
         return this.poste;
     }
