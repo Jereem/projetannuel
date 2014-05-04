@@ -181,7 +181,7 @@
 
 //-------------------------------------------------------------------------------------------------
 
-    <p:tab id="tab4" title="Suppression d'un client">  
+    <!--<p:tab id="tab4" title="Suppression d'un client">  
         <h:panelGrid columns="2" cellpadding="10">  
                      
             <h:form>  
@@ -202,13 +202,13 @@
                     </h:panelGrid>  
                 </p:panel>
 
-                <!-- Envoie le formulaire -->
+                Envoie le formulaire
                 <p:commandButton value="Supprimer" action="#{clientM.delClient}"/>
                                 
             </h:form>
 
         </h:panelGrid>  
-    </p:tab>  
+    </p:tab> -->  
 
 //-------------------------------------------------------------------------------------------------
 
@@ -220,17 +220,74 @@
   
                 <p:tab id="tab1" title="Modification informations client">  
                     <h:panelGrid columns="2" cellpadding="10">
-							
+                        
+                        <h:form>
+
+                            <p:panel header="Saisir le nom et le prénom">                           
+                                <h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
+
+                                    <h:outputText value="Nom : *" />                         
+                                    <h:inputText id="nom" value="#{etudiant.nom}" >
+                                        <f:ajax event="blur" render="nomMessage" />
+                                        <p></p>
+                                    </h:inputText>
+                                    <h:message id="nomMessage" for="nom" errorClass="erreur" />
+
+                                    <h:outputText value="Prénom : *" />                         
+                                    <h:inputText id="prenom" value="#{etudiant.prenom}" >
+                                        <f:ajax event="blur" render="prenomMessage" />
+                                    </h:inputText>
+                                    <h:message id="prenomMessage" for="prenom" errorClass="erreur" />
+                              
+                                </h:panelGrid>
+                            </p:panel>
+
+                            <p:panel header="Informations diverses">                                               
+                                <h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">                                    
+                                                  
+                                    <h:outputText value="Poste du client : *" />  
+                                    <h:inputText id="poste" value="#{client.poste}" >
+                                        <f:ajax event="blur" render="clientMessage" />
+                                    </h:inputText>
+                                    <h:message id="clientMessage" for="client" errorClass="erreur" />                                    
+
+                                </h:panelGrid>  
+                            </p:panel>  
+
+                            <!-- Envoie le formulaire -->                
+                            <p:commandButton value="Modifier" action="#{clientM.modifyCoordonnees}"/> 
+
+                        </h:form>
+                        
                     </h:panelGrid>  	
-                </p:tab>  
+                </p:tab>
 
                 //-------------------------------------------------------------------------------------------------
 	    
                 <p:tab id="tab2" title="Modification coordonnées">  
-                    <h:panelGrid columns="2" cellpadding="10">  		
- 
-                        <h:form>                   
+                    <h:panelGrid columns="2" cellpadding="10">  		                 
 
+                        <h:form>
+
+                            <p:panel header="Saisir le nom et le prénom">                           
+                                <h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
+
+                                    <h:outputText value="Nom : *" />                         
+                                    <h:inputText id="nom" value="#{client.nom}" >
+                                        <f:ajax event="blur" render="nomMessage" />
+                                        <p></p>
+                                    </h:inputText>
+                                    <h:message id="nomMessage" for="nom" errorClass="erreur" />
+
+                                    <h:outputText value="Prénom : *" />                         
+                                    <h:inputText id="prenom" value="#{client.prenom}" >
+                                        <f:ajax event="blur" render="prenomMessage" />
+                                    </h:inputText>
+                                    <h:message id="prenomMessage" for="prenom" errorClass="erreur" />
+                              
+                                </h:panelGrid>
+                           </p:panel>
+                            
                             <p:panel header="Coordonnées">                                               
                                 <h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">                                    
                         
@@ -293,11 +350,11 @@
                             
                             <!-- Envoie le formulaire -->                
                             <p:commandButton value="Modifier" action="#{clientM.modifyCoordonnees}"/>  
-
+                   
                         </h:form>  
 
                     </h:panelGrid>  	
-                </p:tab>  
+                </p:tab> 
   
             </p:tabView>  
 

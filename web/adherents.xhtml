@@ -204,11 +204,11 @@
             <h:form>  
                             
                 <p:panel header="Supression">                                  
-                    <h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5"> 
+                    <h:panelGrid columns="1" style="margin-bottom:10px" cellpadding="5"> 
 
-                                                <h:outputText value="Nom des clients actuels : *" />
-                        <p:selectOneListbox id="nomClient" value="#{etudiantM.etudiant}"  var="a" style="height:100px; width:600px;" >  
-                            <f:selectItems value="#{etudiant.getAdherent()}" var="client" itemLabel="#{etudiant.nom}" itemValue="#{adherent}" />  
+                                                <h:outputText value="Nom des adhérents actuels : *" />
+                                                <p:selectOneListbox id="nomAdherent" value="#{etudiantM.selectedEtudiant}"  var="a" style="height:100px; width:600px;" >  
+                            <f:selectItems value="#{etudiantM.getAdherent()}" var="adherent" itemLabel="#{etudiant.nom}" itemValue="#{adherent}" />  
                             
                             <p:column>  
                                 #{a.prenom} #{a.nom}
@@ -236,7 +236,48 @@
   
                 <p:tab id="tab1" title="Modification informations adhérent">  
                     <h:panelGrid columns="2" cellpadding="10">
-							
+
+                        <h:form>  
+                                            
+                            <p:panel header="Saisir le nom et le prénom">                                  
+                                <h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5"> 
+                               
+                                    <h:outputText value="Nom : *" />  
+                                    <h:inputText id="nom" value="#{etudiant.nom}" >
+                                        <f:ajax event="blur" render="nomMessage" />
+                                    </h:inputText>
+                                    <h:message id="nomMessage" for="nom" errorClass="erreur" />
+
+                                    <h:outputText value="Prénom : *" />  
+                                    <h:inputText id="prenom" value="#{etudiant.prenom}" >
+                                        <f:ajax event="blur" render="prenomMessage" />
+                                    </h:inputText>
+                                    <h:message id="prenomMessage" for="prenom" errorClass="erreur" />
+                                                         
+                                </h:panelGrid>                        
+                            </p:panel>
+            
+                            <p:panel header="Informations diverses">                                               
+                                <h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">                                    
+                                                  
+                                    <h:outputText value="Numéro de sécurité sociale : *" />  
+                                    <h:inputText id="numSS" value="#{etudiant.numeroSS}" >
+                                        <f:ajax event="blur" render="numSSMessage" />
+                                    </h:inputText>
+                                    <h:message id="numSSMessage" for="numSS" errorClass="erreur" />                                    
+
+                                    <h:outputText value="Date de naissance (jj/mm/aaaa): *" />
+                                    <p:calendar value="#{etudiant.dateNaissance}" id="popupButtonCal" pattern="dd/MM/yyyy" showOn="button" />
+                                    <p></p>
+
+                                </h:panelGrid>  
+                            </p:panel>  
+
+                            <!-- Envoie le formulaire -->                
+                            <p:commandButton value="Modifier" action="#{etudiantM.modifyCoordonnees}"/> 
+
+                        </h:form>
+                        
                     </h:panelGrid>  	
                 </p:tab>  
 
@@ -245,7 +286,27 @@
             <p:tab id="tab2" title="Modification coordonnées">  
                 <h:panelGrid columns="2" cellpadding="10">  		
 
-                    <h:form>                   
+                    <h:form>  
+                        
+                        <p:panel header="Saisir le nom et le prénom">                           
+                            <h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
+
+                                    <h:outputText value="Nom : *" />                         
+                                    <h:inputText id="nom" value="#{etudiant.nom}" >
+                                        <f:ajax event="blur" render="nomMessage" />
+                                        <p></p>
+                                    </h:inputText>
+                                    <h:message id="nomMessage" for="nom" errorClass="erreur" />
+
+                                    <h:outputText value="Prénom : *" />                         
+                                    <h:inputText id="prenom" value="#{etudiant.prenom}" >
+                                        <f:ajax event="blur" render="prenomMessage" />
+                                    </h:inputText>
+                                    <h:message id="prenomMessage" for="prenom" errorClass="erreur" />
+                              
+                            </h:panelGrid>
+                        </p:panel>
+                        
                         <p:panel header="Coordonnées">                                               
                             <h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">                                    
                         

@@ -187,7 +187,7 @@ public class EtudiantManaged {
 	
         /* Exécution d'une requête de modification de la BD (INSERT, UPDATE, DELETE, CREATE, etc.). */
         b.getMyStatement().executeUpdate(""
-                + "UPDATE ADHERENT SET A_Jour_Cotisation=0 WHERE Id_Personne = (SELECT Id_Personne FROM PERSONNE WHERE Nom_Personne='"+paramNom+"' AND Prenom_Personne='"+paramPrenom+"')");
+                + "UPDATE ADHERENT SET A_Jour_Cotisation=0 WHERE Id_Personne = (SELECT Id_Personne FROM PERSONNE WHERE Nom_Personne='"+paramNom+"' AND Prenom_Personne='"+paramPrenom+"');");
         return "success";    
         }
         catch (SQLException ex) {
