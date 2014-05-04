@@ -53,7 +53,7 @@ public class TreeBean {
             TreeNode pv;
             TreeNode autres;
 
-            for (int i = 2013; i <= cal; i++) {
+            for (int i = 2012; i <= cal; i++) {
                 nomannee = String.valueOf(i);
                 nomanne = new DefaultTreeNode(nomannee, root_admin);
                 statuts = new DefaultTreeNode("Statuts", nomanne);
@@ -82,8 +82,8 @@ public class TreeBean {
             TreeNode cahier_conception_spe;
             TreeNode projet;
 
-            for (int i = 2013; i <= cal; i++) {
-                nomAnnee = String.valueOf(i);
+            for (int j = 2012; j <= cal; j++) {
+                nomAnnee = String.valueOf(j);
                 nomAnne = new DefaultTreeNode(nomAnnee, root_projet);
                 //get database connection
                 ConnectBDD b = new ConnectBDD();
@@ -91,8 +91,8 @@ public class TreeBean {
                 if (con == null) {
                     throw new SQLException("Can't get database connection");
                 }
-                PreparedStatement ps = con.prepareStatement("SELECT MIN(document.ANNEE) AS annee,Id_Projet, Nom_Projet FROM projetannuel.PROJET NATURAL JOIN projetannuel.DOCUMENT  WHERE DOCUMENT.Annee=" + i + " GROUP BY Id_Projet;");
-
+               // PreparedStatement ps = con.prepareStatement("SELECT MIN(document.ANNEE) AS annee,Id_Projet, Nom_Projet FROM projetannuel.PROJET NATURAL JOIN projetannuel.DOCUMENT  WHERE DOCUMENT.Annee=" + j + " GROUP BY Id_Projet HAVING annee = "+ j +" ORDER BY Nom_Projet ;");
+                  PreparedStatement ps = con.prepareStatement("SELECT document.ANNEE AS annee,Id_Projet, Nom_Projet FROM projetannuel.PROJET NATURAL JOIN projetannuel.DOCUMENT   GROUP BY Id_Projet HAVING MIN(ANNEE)="+ j + " ORDER BY Nom_Projet;");
                 ResultSet result = ps.executeQuery();
                 String nom_projet;
 
