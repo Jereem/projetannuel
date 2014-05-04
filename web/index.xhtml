@@ -25,14 +25,14 @@
                         </h:inputText>
                         <h:message id="pseudoMessage" for="pseudo" errorClass="erreur" />
 
-                        <h:outputText value="Password: *" />  
+                        <h:outputText value="Mot de Passe: *" />  
                         <p:password id="feedback" value="#{utilisateurM.selectedUtilisateur.mdp}" />  
                     </h:panelGrid>  
 
                 </p:panel>  
 
                 <!-- Envoie le formulaire et passe a la page test2.xhtml -->
-                <p:commandButton value="Save" action="#{utilisateurM.connexion()}"/>  
+                <p:commandButton value="Login" action="#{utilisateurM.connexion()}"/>  
 
             </h:form>
 			
