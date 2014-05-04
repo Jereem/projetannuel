@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package Interface;
+package ManagedBeans;
 
 import beans.BureauProGphy;
 import beans.Client;
@@ -20,15 +20,61 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import tools.ConnectBDD;
-@ManagedBean
+
+@ManagedBean(name="projetM")
 @SessionScoped
 /**
  *
  * @author teddy
  */
 public class ProjetManaged {
+    
     private Projet selectedProjet;
     
+    public ProjetManaged(){
+        selectedProjet = new Projet();
+    }
+
+    public Projet getSelectedProjet() {
+        return selectedProjet;
+    }
+
+    public void setSelectedProjet(Projet selectedProjet) {
+        this.selectedProjet = selectedProjet;
+    }
+    
+    // Methodes pour la BDD
+    public String saveProjet() throws SQLException {
+        ConnectBDD con = new ConnectBDD();
+        Connection b = con.getMyConnexion();
+        if (b == null) {
+            throw new SQLException("Can't get database connection");
+        }
+        try {
+            /* Récupération des paramètres d'URL saisis par l'utilisateur */
+            this.selectedProjet = new Projet();
+            String paramNomProjet = this.selectedProjet.getNomProjet();
+            long paramClient = this.selectedProjet.getClient().getSiren();
+            /* Création de l'objet gérant les requêtes préparées */
+            PreparedStatement ps = b.prepareStatement("INSERT INTO projetannuel.PROJET(Nom_Projet, Siret) VALUES (?,?)");
+            /*
+             * Remplissage des paramètres de la requête grâce aux méthodes
+             * setXXX() mises à disposition par l'objet PreparedStatement.
+             */
+            ps.setString(1, paramNomProjet);
+            ps.setLong(2, paramClient);
+            /* Exécution de la requête */
+            int statut = ps.executeUpdate();
+            return "success";
+        } catch (SQLException ex) {
+            System.out.println("SQLException: " + ex.getMessage());
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+            return "failed";
+        }
+
+    }
+
     public List<Projet> getProjet(Boolean actif) throws SQLException {
         //get database connection
         ConnectBDD b = new ConnectBDD();
@@ -93,7 +139,6 @@ public class ProjetManaged {
             }
             //store all data into a List
             list.add(projet);
-            this.selectedProjet = projet;
         }
         return list;
     }
