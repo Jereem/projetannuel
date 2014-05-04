@@ -42,49 +42,6 @@ public class ToolsIT {
     }
 
     /**
-     * Test of saveNewAdherent method, of class Tools.
-     */
-    @Test
-    public void testSaveNewAdherent() throws Exception {
-        System.out.println("saveNewAdherent");
-        Etudiant adherent = null;
-        Tools instance = new Tools();
-        String expResult = "";
-        String result = instance.saveNewAdherent(adherent);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getAdherent method, of class Tools.
-     */
-    @Test
-    public void testGetAdherent() throws Exception {
-        System.out.println("getAdherent");
-        Tools instance = new Tools();
-        List<Etudiant> expResult = null;
-        List<Etudiant> result = instance.getAdherent();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getOldAdherent method, of class Tools.
-     */
-    @Test
-    public void testGetOldAdherent() throws Exception {
-        System.out.println("getOldAdherent");
-        Tools instance = new Tools();
-        List<Etudiant> expResult = null;
-        List<Etudiant> result = instance.getOldAdherent();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of dateJavaToSQL method, of class Tools.
      */
     @Test

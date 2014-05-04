@@ -1,0 +1,31 @@
+<!DOCTYPE html>  
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:f="http://java.sun.com/jsf/core"  
+      xmlns:ui="http://java.sun.com/jsf/facelets"  
+      xmlns:p="http://primefaces.org/ui">  
+
+    <h:head>  
+        <title>Cars</title>  
+        <link type="text/css" rel="stylesheet" href="#{request.contextPath}/css/default.css" />  
+    </h:head>  
+
+    <h:body>  
+        <h:form>  
+            <p:dataTable id="tableProjetEnCours5" var="documents" value="#{ProjetDialog.selectedProjet.getDoc()}" sortMode="multiple" rows="5" paginator="true">  
+
+                <p:column sortBy="nomProjet" headerText="Documents">  
+                    <h:outputText value="#{documents.nomDoc}" />  
+                </p:column>
+            </p:dataTable>
+            <p:ring id="basic" value="#{ProjetDialog.selectedProjet.documents}" var="documents">
+                <p:outputPanel style="text-align:center;" layout="block">
+                    #{documents.nomDoc}
+                    <p:commandButton icon="ui-icon-disk" title="Télécharger">
+                    </p:commandButton>
+                </p:outputPanel>
+            </p:ring> 
+        </h:form>  
+    </h:body>  
+
+</html>

@@ -160,7 +160,7 @@
                         <h:message id="paysMessage" for="pays" errorClass="erreur" />                                    
 
                         <h:outputText value="Email : *" />  
-                        <h:inputText id="eMail" value="#{coordonnees.eMail}" >
+                        <h:inputText id="eMail" value="#{coordonnees.email}" >
                             <f:ajax event="blur" render="eMailMessage" />
                         </h:inputText>
                         <h:message id="eMailMessage" for="eMail" errorClass="erreur" />                                    
@@ -359,7 +359,7 @@
                                     <h:message id="paysMessage" for="pays" errorClass="erreur" />                                    
 
                                     <h:outputText value="Email : *" />  
-                                    <h:inputText id="eMail" value="#{coordonnees.eMail}" >
+                                    <h:inputText id="eMail" value="#{coordonnees.email}" >
                                         <f:ajax event="blur" render="eMailMessage" />
                                     </h:inputText>
                                     <h:message id="eMailMessage" for="eMail" errorClass="erreur" />

@@ -2,11 +2,13 @@ package beans;
 
 import java.io.Serializable;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.validation.constraints.*;
 
 @ManagedBean
-@ViewScoped
+@RequestScoped
 
 public class Coordonnees implements Serializable {
 
@@ -35,7 +37,7 @@ public class Coordonnees implements Serializable {
     private int numRue;
     @NotNull(message = "Veuillez saisir une adresse email")
     @Pattern(regexp = "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)", message = "Merci de saisir une adresse mail valide")
-    private String eMail;
+    private String email;
     @NotNull ( message = "Veuillez saisir un numéro de telephone portable" )
     private int telPortable;
     @NotNull ( message = "Veuillez saisir un numéro de telephone fixe" )
@@ -119,14 +121,13 @@ public class Coordonnees implements Serializable {
         this.numRue = numRue;
     }
 
-    public String geteMail() {
-        return eMail;
+    public String getEmail() {
+        return email;
     }
 
-    public void seteMail(String eMail) {
-        this.eMail = eMail;
+    public void setEmail(String email) {
+        this.email = email;
     }
-
 
     public int getTelPortable() {
         return telPortable;

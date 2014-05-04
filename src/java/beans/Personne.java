@@ -2,14 +2,9 @@ package beans;
 
 import tools.ConnectBDD;
 
-import javax.faces.bean.ManagedBean;
 import java.io.Serializable;
 import java.sql.SQLException;
-import javax.faces.bean.ViewScoped;
 import javax.validation.constraints.*;
-
-@ManagedBean
-@ViewScoped
 
 public class Personne implements Serializable {
 

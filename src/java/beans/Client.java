@@ -12,9 +12,6 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import tools.ConnectBDD;
 
-@ManagedBean
-@RequestScoped
-
 public class Client extends Personne implements Serializable{
 
 	private String societe;
@@ -24,6 +21,14 @@ public class Client extends Personne implements Serializable{
 	public Client() {
 		this.societe = "NewSociete";
 	}
+
+    public String getQualite() {
+        return qualite;
+    }
+
+    public void setQualite(String qualite) {
+        this.qualite = qualite;
+    }
 
 	public String getSociete() {
 		return this.societe;
@@ -82,7 +87,7 @@ public class Client extends Personne implements Serializable{
             String paramCP = this.getCoordonnees().getCodePostal();
             String paramVille = this.getCoordonnees().getVille();
             String paramPays = this.getCoordonnees().getPays();
-            String paramEmail = this.getCoordonnees().geteMail();
+            String paramEmail = this.getCoordonnees().getEmail();
             int paramTelFixe = this.getCoordonnees().getTelFixe();
             int paramTelMobile = this.getCoordonnees().getTelPortable();
 		 
@@ -126,7 +131,7 @@ public class Client extends Personne implements Serializable{
             coordonnes.setCodePostal(result.getString("Code_Postal"));
             coordonnes.setVille(result.getString("Ville"));
             coordonnes.setPays(result.getString("Pays"));
-            coordonnes.seteMail(result.getString("Email"));
+            coordonnes.setEmail(result.getString("Email"));
             coordonnes.setTelFixe(result.getInt("Telephone_1"));
             coordonnes.setTelPortable(result.getInt("Telephone_2"));
             client.setCoordonnees(coordonnes);
@@ -163,7 +168,7 @@ public class Client extends Personne implements Serializable{
             coordonnes.setCodePostal(result.getString("Code_Postal"));
             coordonnes.setVille(result.getString("Ville"));
             coordonnes.setPays(result.getString("Pays"));
-            coordonnes.seteMail(result.getString("Email"));
+            coordonnes.setEmail(result.getString("Email"));
             coordonnes.setTelFixe(result.getInt("Telephone_1"));
             coordonnes.setTelPortable(result.getInt("Telephone_2"));
             client.setCoordonnees(coordonnes);

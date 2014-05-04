@@ -136,7 +136,7 @@ public class Etudiant extends Personne implements Serializable {
             String paramCP = this.getCoordonnees().getCodePostal();
             String paramVille = this.getCoordonnees().getVille();
             String paramPays = this.getCoordonnees().getPays();
-            String paramEmail = this.getCoordonnees().geteMail();
+            String paramEmail = this.getCoordonnees().getEmail();
             int paramTelFixe = this.getCoordonnees().getTelFixe();
             int paramTelMobile = this.getCoordonnees().getTelPortable();
             int paramPromo = this.getPromotion();
@@ -191,7 +191,7 @@ public class Etudiant extends Personne implements Serializable {
             coordonnes.setCodePostal(result.getString("Code_Postal"));
             coordonnes.setVille(result.getString("Ville"));
             coordonnes.setPays(result.getString("Pays"));
-            coordonnes.seteMail(result.getString("Email"));
+            coordonnes.setEmail(result.getString("Email"));
             coordonnes.setTelFixe(result.getInt("Telephone_1"));
             coordonnes.setTelPortable(result.getInt("Telephone_2"));
             adherent.setCoordonnees(coordonnes);
@@ -231,7 +231,7 @@ public class Etudiant extends Personne implements Serializable {
             coordonnes.setCodePostal(result.getString("Code_Postal"));
             coordonnes.setVille(result.getString("Ville"));
             coordonnes.setPays(result.getString("Pays"));
-            coordonnes.seteMail(result.getString("Email"));
+            coordonnes.setEmail(result.getString("Email"));
             coordonnes.setTelFixe(result.getInt("Telephone_1"));
             coordonnes.setTelPortable(result.getInt("Telephone_2"));
             adherent.setCoordonnees(coordonnes);

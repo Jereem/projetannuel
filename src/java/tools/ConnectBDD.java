@@ -13,6 +13,8 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -24,6 +26,10 @@ import java.util.logging.Logger;
  *
  * @author jeremygillet
  */
+
+@ManagedBean
+@SessionScoped
+
 public class ConnectBDD {
     private Connection myConnexion;
     private Statement myStatement;

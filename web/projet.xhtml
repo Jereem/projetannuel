@@ -17,7 +17,7 @@
     <p:tab id="tab00" title="Liste des projets en cours">  
         <h:panelGrid columns="2" cellpadding="10">
                     <h:form>  
-                        <p:dataTable id="tableProjetEnCours" var="projet" value="#{projet.getProjet(true)}" sortMode="multiple" rows="5" paginator="true">  
+                        <p:dataTable id="tableProjetEnCours" var="projet" value="#{projetM.getProjet(true)}" sortMode="multiple" rows="5" paginator="true">  
                             <f:facet name="header">  
                                 Projets  
                             </f:facet>  
@@ -46,7 +46,7 @@
                                 <h:outputText value="#{projet.commercial.nom}" />  
                             </p:column> 
 
-                            
+                            <p:growl id="growl" showDetail="true" />
                             
                             <p:column headerText=" " >
                                 <p:commandLink 
@@ -59,7 +59,7 @@
                                 </p:commandLink>
                                 <p:commandLink process="@this" oncomplete="down.show()" update=":form" >
                                     <img src="download.png" width="24px" height="24px" />
-                                    <f:setPropertyActionListener value="#{projet}" target="#{ProjetDialog.selectedProjet}"/> 
+                                    <f:setPropertyActionListener value="#{projet}" target="#{projetM.selectedProjet}"/> 
                                 </p:commandLink>
                                 <p:commandLink process="@this" oncomplete="dlgclt3.show()" update=":form" >
                                     <img src="upload.png" width="24px" height="24px" />
@@ -69,17 +69,17 @@
                             
                         </p:dataTable>
                         
-                        <p:dialog id="dialog"  header="Documents du projet #{ProjetDialog.selectedProjet.nomProjet}" width="1000px"
+                        <p:dialog id="dialog"  header="Documents du projet #{projetM.selectedProjet.nomProjet}" width="1000px"
                                   widgetVar="down" resizable="false"
                                   showEffect="bounce"
                                   hideEffect="explode">
-                            <p:dataTable id="tableProjetEnCours5" var="documents" value="#{ProjetDialog.selectedProjet.getDoc()}" sortMode="multiple" rows="5" paginator="true">  
+                            <p:dataTable id="tableProjetEnCours5" var="documents" value="#{projetM.selectedProjet.getDocuments()}" sortMode="multiple" rows="5" paginator="true">  
         
                                 <p:column sortBy="nomProjet" headerText="Documents">  
                                     <h:outputText value="#{documents.nomDoc}" />  
                                 </p:column>
                             </p:dataTable>
-                            <p:ring id="basic" value="#{ProjetDialog.selectedProjet.documents}" var="documents">
+                            <p:ring id="basic" value="#{projetM.selectedProjet.getDocuments()}" var="documents">
                                 <p:outputPanel style="text-align:center;" layout="block">
                                         #{documents.nomDoc}
                                     <p:commandButton icon="ui-icon-disk" title="Télécharger">
@@ -111,7 +111,7 @@
     <p:tab id="tab01" title="Liste des projets terminés">  
         <h:panelGrid columns="2" cellpadding="10">
             <h:form>  
-                        <p:dataTable id="tableProjetFinit" var="projet" value="#{projet.getProjet(false)}" sortMode="multiple" rows="5" paginator="true">  
+                <p:dataTable id="tableProjetFinit" var="projet" value="#{projetM.getProjet(false)}" sortMode="multiple" rows="5" paginator="true">  
                             <f:facet name="header">  
                                 Projets  
                             </f:facet>  
@@ -175,9 +175,20 @@
                <h:form>  
                             
                 <p:panel header="Nouveau projet">  
-                    <h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5"> 
+                    <h:panelGrid columns="1" style="margin-bottom:10px" cellpadding="5"> 
 
                         <h:outputText value="Nom du client: *" />
+                        <p:selectOneListbox id="scroll" value="#{clientM.selectedClient}"  var="c" style="height:200px">  
+                            <f:selectItems value="#{clientM.getOldClient()}" var="client" itemLabel="#{client.societe}" itemValue="#{client}" />  
+
+                            <p:column width="50">  
+                                  #{c.societe} ( #{c.siren} )
+                            </p:column>  
+
+                            <p:column width="50">  
+                                #{c.prenom} #{c.nom} ( #{c.qualite} )
+                            </p:column>  
+                        </p:selectOneListbox>  
 
                         <h:outputText value="Nom du projet: *" />                                      
                         <h:inputText id="nom" value="#{etudiant.nom}" >                                   
@@ -190,7 +201,7 @@
                 </p:panel>  
 
                 <!-- Envoie le formulaire -->       
-                <p:commandButton value="Enregistrer" action="#{projet.saveProjet}"/>  
+                <p:commandButton value="Enregistrer" action="#{projetM.saveProjet}"/>  
                        
             </h:form>  
         </h:panelGrid>  
