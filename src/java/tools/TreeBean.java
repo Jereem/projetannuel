@@ -40,10 +40,10 @@ public class TreeBean {
             TreeNode modeles_ad = new DefaultTreeNode("MODELES", root_admin);
 
             TreeNode mod = new DefaultTreeNode("modeles des fiches d'adhesion", modeles_ad);
-            //addDocument2Noeud(mod, "modeles_adhesion");
+            addDocument2Noeud(mod, "modeles_adhesion");
 
             TreeNode formul = new DefaultTreeNode("Formulaires CERFA", modeles_ad);
-            // addDocument2Noeud(formul, "cerfa");
+            addDocument2Noeud(formul, "cerfa");
 
             
             int cal = calendar.get(Calendar.YEAR);
@@ -57,11 +57,11 @@ public class TreeBean {
                 nomannee = String.valueOf(i);
                 nomanne = new DefaultTreeNode(nomannee, root_admin);
                 statuts = new DefaultTreeNode("Statuts", nomanne);
-                // addDocument2Noeud(mod, i, "modeles_adhesion");
+                addDocument2Noeud(mod, i, "modeles_adhesion");
                 pv = new DefaultTreeNode("PV d'assemble generale", nomanne);
-                // addDocument2Noeud(mod, i, "modeles_adhesion");
+                addDocument2Noeud(mod, i, "PV");
                 autres = new DefaultTreeNode("Autres documents", nomanne);
-                // addDocument2Noeud(mod, i, "modeles_adhesion");
+                addDocument2Noeud(mod, i, "autres");
             }
     
             
@@ -80,6 +80,7 @@ public class TreeBean {
             TreeNode devis_spe;
             TreeNode cdc_spe;
             TreeNode cahier_conception_spe;
+            TreeNode autre_spe;
             TreeNode projet;
 
             for (int j = 2012; j <= cal; j++) {
@@ -95,16 +96,32 @@ public class TreeBean {
                   PreparedStatement ps = con.prepareStatement("SELECT document.ANNEE AS annee,Id_Projet, Nom_Projet FROM projetannuel.PROJET NATURAL JOIN projetannuel.DOCUMENT   GROUP BY Id_Projet HAVING MIN(ANNEE)="+ j + " ORDER BY Nom_Projet;");
                 ResultSet result = ps.executeQuery();
                 String nom_projet;
-
+                String id_pro;   
+                int id_proj;
+                
                 while (result.next()) {
                     nom_projet = result.getString("Nom_Projet");
+                    id_pro = result.getString("Id_projet");
+                    id_proj= Integer.valueOf(id_pro);
                     projet = new DefaultTreeNode(nom_projet, nomAnne);
 
                     recueil_besoin = new DefaultTreeNode("RECUEIL DES BESOINS", projet);
+                    addDocument2Noeud(recueil_besoin,j,id_proj,"Recueil des besoins");
+
                     facture_spe = new DefaultTreeNode("FACTURE", projet);
+                    addDocument2Noeud(facture_spe,j,id_proj,"Facture");
+                    
                     devis_spe = new DefaultTreeNode("DEVIS", projet);
+                    addDocument2Noeud(devis_spe,j,id_proj,"devis");
+                     
                     cdc_spe = new DefaultTreeNode("CAHIER DES CHARGES", projet);
+                    addDocument2Noeud(cdc_spe,j,id_proj,"cahier des charges");
+                     
                     cahier_conception_spe = new DefaultTreeNode("CAHIER DE CONCEPTION", projet);
+                    addDocument2Noeud(cahier_conception_spe,j,id_proj,"cahier conception");
+                    
+                    autre_spe = new DefaultTreeNode("AUTRES", projet);
+                    addDocument2Noeud(autre_spe,j,id_proj,"autres");
                 }
             }
 
@@ -147,7 +164,29 @@ public class TreeBean {
     }
     
 
-    public void addDocument2Noeud(TreeNode noeud_pere, int annee, String type) throws SQLException {
+    public void addDocument2Noeud(TreeNode noeud_pere, int annee, String typ) throws SQLException {
+
+         String type=typ;
+        //get database connection
+        ConnectBDD b = new ConnectBDD();
+        Connection con = b.getMyConnexion();
+        if (con == null) {
+            throw new SQLException("Can't get database connection");
+        }
+
+        PreparedStatement ps = con.prepareStatement("SELECT Id_Document, Nom_Document FROM DOCUMENT NATURAL JOIN DEPEND NATURAL JOIN META_DATA WHERE Depend.Valeur='"+ type +"' AND DOCUMENT.Annee='"+ annee +"' ;");
+        
+        ResultSet result = ps.executeQuery();
+        String res = null;
+        TreeNode new_node = null;
+        while (result.next()) {
+            res = result.getString("Nom_Document");
+            new_node = new DefaultTreeNode(res, noeud_pere);
+        }
+    }
+    
+    
+      public void addDocument2Noeud(TreeNode noeud_pere, int annee,int id_projet, String type) throws SQLException {
 
         //get database connection
         ConnectBDD b = new ConnectBDD();
@@ -156,14 +195,14 @@ public class TreeBean {
             throw new SQLException("Can't get database connection");
         }
 
-        PreparedStatement ps = con.prepareStatement("SELECT Id_Document, Nom_Document FROM DOCUMENT NATURAL JOIN DEPEND NATURAL JOIN META_DATA WHERE META_DATA.Nom_metadata='Type' AND Depend.Valeur=" + type + " AND DOCUMENT.Anne=" + annee + " ;");
+        PreparedStatement ps = con.prepareStatement("SELECT Id_Document, Nom_Document FROM DOCUMENT NATURAL JOIN DEPEND NATURAL JOIN META_DATA WHERE Depend.Valeur='"+ type +"' AND DOCUMENT.Annee=" + annee + " ;");
         
         ResultSet result = ps.executeQuery();
         String res = null;
         TreeNode new_node = null;
         while (result.next()) {
             res = result.getString("Nom_Document");
-            new_node = new DefaultTreeNode(res, "Document", noeud_pere);
+            new_node = new DefaultTreeNode(res, noeud_pere);
         }
     }
 }				
