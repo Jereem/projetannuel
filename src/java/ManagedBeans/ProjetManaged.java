@@ -9,6 +9,7 @@ package ManagedBeans;
 import beans.BureauProGphy;
 import beans.Client;
 import beans.Documents;
+import beans.Etudiant;
 import beans.Projet;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import static javax.swing.UIManager.getString;
 import tools.ConnectBDD;
 
 @ManagedBean(name="projetM")
@@ -45,18 +47,18 @@ public class ProjetManaged {
     
     // Methodes pour la BDD
     public String saveProjet() throws SQLException {
-        ConnectBDD con = new ConnectBDD();
-        Connection b = con.getMyConnexion();
-        if (b == null) {
+        ConnectBDD b = new ConnectBDD();
+        Connection con = b.getMyConnexion();
+        if (con == null) {
             throw new SQLException("Can't get database connection");
         }
         try {
             /* Récupération des paramètres d'URL saisis par l'utilisateur */
-            this.selectedProjet = new Projet();
             String paramNomProjet = this.selectedProjet.getNomProjet();
             long paramClient = this.selectedProjet.getClient().getSiren();
-            /* Création de l'objet gérant les requêtes préparées */
-            PreparedStatement ps = b.prepareStatement("INSERT INTO projetannuel.PROJET(Nom_Projet, Siret) VALUES (?,?)");
+            String paramBureau = this.selectedProjet.getCommercial().getIdentifiant();
+            Statement statement = con.createStatement();
+            PreparedStatement ps = con.prepareStatement("INSERT INTO projetannuel.PROJET(Nom_Projet, Siret) VALUES (?,?)");
             /*
              * Remplissage des paramètres de la requête grâce aux méthodes
              * setXXX() mises à disposition par l'objet PreparedStatement.
@@ -65,6 +67,9 @@ public class ProjetManaged {
             ps.setLong(2, paramClient);
             /* Exécution de la requête */
             int statut = ps.executeUpdate();
+//            ResultSet result = statement.executeQuery("INSERT INTO projetannuel.PROJET(Nom_Projet, Siret) VALUES ("+ paramNomProjet +","+ paramClient +")");
+//            ResultSet result2 = statement.executeQuery( "SELECT @last:=LAST_INSERT_ID()" );
+//            ResultSet result3 = statement.executeQuery("INSERT INTO SUPERVISE (Identifiant, Id_Projet) VALUES (" + paramBureau + ", @last)");
             return "success";
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());
@@ -72,7 +77,6 @@ public class ProjetManaged {
             System.out.println("VendorError: " + ex.getErrorCode());
             return "failed";
         }
-
     }
 
     public List<Projet> getProjet(Boolean actif) throws SQLException {
@@ -135,6 +139,15 @@ public class ProjetManaged {
             ResultSet resultat5 = statement5.executeQuery( "SELECT (count(*)/12*100) as nb_etapes FROM projetannuel.est_en_phase where Id_Projet = "+idproj+";" );
             while ( resultat5.next() ) {
                 projet.setProgression(Math.round(resultat5.getInt("nb_etapes")));
+                /* Traiter ici les valeurs récupérées. */
+            }
+            Statement statement6 = con.createStatement();
+            ResultSet resultat6 = statement3.executeQuery( "select Nom_Personne, Prenom_Personne from PROJET natural join TRAVAILLE natural join ADHERENT natural join PERSONNE where Id_Projet = "+idproj+";" );
+            while ( resultat6.next() ) {
+                Etudiant etu = new Etudiant();
+                etu.setPrenom(resultat6.getString("Prenom_Personne"));
+                etu.setNom(resultat6.getString("Nom_Personne"));
+                projet.addDevellopeurs(etu);
                 /* Traiter ici les valeurs récupérées. */
             }
             //store all data into a List

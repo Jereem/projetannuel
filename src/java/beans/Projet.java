@@ -27,6 +27,7 @@ public class Projet implements Serializable {
     public Projet() {
         this.nomProjet = "New project";
         this.documents = new ArrayList<>();
+        this.devellopeurs = new ArrayList<>();
     }
 
     public int getID() {
@@ -106,22 +107,6 @@ public class Projet implements Serializable {
         this.nomProjet = nomProjet;
     }
 
-    /**
-     *
-     * @param etudiant
-     */
-    public void addEtudiant(Etudiant etudiant) {
-        throw new UnsupportedOperationException();
-    }
-
-    /**
-     *
-     * @param etudiant
-     */
-    public void delEtudiant(Etudiant etudiant) {
-        throw new UnsupportedOperationException();
-    }
-
     public ArrayList<Documents> getDocuments() {
         return documents;
     }
@@ -131,6 +116,14 @@ public class Projet implements Serializable {
     }
 
 
+    /**
+     *
+     * @param etu
+     */
+    public void addDevellopeurs(Etudiant etu) {
+        this.devellopeurs.add(etu);
+    }
+    
     /**
      *
      * @param document
