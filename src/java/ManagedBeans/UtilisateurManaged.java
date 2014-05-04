@@ -57,7 +57,7 @@ public class UtilisateurManaged {
             }
         }
         if (utilOK) {
-            this.selectedUtilisateur = this.tryUtilisateur
+            this.selectedUtilisateur = this.tryUtilisateur;
         return "tableauBord";
         }
         else {
