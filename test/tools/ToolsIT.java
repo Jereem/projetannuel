@@ -52,8 +52,7 @@ public class ToolsIT {
         String expResult = "";
         String result = instance.dateJavaToSQL(datejava);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        
     }
 
     /**
@@ -67,8 +66,7 @@ public class ToolsIT {
         Date expResult = new Date(21-06-89);
         Date result = instance.dateSQLToJava(dateSQL);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+       
     }
     
 }

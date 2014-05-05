@@ -72,7 +72,7 @@ public class ProjetManagedTest {
     public void testSaveProjet() throws Exception {
         System.out.println("saveProjet");
         ProjetManaged instance = new ProjetManaged();
-        String expResult = "failed";
+        String expResult ="failed";
         String result = instance.saveProjet();
         assertEquals(expResult, result);
         
